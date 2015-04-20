@@ -39,7 +39,7 @@ char gettoken(void) {
 	if (c == '(' || c == ')') {
 		last_token.type = PARENTHESIS;
 		last_token.val.c = c;
-	} else if (isspace(c)) {
+	} else if (isspace(c) || c == EOF) {
 		last_token.type = EMPTY;
 		last_token.val.c = c;
 	}
@@ -131,7 +131,8 @@ int main(void) {
 	while (1) {
 		printf("> ");
 		fflush(stdout);
-		gettoken();
+		if (gettoken() == EOF)
+			break;
 		struct tree_node *root = parse_node();
 		printf("  \x1b[32mTree:\x1b[0m ");
 		print_tree(root);
