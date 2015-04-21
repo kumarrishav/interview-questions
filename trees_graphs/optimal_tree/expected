@@ -1,0 +1,70 @@
+Enter array size, followed by array elements.
+Optimal binary search tree is:
+Optimal binary search tree is:
+1
+L:
+R:
+Optimal binary search tree is:
+8
+L:
+    4
+    L:
+    R:
+R:
+Optimal binary search tree is:
+2
+L:
+    1
+    L:
+    R:
+R:
+    3
+    L:
+    R:
+Optimal binary search tree is:
+6
+L:
+    4
+    L:
+        2
+        L:
+        R:
+    R:
+R:
+    10
+    L:
+        8
+        L:
+        R:
+    R:
+Optimal binary search tree is:
+5
+L:
+    2
+    L:
+        1
+        L:
+            0
+            L:
+            R:
+        R:
+    R:
+        4
+        L:
+            3
+            L:
+            R:
+        R:
+R:
+    8
+    L:
+        7
+        L:
+            6
+            L:
+            R:
+        R:
+    R:
+        9
+        L:
+        R:
