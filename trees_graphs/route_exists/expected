@@ -1,0 +1,14 @@
+Input format:
+<number of nodes>
+<number of children of node0> <child1> <child2> ...
+<number of children of node1> <child1> <child2> ... 
+node IDs go from 0 to <number of nodes>-1
+Now, enter the source and target nodes to see if there's a route
+Route exists: yes
+Route exists: yes
+Route exists: no
+Route exists: no
+Route exists: no
+Route exists: yes
+Route exists: yes
+Route exists: yes
