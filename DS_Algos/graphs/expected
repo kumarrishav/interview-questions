@@ -1,0 +1,95 @@
+Enter number V of vertices, followed by number E of edges,
+followed by E lines of the form: source_node target_node to describe the edges.
+Vertices are numbered from 0 to V-1
+~~~ DFS ~~~
+DFS entered vertex: 0
+DFS exited vertex: 0
+DFS entered vertex: 1
+DFS exited vertex: 1
+DFS entered vertex: 2
+DFS exited vertex: 2
+DFS entered vertex: 3
+DFS exited vertex: 3
+~~~ END DFS ~~~
+
+~~~ BFS ~~~
+BFS Entered vertex: 0
+BFS exited vertex: 0
+BFS Entered vertex: 1
+BFS exited vertex: 1
+BFS Entered vertex: 2
+BFS exited vertex: 2
+BFS Entered vertex: 3
+BFS exited vertex: 3
+~~~ END BFS ~~~
+~~~ DFS ~~~
+DFS entered vertex: 0
+DFS entered vertex: 1
+DFS entered vertex: 2
+DFS exited vertex: 2
+DFS exited vertex: 1
+DFS exited vertex: 0
+~~~ END DFS ~~~
+
+~~~ BFS ~~~
+BFS Entered vertex: 0
+BFS exited vertex: 0
+BFS Entered vertex: 1
+BFS exited vertex: 1
+BFS Entered vertex: 2
+BFS exited vertex: 2
+~~~ END BFS ~~~
+~~~ DFS ~~~
+DFS entered vertex: 0
+DFS entered vertex: 1
+DFS entered vertex: 4
+DFS entered vertex: 5
+DFS entered vertex: 6
+DFS exited vertex: 6
+DFS exited vertex: 5
+DFS exited vertex: 4
+DFS entered vertex: 3
+DFS entered vertex: 2
+DFS exited vertex: 2
+DFS exited vertex: 3
+DFS exited vertex: 1
+DFS exited vertex: 0
+DFS entered vertex: 7
+DFS exited vertex: 7
+~~~ END DFS ~~~
+
+~~~ BFS ~~~
+BFS Entered vertex: 0
+BFS exited vertex: 0
+BFS Entered vertex: 1
+BFS exited vertex: 1
+BFS Entered vertex: 4
+BFS exited vertex: 4
+BFS Entered vertex: 3
+BFS exited vertex: 3
+BFS Entered vertex: 2
+BFS exited vertex: 2
+BFS Entered vertex: 5
+BFS exited vertex: 5
+BFS Entered vertex: 6
+BFS exited vertex: 6
+BFS Entered vertex: 7
+BFS exited vertex: 7
+~~~ END BFS ~~~
+~~~ DFS ~~~
+DFS entered vertex: 0
+DFS entered vertex: 2
+DFS entered vertex: 1
+DFS exited vertex: 1
+DFS exited vertex: 2
+DFS exited vertex: 0
+~~~ END DFS ~~~
+
+~~~ BFS ~~~
+BFS Entered vertex: 0
+BFS exited vertex: 0
+BFS Entered vertex: 2
+BFS exited vertex: 2
+BFS Entered vertex: 1
+BFS exited vertex: 1
+~~~ END BFS ~~~

@@ -112,6 +112,73 @@ void dfs(struct graph *g) {
 	}
 }
 
+/* ~~~~~~~
+ * BFS
+ * ~~~~~~~
+ */
+#define QUEUE_CAPACITY MAX_VERTICES
+
+static struct graph_vertex *bfs_queue[QUEUE_CAPACITY];
+static size_t head;
+static size_t tail;
+static size_t elem_count;
+
+static void enqueue(struct graph_vertex *v) {
+	assert(elem_count < QUEUE_CAPACITY);
+
+	elem_count++;
+	bfs_queue[tail] = v;
+	tail = (tail+1)%MAX_VERTICES;
+
+}
+
+static struct graph_vertex *dequeue(void) {
+	assert(elem_count > 0);
+
+	elem_count--;
+	struct graph_vertex *ret = bfs_queue[head];
+	head = (head+1)%MAX_VERTICES;
+
+	return ret;
+}
+
+static int is_queue_empty(void) {
+	return elem_count == 0;
+}
+
+void bfs_aux(struct graph_vertex *v) {
+	enqueue(v);
+
+	v->visited = 1;
+
+	while (!is_queue_empty()) {
+
+		struct graph_vertex *vertex = dequeue();
+		printf("BFS Entered vertex: %d\n", vertex->value);
+
+		struct list_node *neighbor_node;
+		list_for_each(&vertex->neighbors, neighbor_node) {
+			struct graph_vertex *neighbor = neighbor_node->vertex;
+			if (!neighbor->visited) {
+				neighbor->visited = 1;
+				enqueue(neighbor);
+			}
+		}
+
+		printf("BFS exited vertex: %d\n", vertex->value);
+	}
+}
+
+void bfs(struct graph *g) {
+	prepare_traversal(g);
+	size_t i;
+	for (i = 0; i < g->vertices_sz; i++) {
+		if (!g->vertices[i].visited) {
+			bfs_aux(&g->vertices[i]);
+		}
+	}
+}
+
 /* ~~~
  * Driver
  * ~~~
@@ -138,7 +205,7 @@ int main(void) {
 		printf("~~~ END DFS ~~~\n\n");
 
 		printf("~~~ BFS ~~~\n");
-		// bfs(&g);
+		bfs(&g);
 		printf("~~~ END BFS ~~~\n");
 
 	}
