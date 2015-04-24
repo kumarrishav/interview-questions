@@ -1,0 +1,16 @@
+Input format: N n1 n2 n3 ...
+N is the array size; the rest are the elements
+Received: 1 
+Sorted: 1 
+Received: 1 2 
+Sorted: 1 2 
+Received: 2 1 
+Sorted: 1 2 
+Received: 1 2 3 4 
+Sorted: 1 2 3 4 
+Received: 3 9 1 2 
+Sorted: 1 2 3 9 
+Received: 1 2 3 4 5 6 7 8 9 10 
+Sorted: 1 2 3 4 5 6 7 8 9 10 
+Received: -5 -3 -9 88 54 2 29 27 -27 100 
+Sorted: -27 -9 -5 -3 2 27 29 54 88 100 
