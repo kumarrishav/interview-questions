@@ -1,8 +1,11 @@
 # quicksort
 
 Best case: O(n log(n))
+
 Worst case: O(n^2)
+
 Average case: O(n log(n))
+
 Memory: O(log(n))
 
 Ahh... quicksort! Quicksort is a classic sorting algorithm. It is very well known, and it is commonly the algorithm of choice in sorting libraries. Yes, theoretically, it can degrade to O(n^2), but that is extremely unlikely to happen, especially if pivots are chosen randomly. It is relatively easy to code, doesn't need much memory, and in practice, as a general purpose algorithm, it beats most of the competition.
