@@ -1,0 +1,139 @@
+The available commands are:
+I K - Inserts a key with the value K
+F K - Finds the entry with value K
+P K - Searches for the predecessor of K
+S K - Searches for the successor of K
+H K - Finds the maximum key of the subtree rooted at K
+L K - Finds the minimum key of the subtree rooted at K
+D - Dumps the tree (pre-order traversal)
+Q - Quit
+> > > *** Entered 32
+    L:
+    R:
+*** Leaving 32
+> > *** Entered 32
+    L:
+*** Entered 8
+    L:
+    R:
+*** Leaving 8
+    R:
+*** Leaving 32
+> > *** Entered 32
+    L:
+*** Entered 8
+    L:
+    R:
+*** Leaving 8
+    R:
+*** Entered 256
+    L:
+    R:
+*** Leaving 256
+*** Leaving 32
+> > *** Entered 32
+    L:
+*** Entered 8
+    L:
+    R:
+*** Entered 16
+    L:
+    R:
+*** Leaving 16
+*** Leaving 8
+    R:
+*** Entered 256
+    L:
+    R:
+*** Leaving 256
+*** Leaving 32
+> > > *** Entered 32
+    L:
+*** Entered 8
+    L:
+*** Entered 2
+    L:
+    R:
+*** Entered 4
+    L:
+    R:
+*** Leaving 4
+*** Leaving 2
+    R:
+*** Entered 16
+    L:
+    R:
+*** Leaving 16
+*** Leaving 8
+    R:
+*** Entered 256
+    L:
+    R:
+*** Leaving 256
+*** Leaving 32
+> > > > > *** Entered 32
+    L:
+*** Entered 8
+    L:
+*** Entered 2
+    L:
+    R:
+*** Entered 4
+    L:
+    R:
+*** Leaving 4
+*** Leaving 2
+    R:
+*** Entered 16
+    L:
+    R:
+*** Leaving 16
+*** Leaving 8
+    R:
+*** Entered 256
+    L:
+*** Entered 128
+    L:
+*** Entered 64
+    L:
+    R:
+*** Leaving 64
+    R:
+*** Leaving 128
+    R:
+*** Entered 512
+    L:
+    R:
+*** Entered 1024
+    L:
+    R:
+*** Leaving 1024
+*** Leaving 512
+*** Leaving 256
+*** Leaving 32
+> Found key 32. Left = 8; Right = 256; Parent = N/A; 
+> Found key 64. Left = N/A; Right = N/A; Parent = 128; 
+> Found key 8. Left = 2; Right = 16; Parent = 32; 
+> Found key 1024. Left = N/A; Right = N/A; Parent = 512; 
+> Found key 4. Left = N/A; Right = N/A; Parent = 2; 
+> Predecessor of 32 is 16
+> Successor of 32 is 64
+> Node 1024 has no successor.
+> Successor of 64 is 128
+> Successor of 16 is 32
+> Predecessor of 16 is 8
+> Successor of 128 is 256
+> Predecessor of 128 is 64
+> Successor of 2 is 4
+> Node 2 has no predecessor.
+> Subtree rooted at 32 has maximum = 1024
+> Subtree rooted at 128 has maximum = 128
+> Subtree rooted at 16 has maximum = 16
+> Subtree rooted at 8 has maximum = 16
+> Subtree rooted at 32 has minimum = 2
+> Subtree rooted at 1024 has minimum = 1024
+> Subtree rooted at 256 has minimum = 64
+> Subtree rooted at 2 has minimum = 2
+> Subtree rooted at 4 has minimum = 4
+> Subtree rooted at 128 has minimum = 64
+> 
