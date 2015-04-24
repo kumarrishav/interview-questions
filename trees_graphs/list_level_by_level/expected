@@ -1,0 +1,11 @@
+Input format:
+<number of nodes>
+<number of children of node0> <child1> <child2>
+<number of children of node1> <child1> <child2>
+node IDs go from 0 to <number of nodes>-1
+The root is node 0
+Layer by layer list:
+0 
+1 2 
+3 4 5 6 
+7 8 9 10 11 12 13 14 
