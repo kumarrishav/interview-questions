@@ -1,0 +1,14 @@
+The available commands are:
+I K - Inserts a key with the value K
+F K - Finds the entry with value K
+S K - Searches for the successor of K
+D - Dumps the tree (pre-order traversal)
+Q - Quit
+> > > > > > > > > > > > > > Successor of 50 is 60
+> Successor of 70 is 80
+> Successor of 40 is 45
+> Successor of 12 is 20
+> Successor of 4 is 5
+> Successor of 2 is 3
+> Successor of 3 is 4
+> 
