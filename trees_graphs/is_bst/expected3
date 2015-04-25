@@ -1,0 +1,7 @@
+Input format:
+<number of nodes>
+<node0 value> <number of children of node0> <child1> <child2>
+<node1 value> <number of children of node1> <child1> <child2>
+node IDs go from 0 to <number of nodes>-1
+The root is node 0
+Is BST: Yes
