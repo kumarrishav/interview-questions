@@ -1,0 +1,9 @@
+Tree input format:
+<Number of nodes>
+<node_i value> <left> <right>
+0 means no child
+
+Enter tree 1:
+
+Enter tree 2:
+Tree 2 is a subtree of tree 1: no
