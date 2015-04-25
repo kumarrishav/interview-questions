@@ -1,0 +1,52 @@
+Number of nodes?
+Node 0:
+Left child (0 if no child): 
+Right child (0 if no child): 
+Node 1:
+Left child (0 if no child): 
+Right child (0 if no child): 
+Node 2:
+Left child (0 if no child): 
+Right child (0 if no child): 
+Node 3:
+Left child (0 if no child): 
+Right child (0 if no child): 
+Node 4:
+Left child (0 if no child): 
+Right child (0 if no child): 
+Node 5:
+Left child (0 if no child): 
+Right child (0 if no child): 
+Node 6:
+Left child (0 if no child): 
+Right child (0 if no child): 
+Node 7:
+Left child (0 if no child): 
+Right child (0 if no child): 
+Node 8:
+Left child (0 if no child): 
+Right child (0 if no child): 
+Node 9:
+Left child (0 if no child): 
+Right child (0 if no child): 
+Node 10:
+Left child (0 if no child): 
+Right child (0 if no child): 
+Node 11:
+Left child (0 if no child): 
+Right child (0 if no child): 
+Enter 2 node IDs to find LCA
+LCA = 0
+LCA = 0
+LCA = 0
+LCA = 1
+LCA = 2
+LCA = 0
+LCA = 1
+LCA = 0
+LCA = 5
+LCA = 5
+LCA = 5
+LCA = 0
+LCA = 0
+LCA = 5
