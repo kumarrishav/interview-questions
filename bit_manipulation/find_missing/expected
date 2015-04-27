@@ -1,0 +1,7 @@
+Enter the size of the array, and then enter each array element.
+For an array of size n, there is exactly one missing number of the
+sequence 0..n. All the other numbers must be in the array.
+Missing value is: 0
+Missing value is: 2
+Missing value is: 3
+Missing value is: 4
