@@ -1,0 +1,21 @@
+Enter a string to compress
+Received:	aabcccccaaa
+Compressed:	a2b1c5a3
+Received:	abc
+Compressed:	abc
+Received:	a
+Compressed:	a
+Received:	aa
+Compressed:	aa
+Received:	aaa
+Compressed:	a3
+Received:	banana
+Compressed:	banana
+Received:	baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaananaaaaa
+Compressed:	b1a130n1a1n1a5
+Received:	xxx
+Compressed:	x3
+Received:	aabbcc
+Compressed:	aabbcc
+Received:	aabbccc
+Compressed:	a2b2c3
