@@ -1,0 +1,9 @@
+Enter a string to check if it has all unique chars
+Has all unique chars, with buffer: no
+Has all unique chars, without buffer: no
+Has all unique chars, with buffer: yes
+Has all unique chars, without buffer: yes
+Has all unique chars, with buffer: no
+Has all unique chars, without buffer: no
+Has all unique chars, with buffer: yes
+Has all unique chars, without buffer: yes

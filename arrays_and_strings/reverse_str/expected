@@ -1,0 +1,9 @@
+Enter a string to reverse
+Received:	a
+Reversed:	a
+Received:	ab
+Reversed:	ba
+Received:	banana
+Reversed:	ananab
+Received:	mississippi
+Reversed:	ippississim
