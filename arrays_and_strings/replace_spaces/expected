@@ -1,0 +1,19 @@
+Enter a string to escape spaces
+Received:	Mr John Smith
+Escaped:	Mr%20John%20Smith
+Received:	Astringwithoutspaces
+Escaped:	Astringwithoutspaces
+Received:	                              
+Escaped:	%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20
+Received:	A                                       B
+Escaped:	A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20B
+Received:	                    A
+Escaped:	%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20A
+Received:	A                                 
+Escaped:	A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20
+Received:	x
+Escaped:	x
+Received:	x 
+Escaped:	x%20
+Received:	xpto xpto
+Escaped:	xpto%20xpto
