@@ -31,12 +31,11 @@ struct list_node *remove_dups(struct list_node *head) {
 	while (curr != NULL) {
 		if (seen[curr->data]) {
 			prev->next = curr->next;
-			curr = curr->next;
 		} else {
 			seen[curr->data] = true;
 			prev = curr;
-			curr = curr->next;
 		}
+		curr = curr->next;
 	}
 
 	return head;
@@ -58,11 +57,10 @@ struct list_node *remove_dups_no_buff(struct list_node *head) {
 		while (look_ahead != NULL) {
 			if (look_ahead->data == cursor->data) {
 				look_ahead_prev->next = look_ahead->next;
-				look_ahead = look_ahead->next;
 			} else {
 				look_ahead_prev = look_ahead;
-				look_ahead = look_ahead->next;
 			}
+			look_ahead = look_ahead->next;
 		}
 		cursor = cursor->next;
 	}
