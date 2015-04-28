@@ -1,0 +1,9 @@
+Enter list size and node to remove (nodes go from 0 to n-1)
+Before removal: 0 -> 1 -> 2 -> 3 -> 4 -> 5
+After removal: 0 -> 1 -> 2 -> 4 -> 5
+Before removal: 0 -> 1 -> 2 -> 3 -> 4 -> 5
+After removal: 0 -> 1 -> 2 -> 3 -> 5
+Before removal: 0 -> 1 -> 2 -> 3 -> 4 -> 5
+After removal: 0 -> 2 -> 3 -> 4 -> 5
+Before removal: 0 -> 1 -> 2
+After removal: 0 -> 2
