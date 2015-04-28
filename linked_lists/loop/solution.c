@@ -6,6 +6,8 @@
  * EXAMPLE
  * Input: A -> B -> C -> D -> E -> C (the same C as earlier)
  * Output: C
+ *
+ * Source: Cracking the Coding Interview, page 78, question 2.6
  */
 #include <stdio.h>
 
