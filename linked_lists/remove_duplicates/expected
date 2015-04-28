@@ -1,0 +1,25 @@
+Enter the list size, and then each node.
+Received: 1 -> 2 -> 3 -> 4 -> 5 -> 6
+After removing duplicates (using buffer): 1 -> 2 -> 3 -> 4 -> 5 -> 6
+After removing duplicates (without buffer): 1 -> 2 -> 3 -> 4 -> 5 -> 6
+Received: 1
+After removing duplicates (using buffer): 1
+After removing duplicates (without buffer): 1
+Received: 2 -> 2
+After removing duplicates (using buffer): 2
+After removing duplicates (without buffer): 2
+Received: 3 -> 3 -> 3
+After removing duplicates (using buffer): 3
+After removing duplicates (without buffer): 3
+Received: 2 -> 1 -> 2
+After removing duplicates (using buffer): 2 -> 1
+After removing duplicates (without buffer): 2 -> 1
+Received: 6 -> 6 -> 6 -> 6 -> 6 -> 6
+After removing duplicates (using buffer): 6
+After removing duplicates (without buffer): 6
+Received: 1 -> 2 -> 3 -> 2 -> 4 -> 2
+After removing duplicates (using buffer): 1 -> 2 -> 3 -> 4
+After removing duplicates (without buffer): 1 -> 2 -> 3 -> 4
+Received: 5 -> 5 -> 1 -> 2 -> 3
+After removing duplicates (using buffer): 5 -> 1 -> 2 -> 3
+After removing duplicates (without buffer): 5 -> 1 -> 2 -> 3
