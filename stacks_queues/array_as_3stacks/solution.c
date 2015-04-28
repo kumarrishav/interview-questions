@@ -1,4 +1,7 @@
-
+/* Describe how you could use a single array to implement three stacks.
+ *
+ * Source: Cracking the Coding Interview, page 80, question 3.1
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
