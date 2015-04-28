@@ -1,0 +1,21 @@
+Enter list size followed by the list elements
+Received: 1 -> 2 -> 3 -> 3 -> 2 -> 1
+Is palindrome: yes
+Received: 1 -> 2 -> 3 -> 3 -> 2 -> 0
+Is palindrome: no
+Received: 1 -> 2 -> 3 -> 4 -> 5 -> 6
+Is palindrome: no
+Received: 1 -> 2 -> 3 -> 2 -> 1
+Is palindrome: yes
+Received: 1 -> 2 -> 1
+Is palindrome: yes
+Received: 1 -> 2 -> 2
+Is palindrome: no
+Received: 11 -> 11
+Is palindrome: yes
+Received: 5
+Is palindrome: yes
+Received: 5 -> 7
+Is palindrome: no
+Received: 2 -> 2
+Is palindrome: yes
