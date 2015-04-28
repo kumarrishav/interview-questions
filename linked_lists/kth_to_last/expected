@@ -1,0 +1,15 @@
+Enter list size and k, followed by the list elements
+Received: 1 -> 2 -> 3 -> 4 -> 5 -> 6
+2-th to last: 5
+Received: 1 -> 2 -> 3 -> 4 -> 5 -> 6
+5-th to last: 2
+Received: 1 -> 2 -> 3 -> 4 -> 5 -> 6
+6-th to last: 1
+Received: 1 -> 2 -> 3 -> 4 -> 5 -> 6
+The list size is less than 7; please choose a valid value.
+Received: 1
+1-th to last: 1
+Received: 3 -> 4
+1-th to last: 4
+Received: 3 -> 4
+2-th to last: 3
