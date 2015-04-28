@@ -1,0 +1,51 @@
+Available commands:
+I s v - Pushes the value v into stack s. 0 <= s < < 3
+P s - Pops from stack s. 0 <= s < 3
+Q - quit
+> Pushed -1 into stack 0
+> Pushed 2 into stack 0
+> Pushed 3 into stack 1
+> Pushed 4 into stack 2
+> Pushed 5 into stack 2
+> Pushed 6 into stack 2
+> Popped from 0: 2
+> Pushed 5 into stack 2
+> Popped from 1: 3
+> Popped from 0: -1
+> Popped from 2: 5
+> Popped from 2: 6
+> Popped from 2: 5
+> Popped from 2: 4
+> Pushed 1 into stack 0
+> Pushed 2 into stack 0
+> Pushed 3 into stack 0
+> Pushed 4 into stack 0
+> Pushed 5 into stack 1
+> Pushed 6 into stack 1
+> Pushed 7 into stack 1
+> Pushed 8 into stack 1
+> Pushed 9 into stack 1
+> Pushed 10 into stack 1
+> Pushed 11 into stack 2
+> Pushed 12 into stack 2
+> Pushed 13 into stack 2
+> Pushed 14 into stack 2
+> Pushed 15 into stack 2
+> Popped from 1: 10
+> Popped from 1: 9
+> Popped from 1: 8
+> Popped from 1: 7
+> Popped from 1: 6
+> Popped from 0: 4
+> Popped from 2: 15
+> Pushed -5 into stack 0
+> Popped from 2: 14
+> Popped from 1: 5
+> Popped from 0: -5
+> Popped from 2: 13
+> Popped from 0: 3
+> Popped from 2: 12
+> Popped from 0: 2
+> Popped from 2: 11
+> Popped from 0: 1
+> 
