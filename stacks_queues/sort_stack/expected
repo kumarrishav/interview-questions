@@ -1,0 +1,106 @@
+Available commands:
+PUSH v - Pushes the value v.
+POP - Pops from the stack.
+SORT - Sorts the stack (biggest item on top) using an auxiliary stack.
+Q - quit
+> Sorted stack.
+0 elements are in the stack:
+> Pushed 0.
+> Pushed 1.
+> Pushed 2.
+> Pushed 3.
+> Pushed 4.
+> Pushed 5.
+> Sorted stack.
+6 elements are in the stack:
+5
+4
+3
+2
+1
+0
+> Popped: 5
+> Popped: 4
+> Popped: 3
+> Popped: 2
+> Popped: 1
+> Popped: 0
+> Pushed -2.
+> Pushed 3.
+> Pushed -6.
+> Pushed 9.
+> Pushed 3.
+> Pushed -20.
+> Pushed 100.
+> Pushed 3.
+> Pushed 2.
+> Pushed 3.
+> Pushed 4.
+> Pushed -5.
+> Pushed -5.
+> Sorted stack.
+13 elements are in the stack:
+100
+9
+4
+3
+3
+3
+3
+2
+-2
+-5
+-5
+-6
+-20
+> Sorted stack.
+13 elements are in the stack:
+100
+9
+4
+3
+3
+3
+3
+2
+-2
+-5
+-5
+-6
+-20
+> Pushed 1999.
+> Sorted stack.
+14 elements are in the stack:
+1999
+100
+9
+4
+3
+3
+3
+3
+2
+-2
+-5
+-5
+-6
+-20
+> Pushed -1999.
+> Sorted stack.
+15 elements are in the stack:
+1999
+100
+9
+4
+3
+3
+3
+3
+2
+-2
+-5
+-5
+-6
+-20
+-1999
+> 
