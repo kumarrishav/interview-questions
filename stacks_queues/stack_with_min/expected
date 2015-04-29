@@ -1,0 +1,48 @@
+Available commands:
+PUSH v - Pushes the value v.
+POP - Pops from the stack.
+MIN - Returns the minimum value currently in the stack.
+Q - quit
+> Pushed -1.
+> Pushed -1.
+> Pushed -2.
+> Pushed -2.
+> Pushed -2.
+> Pushed 3.
+> Pushed 4.
+> Pushed -6.
+> Pushed 125.
+> Pushed 32.
+> Min: -6
+> Popped: 32
+> Min: -6
+> Popped: 125
+> Min: -6
+> Popped: -6
+> Min: -2
+> Popped: 4
+> Min: -2
+> Popped: 3
+> Min: -2
+> Popped: -2
+> Min: -2
+> Popped: -2
+> Min: -2
+> Popped: -2
+> Min: -1
+> Popped: -1
+> Min: -1
+> Popped: -1
+> Pushed 4.
+> Pushed 0.
+> Pushed 5.
+> Pushed -2.
+> Min: -2
+> Popped: -2
+> Min: 0
+> Popped: 5
+> Min: 0
+> Popped: 0
+> Min: 4
+> Popped: 4
+> 
