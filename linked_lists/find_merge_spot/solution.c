@@ -1,4 +1,23 @@
-
+/* You are given two linked lists, L1 and L2, with some nodes in common.
+ * That is, at some point, the lists merge into one. There is always at least
+ * one node in each list before the merging spot.
+ * Design an algorithm to find the merging spot.
+ * EXAMPLE
+ *
+ * Input:
+ *
+ * L1 = 0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 6
+ *                     ^
+ *                    /
+ * L2 =      7 -> 8 -/
+ *
+ * Output: Node 3
+ *
+ * POSSIBLE FOLLOW UP
+ * Can you do it in O(N) time using O(1) memory?
+ *
+ * Source: Invented by me
+ */
 #include <stdio.h>
 #include <assert.h>
 
