@@ -1,4 +1,25 @@
-
+/* You have a set of linked lists vertically connected by child pointers, essentially forming
+ * a multi-layer structure of linked lists. For example, here we have 4 linked lists:
+ * the list (1, 2, 3, 4, 5); the list (6, 7); the list (8), and the list (9, 10, 11)
+ *
+ * 1 - 2 - 3 - 4 - 5
+ *     |       |   
+ *     6 - 7   8
+ *         |
+ *         9 - 10 - 11
+ *
+ * Dashes represent the "next" pointer; vertical lines represent child pointers.
+ * To be clear, this is the structure of each node:
+ *
+ * struct list_node {
+ *	int data;
+ *	struct list_node *next;
+ *	struct list_node *child;
+ * };
+ *
+ * Design an algorithm to flatten the structure, such that every element can be reached
+ * by following only "next" pointers.
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
