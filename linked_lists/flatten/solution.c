@@ -19,6 +19,8 @@
  *
  * Design an algorithm to flatten the structure, such that every element can be reached
  * by following only "next" pointers.
+ *
+ * Source: Previous interview experience.
  */
 
 #include <stdio.h>
