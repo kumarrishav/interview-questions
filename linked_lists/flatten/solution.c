@@ -131,6 +131,16 @@ struct list_node *md_list(void) {
 	return n;
 }
 
+void destroy_md_list(struct list_node *head) {
+	if (head == NULL) {
+		return;
+	}
+
+	destroy_md_list(head->child);
+	destroy_md_list(head->next);
+	free(head);
+}
+
 void print_md_list(struct list_node *head) {
 
 	if (head == NULL) {
@@ -162,7 +172,7 @@ int main(void) {
 			break;
 		}
 
-		struct list_node *head = md_list(); // TODO Free everything
+		struct list_node *head = md_list();
 
 		printf("Received: ");
 		print_md_list(head);
@@ -171,6 +181,8 @@ int main(void) {
 		printf("Flattened: ");
 		print_md_list(flatten(head));
 		putchar('\n');
+
+		destroy_md_list(head);
 
 		printf("> ");
 		fflush(stdout);
