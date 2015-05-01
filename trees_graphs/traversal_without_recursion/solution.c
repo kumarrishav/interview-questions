@@ -1,4 +1,8 @@
-
+/* Design an algorithm to perform in-order and pre-order traversal of a binary search tree
+ * without recursion and O(1) memory usage.
+ *
+ * Source: Somewhere on the internet
+ */
 #include <stdio.h>
 #include <stdlib.h>
 
