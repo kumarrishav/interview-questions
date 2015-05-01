@@ -88,6 +88,7 @@ void next_token(void) {
 }
 
 struct list_node *md_list(void) {
+
 	assert(last_token.type == ID);
 
 	struct list_node *n = malloc(sizeof(*n));
@@ -156,6 +157,11 @@ int main(void) {
 
 	while (1) {
 		next_token();
+
+		if (last_token.type == CHAR && last_token.val.character == EOF) {
+			break;
+		}
+
 		struct list_node *head = md_list(); // TODO Free everything
 
 		printf("Received: ");
