@@ -1,3 +1,11 @@
+/* Write two conversion routines. The first routine converts a string
+ * to a signed integer. You may assume that the string contains only digits and the
+ * minus character ('-'), that it is a properly formatted integer number, and that the
+ * number is within the range of an `int` type. The second routine converts a signed integer
+ * stored as an `int` back to a string.
+ *
+ * Source: Programming Interviews Exposed, page 87
+ */
 
 #include <stdio.h>
 
@@ -7,7 +15,7 @@ int char_to_digit(char c) {
 }
 
 char digit_to_char(int d) {
-	return d+'0';
+	return d + '0';
 }
 
 // Assumption: str is well formatted and represents an `int` that is not out of range
