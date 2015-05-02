@@ -30,6 +30,26 @@ static void destroy_tree_node(struct tree_node *n) {
 	free(n);
 }
 
+struct tree_node *tree_minimum(struct tree_node *root) {
+	if (root == NULL) {
+		return NULL;
+	}
+
+	for (; root->left != NULL; root = root->left); // Empty loop body
+
+	return root;
+}
+
+struct tree_node *tree_maximum(struct tree_node *root) {
+	if (root == NULL) {
+		return NULL;
+	}
+
+	for (; root->right != NULL; root = root->right); // Empty loop body
+
+	return root;
+}
+
 /* If it returns NULL, there was a memory error and the node couldn't be inserted
  * Otherwise, the tree's root is returned
  */
@@ -63,24 +83,79 @@ struct tree_node *tree_insert(struct tree_node *root, int k) {
 	return root;
 }
 
-struct tree_node *tree_minimum(struct tree_node *root) {
-	if (root == NULL) {
-		return NULL;
-	}
+struct tree_node *tree_find(struct tree_node *root, int k) {
 
-	for (; root->left != NULL; root = root->left); // Empty loop body
+	while (root != NULL && root->key != k) {
+		if (k < root->key) {
+			root = root->left;
+		} else {
+			root = root->right;
+		}
+	}
 
 	return root;
 }
 
-struct tree_node *tree_maximum(struct tree_node *root) {
-	if (root == NULL) {
-		return NULL;
+/* Replaces subtree rooted at `u` with subtree rooted at `v`, updating parent pointers
+ * `v` can be NULL, but `u` can't
+ */
+static void transplant(struct tree_node *u, struct tree_node *v) {
+	if (u->parent != NULL) {
+		if (u == u->parent->left) {
+			u->parent->left = v;
+		} else {
+			u->parent->right = v;
+		}
 	}
 
-	for (; root->right != NULL; root = root->right); // Empty loop body
+	if (v != NULL) {
+		v->parent = u->parent;
+	}
+}
 
-	return root;
+static struct tree_node *tree_delete_internal(struct tree_node *root, struct tree_node *to_del) {
+	struct tree_node *newroot = root;
+
+	if (to_del->left == NULL) {
+		transplant(to_del, to_del->right);
+		if (to_del->parent == NULL) {
+			newroot = to_del->right;
+		}
+	} else if (to_del->right == NULL) {
+		transplant(to_del, to_del->left);
+		if (to_del->parent == NULL) {
+			newroot = to_del->left;
+		}
+	} else {
+		struct tree_node *successor = tree_minimum(to_del->right);
+		if (successor == to_del->right) {
+			successor->left = to_del->left;
+			transplant(to_del, successor);
+		} else {
+			transplant(successor, successor->right);
+			successor->right = to_del->right;
+			successor->left = to_del->left;
+			successor->left->parent = successor->right->parent = successor;
+			transplant(to_del, successor);
+		}
+		if (successor->parent == NULL) {
+			newroot = successor;
+		}
+	}
+
+	destroy_tree_node(to_del);
+
+	return newroot;
+}
+
+struct tree_node *tree_delete(struct tree_node *root, int k) {
+	struct tree_node *to_delete = tree_find(root, k);
+
+	if (to_delete == NULL) {
+		return root;
+	}
+
+	return tree_delete_internal(root, to_delete);
 }
 
 struct tree_node *tree_successor(struct tree_node *root) {
@@ -119,19 +194,6 @@ struct tree_node *tree_predecessor(struct tree_node *root) {
 	return p;
 }
 
-struct tree_node *tree_find(struct tree_node *root, int k) {
-
-	while (root != NULL && root->key != k) {
-		if (k < root->key) {
-			root = root->left;
-		} else {
-			root = root->right;
-		}
-	}
-
-	return root;
-}
-
 void destroy_tree(struct tree_node *root) {
 	if (root == NULL) {
 		return;
@@ -160,6 +222,7 @@ static char input_buff[1024];
 int main(void) {
 	printf("The available commands are:\n"
 	       "I K - Inserts a key with the value K\n"
+	       "R K - Removes the key with value K\n"
 	       "F K - Finds the entry with value K\n"
 	       "P K - Searches for the predecessor of K\n"
 	       "S K - Searches for the successor of K\n"
@@ -189,6 +252,8 @@ int main(void) {
 			} else {
 				root = new_root;
 			}
+		} else if (sscanf(input_buff, " R %d", &key) == 1) {
+			root = tree_delete(root, key);
 		} else if (sscanf(input_buff, " F %d", &key) == 1) {
 			struct tree_node *n = tree_find(root, key);
 			if (n == NULL) {
