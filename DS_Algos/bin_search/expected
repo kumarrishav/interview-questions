@@ -1,0 +1,271 @@
+Enter number of elements in array, followed by the elements (sorted), followed by the number of queries, followed by each query.
+Traditional binary search: -1 not found
+First occurrence: -1 not found
+Last occurrence: -1 not found
+Closest match: 0
+
+Traditional binary search: 9 not found
+First occurrence: 9 not found
+Last occurrence: 9 not found
+Closest match: 8
+
+Traditional binary search: 10 found at i = 3
+First occurrence: 10 occurs for the first time at i = 3
+Last occurrence: 10 occurs for the first time at i = 3
+Closest match: 10
+
+Traditional binary search: 0 found at i = 0
+First occurrence: 0 occurs for the first time at i = 0
+Last occurrence: 0 occurs for the first time at i = 0
+Closest match: 0
+
+Traditional binary search: 15 found at i = 4
+First occurrence: 15 occurs for the first time at i = 4
+Last occurrence: 15 occurs for the first time at i = 4
+Closest match: 15
+
+Traditional binary search: 4 found at i = 1
+First occurrence: 4 occurs for the first time at i = 1
+Last occurrence: 4 occurs for the first time at i = 1
+Closest match: 4
+
+Traditional binary search: 8 found at i = 2
+First occurrence: 8 occurs for the first time at i = 2
+Last occurrence: 8 occurs for the first time at i = 2
+Closest match: 8
+
+Traditional binary search: 5 not found
+First occurrence: 5 not found
+Last occurrence: 5 not found
+Closest match: 4
+
+Traditional binary search: 11 not found
+First occurrence: 11 not found
+Last occurrence: 11 not found
+Closest match: 10
+
+Traditional binary search: 2 not found
+First occurrence: 2 not found
+Last occurrence: 2 not found
+Closest match: 0
+
+Traditional binary search: 25 not found
+First occurrence: 25 not found
+Last occurrence: 25 not found
+Closest match: 15
+
+Traditional binary search: 0 not found
+First occurrence: 0 not found
+Last occurrence: 0 not found
+Closest match: 1
+
+Traditional binary search: 1 found at i = 0
+First occurrence: 1 occurs for the first time at i = 0
+Last occurrence: 1 occurs for the first time at i = 0
+Closest match: 1
+
+Traditional binary search: 2 found at i = 1
+First occurrence: 2 occurs for the first time at i = 1
+Last occurrence: 2 occurs for the first time at i = 1
+Closest match: 2
+
+Traditional binary search: 3 not found
+First occurrence: 3 not found
+Last occurrence: 3 not found
+Closest match: 2
+
+Traditional binary search: 4 found at i = 2
+First occurrence: 4 occurs for the first time at i = 2
+Last occurrence: 4 occurs for the first time at i = 2
+Closest match: 4
+
+Traditional binary search: 5 not found
+First occurrence: 5 not found
+Last occurrence: 5 not found
+Closest match: 4
+
+Traditional binary search: 6 not found
+First occurrence: 6 not found
+Last occurrence: 6 not found
+Closest match: 4
+
+Traditional binary search: 7 not found
+First occurrence: 7 not found
+Last occurrence: 7 not found
+Closest match: 8
+
+Traditional binary search: 8 found at i = 3
+First occurrence: 8 occurs for the first time at i = 3
+Last occurrence: 8 occurs for the first time at i = 3
+Closest match: 8
+
+Traditional binary search: 9 not found
+First occurrence: 9 not found
+Last occurrence: 9 not found
+Closest match: 8
+
+Traditional binary search: 10 not found
+First occurrence: 10 not found
+Last occurrence: 10 not found
+Closest match: 8
+
+Traditional binary search: 11 not found
+First occurrence: 11 not found
+Last occurrence: 11 not found
+Closest match: 8
+
+Traditional binary search: 12 not found
+First occurrence: 12 not found
+Last occurrence: 12 not found
+Closest match: 8
+
+Traditional binary search: 13 not found
+First occurrence: 13 not found
+Last occurrence: 13 not found
+Closest match: 16
+
+Traditional binary search: 14 not found
+First occurrence: 14 not found
+Last occurrence: 14 not found
+Closest match: 16
+
+Traditional binary search: 15 not found
+First occurrence: 15 not found
+Last occurrence: 15 not found
+Closest match: 16
+
+Traditional binary search: 16 found at i = 4
+First occurrence: 16 occurs for the first time at i = 4
+Last occurrence: 16 occurs for the first time at i = 4
+Closest match: 16
+
+Traditional binary search: 17 not found
+First occurrence: 17 not found
+Last occurrence: 17 not found
+Closest match: 16
+
+Traditional binary search: 18 not found
+First occurrence: 18 not found
+Last occurrence: 18 not found
+Closest match: 16
+
+Traditional binary search: 19 not found
+First occurrence: 19 not found
+Last occurrence: 19 not found
+Closest match: 16
+
+Traditional binary search: 20 not found
+First occurrence: 20 not found
+Last occurrence: 20 not found
+Closest match: 16
+
+Traditional binary search: 21 not found
+First occurrence: 21 not found
+Last occurrence: 21 not found
+Closest match: 16
+
+Traditional binary search: 22 not found
+First occurrence: 22 not found
+Last occurrence: 22 not found
+Closest match: 16
+
+Traditional binary search: 23 not found
+First occurrence: 23 not found
+Last occurrence: 23 not found
+Closest match: 16
+
+Traditional binary search: 24 not found
+First occurrence: 24 not found
+Last occurrence: 24 not found
+Closest match: 16
+
+Traditional binary search: 25 not found
+First occurrence: 25 not found
+Last occurrence: 25 not found
+Closest match: 32
+
+Traditional binary search: 26 not found
+First occurrence: 26 not found
+Last occurrence: 26 not found
+Closest match: 32
+
+Traditional binary search: 27 not found
+First occurrence: 27 not found
+Last occurrence: 27 not found
+Closest match: 32
+
+Traditional binary search: 28 not found
+First occurrence: 28 not found
+Last occurrence: 28 not found
+Closest match: 32
+
+Traditional binary search: 29 not found
+First occurrence: 29 not found
+Last occurrence: 29 not found
+Closest match: 32
+
+Traditional binary search: 30 not found
+First occurrence: 30 not found
+Last occurrence: 30 not found
+Closest match: 32
+
+Traditional binary search: 31 not found
+First occurrence: 31 not found
+Last occurrence: 31 not found
+Closest match: 32
+
+Traditional binary search: 32 found at i = 5
+First occurrence: 32 occurs for the first time at i = 5
+Last occurrence: 32 occurs for the first time at i = 5
+Closest match: 32
+
+Traditional binary search: 33 not found
+First occurrence: 33 not found
+Last occurrence: 33 not found
+Closest match: 32
+
+Traditional binary search: 34 not found
+First occurrence: 34 not found
+Last occurrence: 34 not found
+Closest match: 32
+
+Traditional binary search: 35 not found
+First occurrence: 35 not found
+Last occurrence: 35 not found
+Closest match: 32
+
+Traditional binary search: 60 not found
+First occurrence: 60 not found
+Last occurrence: 60 not found
+Closest match: 64
+
+Traditional binary search: 129 not found
+First occurrence: 129 not found
+Last occurrence: 129 not found
+Closest match: 128
+
+Traditional binary search: 255 not found
+First occurrence: 255 not found
+Last occurrence: 255 not found
+Closest match: 256
+
+Traditional binary search: 256 found at i = 8
+First occurrence: 256 occurs for the first time at i = 8
+Last occurrence: 256 occurs for the first time at i = 8
+Closest match: 256
+
+Traditional binary search: 550 not found
+First occurrence: 550 not found
+Last occurrence: 550 not found
+Closest match: 512
+
+Traditional binary search: 1000 not found
+First occurrence: 1000 not found
+Last occurrence: 1000 not found
+Closest match: 1024
+
+Traditional binary search: 2000 not found
+First occurrence: 2000 not found
+Last occurrence: 2000 not found
+Closest match: 1024
+
