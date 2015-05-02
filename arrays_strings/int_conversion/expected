@@ -1,0 +1,43 @@
+Enter a valid integer as a string
+Received: 32
+`char *` -> `int`: 32
+`int` -> `char *`: 32
+Received: 3298
+`char *` -> `int`: 3298
+`int` -> `char *`: 3298
+Received: -0
+`char *` -> `int`: 0
+`int` -> `char *`: 0
+Received: 0
+`char *` -> `int`: 0
+`int` -> `char *`: 0
+Received: -1
+`char *` -> `int`: -1
+`int` -> `char *`: -1
+Received: -2
+`char *` -> `int`: -2
+`int` -> `char *`: -2
+Received: -351
+`char *` -> `int`: -351
+`int` -> `char *`: -351
+Received: 1992
+`char *` -> `int`: 1992
+`int` -> `char *`: 1992
+Received: -1992
+`char *` -> `int`: -1992
+`int` -> `char *`: -1992
+Received: 10
+`char *` -> `int`: 10
+`int` -> `char *`: 10
+Received: 20
+`char *` -> `int`: 20
+`int` -> `char *`: 20
+Received: 1
+`char *` -> `int`: 1
+`int` -> `char *`: 1
+Received: 0000
+`char *` -> `int`: 0
+`int` -> `char *`: 0
+Received: -0000000
+`char *` -> `int`: 0
+`int` -> `char *`: 0
