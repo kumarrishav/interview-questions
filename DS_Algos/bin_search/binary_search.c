@@ -1,3 +1,16 @@
+/* This file implements the traditional binary search algorithm,
+ * along with some interesting variants:
+ *
+ * - binary_search() - traditional binary search
+ * - bin_search_closest() - returns the closest match if the element isn't found
+ * - bin_search_first_occurrence - if there are duplicates, returns the first occurrence
+ * - bin_search_last_occurrence - if there are duplicates, returns the last occurrence
+ *
+ * This is actually quite important. In one of my interviews, I had to develop an algorithm
+ * for an interesting problem where one of the steps required the use of bin_search_closest().
+ * Needless to say, the interviewer wanted me to code it. It is always important to know
+ * how binary search works and how it can be modified to suit our specific needs.
+ */
 #include <stdio.h>
 #include <assert.h>
 #define MAX_INPUT_SZ 256
