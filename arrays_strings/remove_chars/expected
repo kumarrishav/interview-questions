@@ -1,0 +1,9 @@
+Enter input string, followed by the string of characters to remove
+Before removal: GoogleRocks!
+After removal: GgleRcks
+Before removal: GoogleRocks!
+After removal: GoogleRocks!
+Before removal: GoogleRocks!
+After removal: GR
+Before removal: GoogleRocks!
+After removal: 
