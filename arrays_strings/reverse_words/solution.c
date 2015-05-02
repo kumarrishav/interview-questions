@@ -1,5 +1,10 @@
-
-
+/* Write a function that reverses the order of the words in a string. For
+ * example, your function should transform the string "Do or do not, there is no try."
+ * to "try. no is there not, do or Do". Assume that all words are space delimited
+ * and treat punctuation the same as letters.
+ *
+ * Source: Programming Interviews Exposed, page 87
+ */
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
@@ -17,7 +22,9 @@ size_t next_word_end(const char *str) {
 }
 
 
-/* Approach 1: O(n) time and O(n) memory */
+/* Approach 1: Recursive solution. A good exercise to play with and study recursion.
+ * O(n) time and O(n) memory
+ */
 size_t reverse_words_aux(char *str, size_t curr);
 void reverse_words_1(char *str) {
 	(void) reverse_words_aux(str, 0);
