@@ -159,7 +159,7 @@ int main(void) {
 			if (last == -1) {
 				printf("%d not found\n", val);
 			} else {
-				printf("%d occurs for the first time at i = %zd\n", val, last);
+				printf("%d occurs for the last time at i = %zd\n", val, last);
 			}
 
 			printf("Closest match: ");
