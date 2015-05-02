@@ -1,4 +1,9 @@
-
+/* Imagine a robot sitting on the upper left corner of an X by Y grid. The robot can
+ * only move in two directions: right and down. How many possible paths are there
+ * for the robot to go from (0,0) to (X,Y)?
+ *
+ * Source: Cracking the Coding Interview, page 109, question 9.2
+ */
 #include <stdio.h>
 
 /* Recursive approach */
