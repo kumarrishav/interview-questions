@@ -1,0 +1,375 @@
+The available commands are:
+I K - Inserts a key with the value K
+R K - Removes the key with value K
+F K - Finds the entry with value K
+P K - Searches for the predecessor of K
+S K - Searches for the successor of K
+H K - Finds the maximum key of the subtree rooted at K
+L K - Finds the minimum key of the subtree rooted at K
+D - Dumps the tree (pre-order traversal)
+Q - Quit
+> > > > > > > > > > > > > > > > > *** Entered 25
+    L:
+*** Entered 12
+    L:
+*** Entered 10
+    L:
+*** Entered 5
+    L:
+    R:
+*** Entered 7
+    L:
+    R:
+*** Leaving 7
+*** Leaving 5
+    R:
+*** Leaving 10
+    R:
+*** Entered 20
+    L:
+*** Entered 15
+    L:
+*** Entered 13
+    L:
+    R:
+*** Leaving 13
+    R:
+*** Entered 18
+    L:
+    R:
+*** Leaving 18
+*** Leaving 15
+    R:
+*** Entered 22
+    L:
+*** Entered 21
+    L:
+    R:
+*** Leaving 21
+    R:
+*** Entered 23
+    L:
+    R:
+*** Leaving 23
+*** Leaving 22
+*** Leaving 20
+*** Leaving 12
+    R:
+*** Entered 60
+    L:
+*** Entered 50
+    L:
+*** Entered 40
+    L:
+    R:
+*** Leaving 40
+    R:
+*** Leaving 50
+    R:
+*** Entered 75
+    L:
+    R:
+*** Leaving 75
+*** Leaving 60
+*** Leaving 25
+> > *** Entered 25
+    L:
+*** Entered 12
+    L:
+*** Entered 10
+    L:
+*** Entered 5
+    L:
+    R:
+*** Entered 7
+    L:
+    R:
+*** Leaving 7
+*** Leaving 5
+    R:
+*** Leaving 10
+    R:
+*** Entered 20
+    L:
+*** Entered 15
+    L:
+*** Entered 13
+    L:
+    R:
+*** Leaving 13
+    R:
+*** Entered 18
+    L:
+    R:
+*** Leaving 18
+*** Leaving 15
+    R:
+*** Entered 22
+    L:
+*** Entered 21
+    L:
+    R:
+*** Leaving 21
+    R:
+*** Entered 23
+    L:
+    R:
+*** Leaving 23
+*** Leaving 22
+*** Leaving 20
+*** Leaving 12
+    R:
+*** Entered 60
+    L:
+*** Entered 50
+    L:
+*** Entered 40
+    L:
+    R:
+*** Leaving 40
+    R:
+*** Leaving 50
+    R:
+*** Leaving 60
+*** Leaving 25
+> > *** Entered 25
+    L:
+*** Entered 12
+    L:
+*** Entered 10
+    L:
+*** Entered 5
+    L:
+    R:
+*** Entered 7
+    L:
+    R:
+*** Leaving 7
+*** Leaving 5
+    R:
+*** Leaving 10
+    R:
+*** Entered 20
+    L:
+*** Entered 15
+    L:
+*** Entered 13
+    L:
+    R:
+*** Leaving 13
+    R:
+*** Entered 18
+    L:
+    R:
+*** Leaving 18
+*** Leaving 15
+    R:
+*** Entered 22
+    L:
+*** Entered 21
+    L:
+    R:
+*** Leaving 21
+    R:
+*** Entered 23
+    L:
+    R:
+*** Leaving 23
+*** Leaving 22
+*** Leaving 20
+*** Leaving 12
+    R:
+*** Entered 60
+    L:
+*** Entered 40
+    L:
+    R:
+*** Leaving 40
+    R:
+*** Leaving 60
+*** Leaving 25
+> > *** Entered 25
+    L:
+*** Entered 12
+    L:
+*** Entered 10
+    L:
+*** Entered 7
+    L:
+    R:
+*** Leaving 7
+    R:
+*** Leaving 10
+    R:
+*** Entered 20
+    L:
+*** Entered 15
+    L:
+*** Entered 13
+    L:
+    R:
+*** Leaving 13
+    R:
+*** Entered 18
+    L:
+    R:
+*** Leaving 18
+*** Leaving 15
+    R:
+*** Entered 22
+    L:
+*** Entered 21
+    L:
+    R:
+*** Leaving 21
+    R:
+*** Entered 23
+    L:
+    R:
+*** Leaving 23
+*** Leaving 22
+*** Leaving 20
+*** Leaving 12
+    R:
+*** Entered 60
+    L:
+*** Entered 40
+    L:
+    R:
+*** Leaving 40
+    R:
+*** Leaving 60
+*** Leaving 25
+> > *** Entered 25
+    L:
+*** Entered 13
+    L:
+*** Entered 10
+    L:
+*** Entered 7
+    L:
+    R:
+*** Leaving 7
+    R:
+*** Leaving 10
+    R:
+*** Entered 20
+    L:
+*** Entered 15
+    L:
+    R:
+*** Entered 18
+    L:
+    R:
+*** Leaving 18
+*** Leaving 15
+    R:
+*** Entered 22
+    L:
+*** Entered 21
+    L:
+    R:
+*** Leaving 21
+    R:
+*** Entered 23
+    L:
+    R:
+*** Leaving 23
+*** Leaving 22
+*** Leaving 20
+*** Leaving 13
+    R:
+*** Entered 60
+    L:
+*** Entered 40
+    L:
+    R:
+*** Leaving 40
+    R:
+*** Leaving 60
+*** Leaving 25
+> > *** Entered 25
+    L:
+*** Entered 13
+    L:
+*** Entered 10
+    L:
+*** Entered 7
+    L:
+    R:
+*** Leaving 7
+    R:
+*** Leaving 10
+    R:
+*** Entered 21
+    L:
+*** Entered 15
+    L:
+    R:
+*** Entered 18
+    L:
+    R:
+*** Leaving 18
+*** Leaving 15
+    R:
+*** Entered 22
+    L:
+    R:
+*** Entered 23
+    L:
+    R:
+*** Leaving 23
+*** Leaving 22
+*** Leaving 21
+*** Leaving 13
+    R:
+*** Entered 60
+    L:
+*** Entered 40
+    L:
+    R:
+*** Leaving 40
+    R:
+*** Leaving 60
+*** Leaving 25
+> > *** Entered 40
+    L:
+*** Entered 13
+    L:
+*** Entered 10
+    L:
+*** Entered 7
+    L:
+    R:
+*** Leaving 7
+    R:
+*** Leaving 10
+    R:
+*** Entered 21
+    L:
+*** Entered 15
+    L:
+    R:
+*** Entered 18
+    L:
+    R:
+*** Leaving 18
+*** Leaving 15
+    R:
+*** Entered 22
+    L:
+    R:
+*** Entered 23
+    L:
+    R:
+*** Leaving 23
+*** Leaving 22
+*** Leaving 21
+*** Leaving 13
+    R:
+*** Entered 60
+    L:
+    R:
+*** Leaving 60
+*** Leaving 40
+> 
