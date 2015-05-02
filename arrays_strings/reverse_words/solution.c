@@ -47,7 +47,7 @@ size_t reverse_words_aux(char *str, size_t curr) {
 	return ret;
 }
 
-/* Approach 2: O(1) memory, O(n^2) time */
+/* Approach 2: O(1) memory, O(n) time */
 void reverse_str(char *str, char *end);
 void reverse_words_2(char *str) {
 	size_t next_end = 0;
