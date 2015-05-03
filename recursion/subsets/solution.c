@@ -1,4 +1,7 @@
-
+/* Write a method to return all subsets of a set.
+ *
+ * Source: Cracking the Coding Interview, page 109, question 9.4
+ */
 #include <stdio.h>
 
 void print_subsets_aux(char *buff, size_t buff_i, size_t n, int set[n], size_t set_i) {
