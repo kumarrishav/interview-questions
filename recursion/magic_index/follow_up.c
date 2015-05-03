@@ -1,4 +1,8 @@
-
+/* FOLLOW UP
+ * What if the values are not distinct?
+ *
+ * Source: Cracking the Coding Interview, page 109, question 9.3
+ */
 #include <stdio.h>
 #define max(a, b) ((a) > (b) ? (a) : (b))
 #define min(a, b) ((a) < (b) ? (a) : (b))
