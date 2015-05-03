@@ -1,4 +1,9 @@
-
+/* FOLLOW UP
+ * Imagine certain spots are "off limits", such that the robot cannot step on them.
+ * Design an algorithm to find a path for the robot from the top left to the bottom right.
+ *
+ * Source: Cracking the Coding Interview, page 109, question 9.2
+ */
 #include <stdio.h>
 #include <string.h>
 
