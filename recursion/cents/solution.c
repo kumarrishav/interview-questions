@@ -1,4 +1,9 @@
-
+/* Given an infinite number of quarters (25 cents), dimes (10 cents), nickels (5 cents),
+ * and pennies (1 cent), write code to calculate the number of ways of representing
+ * n cents.
+ *
+ * Source: Cracking the Coding Interview, page 110, question 9.8
+ */
 #include <stdio.h>
 
 static unsigned quantities[] = { 25, 10, 5, 1 };
