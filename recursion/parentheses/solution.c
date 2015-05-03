@@ -1,4 +1,11 @@
-
+/* Implement an algorithm to print all valid (e.g., properly opened and closed)
+ * combinations of n-pairs of parentheses.
+ * EXAMPLE
+ * Input: 3
+ * Output: ((())), (()()), (())(), ()(()), ()()()
+ *
+ * Source: Cracking the Coding Interview, page 110, question 9.6
+ */
 #include <stdio.h>
 
 void print_parens_aux(char *buff, size_t buff_i, unsigned open_used, unsigned n, unsigned to_close) {
