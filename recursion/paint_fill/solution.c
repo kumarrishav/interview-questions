@@ -1,4 +1,10 @@
-
+/* Implement the "paint fill" function that one might see on many image editing
+ * programs. That is, given a screen (represented by a two-dimensional array of
+ * colors), a point, and a new color, fill in the surrounding area until the color
+ * changes from the original color.
+ *
+ * Source: Cracking the Coding Interview, page 110, question 9.7
+ */
 #include <stdio.h>
 
 static void paint_fill_aux(size_t x, size_t y, char screen[x][y], size_t curr_x, size_t curr_y,
