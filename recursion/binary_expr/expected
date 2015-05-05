@@ -1,0 +1,8 @@
+Enter a boolean expression with ^, & and |, and the desired result (1 or 0)
+> There are 2 ways to get 0.
+> There are 3 ways to get 1.
+> There are 268 ways to get 0.
+> There are 161 ways to get 1.
+> There are 104 ways to get 1.
+> There are 28 ways to get 0.
+> 
