@@ -1,4 +1,9 @@
-
+/* Given a boolean expression consisting of the symbols 0, 1, &, | and ^, and a
+ * desired boolean result value `result`, implement a function to count the number
+ * of ways of parenthesizing the expression such that it evaluates to `result`.
+ *
+ * Source: Cracking the Coding Interview, page 110, question 9.11
+ */ 
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
