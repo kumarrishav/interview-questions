@@ -1,0 +1,12 @@
+Enter size of array, followed by the array elements, followed by the element to find.
+5 found at i = 8
+Element not found.
+20 found at i = 3
+14 found at i = 11
+25 found at i = 4
+1 found at i = 5
+0 found at i = 1
+14 found at i = 0
+1 found at i = 0
+Element not found.
+0 found at i = 1
