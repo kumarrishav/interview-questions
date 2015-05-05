@@ -1,4 +1,8 @@
-
+/* You are given two sorted arrays, A and B, where A has a large enough buffer at
+ * the end to hold B. Write a method to merge B into A in sorted order.
+ *
+ * Source: Cracking the Coding Interview, page 121, question 11.1
+ */
 #include <stdio.h>
 
 void merge(int arrayA[], size_t arrayA_sz, int arrayB[], size_t arrayB_sz) {
