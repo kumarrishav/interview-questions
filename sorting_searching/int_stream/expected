@@ -1,0 +1,18 @@
+Available commands:
+I n - Insert n into the stream.
+R n - Get the rank of n.
+rank(1) = 0
+rank(3) = 1
+rank(4) = 3
+rank(5) = 5
+rank(7) = 6
+6 never appeared in the stream.
+rank(9) = 7
+rank(13) = 8
+rank(6) = 6
+rank(7) = 7
+rank(9) = 8
+rank(13) = 9
+rank(13) = 9
+rank(9) = 8
+rank(13) = 10
