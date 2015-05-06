@@ -5,6 +5,14 @@
  */
 #include <stdio.h>
 
+/* Note:
+ * The following code implements the solution outlined in the book.
+ * It makes binary search on the diagonal of the matrix, partitions the matrix,
+ * and recurses appropriately.
+ * Because of the binary search in the diagonal, the running time
+ * is roughly O(log(MN)*log(min(M, N))
+ */
+
 struct cell {
 	ssize_t row;
 	ssize_t col;

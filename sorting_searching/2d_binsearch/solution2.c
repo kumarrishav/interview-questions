@@ -5,6 +5,22 @@
  */
 #include <stdio.h>
 
+/* Note:
+ * The following code implements a more accurate version of bi-dimensional binary search.
+ * It does not perform a binary search on each of the sub-matrices diagonals; instead,
+ * it picks the middle spot or the sub-matrix (i.e. the "center of mass" of the matrix)
+ * and recurses based on that center.
+ * In the worst case, the code has to recurse on 3 of the 4 sub-matrices.
+ * This solution is O(log(MN)).
+ * Although irrelevant for big-O analysis, the logarithm's base is 4/3, since we recurse on
+ * 3/4 of the sub-matrices in the worst case.
+ *
+ * The performance difference between the other solution and this one is big.
+ * For a 5000x5000 matrix with 1000 random lookup queries, the other solution
+ * took 1 minute and 15 seconds. This solution took 20 seconds -- a considerable improvement
+ * on the runtime.
+ */
+
 struct cell {
 	ssize_t row;
 	ssize_t col;
