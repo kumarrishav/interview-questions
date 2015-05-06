@@ -1,4 +1,16 @@
-
+/* Write a method to print every possible ways of parenthesizing an expression.
+ * Assume that each number in the expression is a 1 digit number.
+ *
+ * EXAMPLE:
+ * Input: 1+2*3/5
+ * Output:
+ *   1+(2*(3/5))
+ *   1+((2*3)/5)
+ *   (1+2)*(3/5)
+ *   (1+(2*3))/5
+ *   ((1+2)*3)/5
+ *
+ */
 #include <iostream>
 #include <sstream>
 #include <cassert>
