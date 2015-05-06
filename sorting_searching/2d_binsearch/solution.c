@@ -1,4 +1,8 @@
-
+/* Given an MxN matrix in which each row and each column is sorted in ascending order,
+ * write a method to find an element.
+ *
+ * Source: Cracking the Coding Interview, page 122, question 11.6
+ */
 #include <stdio.h>
 
 struct cell {
