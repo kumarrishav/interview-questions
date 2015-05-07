@@ -1,0 +1,11 @@
+Enter the array dimensions
+Available commands are:
+W i j n - Write the value `n` into position (i, j)
+R i j - Read and print the value in position (i, j)
+Q - Quit
+Stored -2 in (0, 0)
+Stored 23 in (3, 5)
+Stored -6 in (2, 1)
+(0, 0) = -2
+(3, 5) = 23
+(2, 1) = -6
