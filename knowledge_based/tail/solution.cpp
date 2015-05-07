@@ -1,3 +1,7 @@
+/* Write a method to print the last K lines of an input file using C++.
+ *
+ * Source: Cracking the Coding Interview, page 139, question 13.1
+ */
 #include <iostream>
 #include <cstdlib>
 #include <cerrno>
