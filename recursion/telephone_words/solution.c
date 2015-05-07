@@ -43,7 +43,7 @@ static int read_number(int number[]) {
 
 	for (i = 0; i < NUMBER_LEN; i++) {
 		c = getchar();
-		if (c == EOF) {
+		if (!('0' <= c && c <= '9')) {
 			return 0;
 		}
 		number[i] = c-'0';
