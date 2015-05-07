@@ -1,4 +1,8 @@
-
+/* Numbers are randomly generated and stored into an (expanding) array. How
+ * would you keep track of the median?
+ *
+ * Source: Cracking the Coding Interview, page 54 (Example question in the section "Approach V")
+ */
 #include <iostream>
 #include <vector>
 
