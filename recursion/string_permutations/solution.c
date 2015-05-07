@@ -22,6 +22,7 @@ void str_permutations_aux(char *str, size_t str_sz, size_t str_i) {
 	for (i = str_i; i < str_sz; i++) {
 		swap(str, str_i, i);
 		str_permutations_aux(str, str_sz, str_i+1);
+		swap(str, str_i, i);
 	}
 }
 
