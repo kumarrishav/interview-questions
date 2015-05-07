@@ -1,4 +1,4 @@
-Enter 7 digits representing a US phone number (without area code)
+Enter 7 consecutive digits representing a US phone number (without area code)
 > 0011010
 > 011a010
 011b010
