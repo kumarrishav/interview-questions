@@ -1,0 +1,21 @@
+The available commands are:
+I n - Insert the value `n` into the stream
+M - Get the median
+Q - Quit
+> Inserted 1 into the median
+> Median = 1
+> Inserted 0 into the median
+> Median = 0.5
+> Inserted 4 into the median
+> Median = 1
+> Inserted 6 into the median
+> Median = 2.5
+> Inserted 8 into the median
+> Median = 4
+> Inserted 10 into the median
+> Median = 5
+> Inserted 1 into the median
+> Median = 4
+> Inserted 2 into the median
+> Median = 3
+> 
