@@ -1,4 +1,6 @@
-/* 
+/* Write a C function that determines whether a computer is big-endian or little-endian
+ *
+ * Source: Programming Interviews Exposed, page 201
  */
 
 #include <stdio.h>
