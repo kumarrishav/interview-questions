@@ -1,4 +1,8 @@
-
+/* FOLLOW UP
+ * Reimplement PrintTelephoneWords without using recursion.
+ *
+ * Source: Programming Interviews Exposed, page 122
+ */
 #include <stdio.h>
 #include <ctype.h>
 #include <assert.h>
