@@ -1,4 +1,8 @@
-
+/* Given two memory addresses, determine if they are in the same page.
+ * Assume one page is 4096 bytes
+ *
+ * Source: past interview experience
+ */
 #include <stdio.h>
 #include <limits.h>
 #include <stdint.h>
