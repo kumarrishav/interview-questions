@@ -1,4 +1,37 @@
-
+/* Boggle is a word game where players try to find words in an NxN board of letters. Each word
+ * has a score.
+ * As an example, consider this boggle board configuration:
+ *
+ *      (0) (1) (2) (3)
+ *      ~~~ ~~~ ~~~ ~~~
+ * (0) | K | G | W | I |
+ *      ~~~ ~~~ ~~~ ~~~
+ * (1) | N | I | R | G |
+ *      ~~~ ~~~ ~~~ ~~~
+ * (2) | E | L | N | E |
+ *      ~~~ ~~~ ~~~ ~~~
+ * (3) | S | O | A | E |
+ *      ~~~ ~~~ ~~~ ~~~
+ *
+ * Among others, we can find the word "engineering"
+ * (2,0 -> 1,0 -> 0,1 -> 1,1 -> 2,2 -> 3,3 -> 2,3 -> 1,2 -> 1,1 -> 1,0 -> 0,1)
+ * and "song" (3,0 -> 3,1 -> 2,2 -> 1,3)
+ *
+ * Question (a):
+ * Write a function that generates a random NxN boggle board ensuring that no letter is used
+ * more than N times.
+ *
+ * Question (b):
+ * Given a function `int score(char *)` that returns the score of a word, and an NxN boggle board,
+ * find the word in the boggle board that has the maximum score.
+ * score() will return -1 if the word is invalid.
+ * If a word is invalid, you may assume that every word with that prefix is also invalid.
+ *
+ * FOLLOW UP
+ * How would you store and lookup a word's score?
+ *
+ * Source: past interview experience
+ */
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -158,6 +191,12 @@ char *find_best_word(char **board, size_t board_dim) {
 
 /* ~~~ End of question (b) ~~~ */
 
+/* Follow up question
+ * A good approach is to use a trie to efficiently find words and their score
+ * Implementing a trie was not part of the interview - it was enough to mention the
+ * data structure and explain how it can be used in this problem
+ */
+
 /* ~~~ Trie implementation to store words and scores ~~~ */
 struct trie_node {
 	int score; // -1 means not a word
@@ -306,25 +345,6 @@ static char word_buff[MAX_WORD_SZ];
 static struct trie_node *trie;
 
 int score(const char *word) {
-/*
-	if (!strcmp(word, "e") ||
-	    !strcmp(word, "en") ||
-	    !strcmp(word, "eng") ||
-	    !strcmp(word, "engi") ||
-	    !strcmp(word, "engin") ||
-	    !strcmp(word, "engine") ||
-	    !strcmp(word, "enginee") ||
-	    !strcmp(word, "engineer") ||
-	    !strcmp(word, "engineeri") ||
-	    !strcmp(word, "engineerin") ||
-	    !strcmp(word, "engineering") ||
-	    !strcmp(word, "s") ||
-	    !strcmp(word, "so") ||
-	    !strcmp(word, "son") ||
-	    !strcmp(word, "song")) {
-		return strlen(word);
-	}
-*/
 	return word_score(trie, word);
 }
 
