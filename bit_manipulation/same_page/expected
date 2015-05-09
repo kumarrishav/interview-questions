@@ -1,0 +1,15 @@
+Page size = 4096; Pointers are 64 bits
+Enter 2 memory addresses to see if they are on the same memory page
+> They are on the same page
+> They are on the same page
+> They are on the same page
+> They are on the same page
+> They are on the same page
+> They are not on the same page
+> They are on the same page
+> They are not on the same page
+> They are on the same page
+> They are on the same page
+> They are on the same page
+> They are not on the same page
+> 
