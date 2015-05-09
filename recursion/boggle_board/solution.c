@@ -11,7 +11,13 @@ static char get_rand_letter(void) {
 	return rand()%26+'a';
 }
 
-char **generate_board(size_t n) {
+static char inject_letter(void) {
+	char l;
+	scanf(" %c", &l);
+	return l;
+}
+
+char **generate_board_aux(size_t n, char (*letter_gen)(void)) {
 	unsigned letters_used[ALPHABET_SZ];
 	memset(letters_used, 0, sizeof(letters_used));
 
@@ -27,9 +33,9 @@ char **generate_board(size_t n) {
 	for (i = 0; i < n; i++) {
 		size_t j;
 		for (j = 0; j < n; j++) {
-			char letter = get_rand_letter();
+			char letter = (*letter_gen)();
 			while (letters_used[(unsigned char) (letter-'a')] > n) {
-				letter = get_rand_letter();
+				letter = (*letter_gen)();
 			}
 			letters_used[(unsigned char) (letter-'a')]++;
 			board[i][j] = letter;
@@ -39,7 +45,19 @@ char **generate_board(size_t n) {
 	return board;
 }
 
+char **generate_board(size_t n) {
+	return generate_board_aux(n, get_rand_letter);
+}
+
+char **inject_board(size_t n) {
+	return generate_board_aux(n, inject_letter);
+}
+
 void destroy_board(char **board, size_t n) {
+
+	if (board == NULL) {
+		return;
+	}
 
 	size_t i;
 	for (i = 0; i < n; i++) {
@@ -114,14 +132,32 @@ char *find_best_word_aux(char **board, size_t board_dims, ssize_t row, ssize_t c
 
 char *find_best_word(char **board, size_t board_dim) {
 	static char word_buffer[1024];
-	int score;
-	return find_best_word_aux(board, board_dim, 0, 0,
-				  word_buffer, sizeof(word_buffer), 0, &score);
+	int best_score = -1;
+	char *word = NULL;
+
+	ssize_t i, j;
+	for (i = 0; i < board_dim; i++) {
+		for (j = 0; j < board_dim; j++) {
+			int score;
+			char *w = find_best_word_aux(board, board_dim, i, j,
+						     word_buffer, sizeof(word_buffer), 0,
+						     &score);
+			if (score > best_score) {
+				free(word);
+				word = w;
+				best_score = score;
+			}
+		}
+	}
+
+	return word;
 }
+
 /* ~~~ End of question (b) ~~~ */
 
 /* Dummy score function */
 int score(const char *word) {
+	printf("score called with word = %s\n", word);
 	if (!strcmp(word, "e") ||
 	    !strcmp(word, "en") ||
 	    !strcmp(word, "eng") ||
@@ -132,7 +168,11 @@ int score(const char *word) {
 	    !strcmp(word, "engineer") ||
 	    !strcmp(word, "engineeri") ||
 	    !strcmp(word, "engineerin") ||
-	    !strcmp(word, "engineering")) {
+	    !strcmp(word, "engineering") ||
+	    !strcmp(word, "s") ||
+	    !strcmp(word, "so") ||
+	    !strcmp(word, "son") ||
+	    !strcmp(word, "song")) {
 		return strlen(word);
 	}
 
@@ -153,29 +193,49 @@ static void print_board(char **board, size_t n) {
 
 
 int main(void) {
-
 	srand(time(NULL));
 
-	size_t n;
-	printf("Enter a size for the board.\n");
-	printf("> ");
+	printf("The available commands are:\n"
+	       "I N - Inject an NxN board. This command will scan NxN letters to form a board\n"
+	       "G N - Generates a new NxN board where a letter doesn't appear more than N times\n"
+	       "P - Print the current board\n"
+	       "B - Find the best word (word with the highest score)\n> ");
 
-	while (scanf("%zu", &n) == 1) {
-		char **board = generate_board(n);
-		print_board(board, n);
+	char **board = NULL;
+	size_t board_dim = 0;
 
-		printf("Best word: ");
-		char *word = find_best_word(board, n);
-		if (word == NULL) {
-			printf("no words\n");
+	char op;
+	while (scanf(" %c", &op) == 1) {
+		if (op == 'I') {
+			destroy_board(board, board_dim);
+			scanf("%zu", &board_dim);
+			board = inject_board(board_dim);
+		} else if (op == 'P') {
+			if (board == NULL) {
+				printf("No board at the moment\n");
+			} else {
+				print_board(board, board_dim);
+			}
+		} else if (op == 'G') {
+			destroy_board(board, board_dim);
+			scanf("%zu", &board_dim);
+			board = generate_board(board_dim);
+		} else if (op == 'B') {
+			char *w = find_best_word(board, board_dim);
+			if (w == NULL) {
+				printf("No words found\n");
+			} else {
+				printf("Best word: %s\n", w);
+			}
+			free(w);
 		} else {
-			printf("%s\n", word);
+			fprintf(stderr, "Unrecognized operation: %c\n", op);
 		}
-		free(word);
 
-		destroy_board(board, n);
 		printf("> ");
 	}
+
+	destroy_board(board, board_dim);
 
 	return 0;
 }
