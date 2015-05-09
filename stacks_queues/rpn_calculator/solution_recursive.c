@@ -1,7 +1,18 @@
-
+/* Reverse Polish Notation (RPN) calculators don't have the need for parenthesis.
+ * In RPN, the operands of an operator are always specified before the operator, and as such
+ * there is only one way to interpret the expression (in other words, it uses postfix operators).
+ *
+ * For example, this expression:
+ *
+ * 3 4 + 5 3 - *
+ * Is equal to (3+4)*(5-3), and it evaluates to 14.
+ *
+ * Design and implement a method to evaluate an RPN expression.
+ *
+ * Source: past interview experience
+ */
 #include <stdio.h>
 #include <assert.h>
-#include <ctype.h>
 #include <stdlib.h>
 #define MAX_EXPR_SZ 1024
 
