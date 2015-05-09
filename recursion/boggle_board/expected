@@ -1,0 +1,13 @@
+The available commands are:
+I N - Inject an NxN board. This command will scan NxN letters to form a board
+G N - Generates a new NxN board where a letter doesn't appear more than N times
+P - Print the current board
+W N word - Insert a word into the dictionary with score N
+A N word - Insert a word and all prefixes in the dictionary. Non-proper prefixes get a score of 0
+R word - Delete a word
+S word - Search for a word and return its score (-1 if no such word exists)
+D - Dump the dictionary with the corresponding scores
+B - Find the best word (word with the highest score)
+Q - Quit
+> > > > > Best word: engineering
+> 
