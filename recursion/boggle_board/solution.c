@@ -5,6 +5,7 @@
 #include <assert.h>
 #include <time.h>
 #define ALPHABET_SZ 26
+#define MAX_WORD_SZ 512
 
 /* ~~~ Question (a) ~~~ */
 static char get_rand_letter(void) {
@@ -157,6 +158,91 @@ char *find_best_word(char **board, size_t board_dim) {
 
 /* ~~~ End of question (b) ~~~ */
 
+/* ~~~ Trie implementation to store words and scores ~~~ */
+struct trie_node {
+	int score; // -1 means not a word
+	struct trie_node *children[ALPHABET_SZ];
+};
+
+static struct trie_node *new_node(void) {
+	struct trie_node *ret = malloc(sizeof(*ret));
+	if (ret == NULL) {
+		return NULL;
+	}
+
+	ret->score = -1;
+	memset(ret->children, 0, sizeof(ret->children));
+
+	return ret;
+}
+
+struct trie_node *new_trie(void) {
+	return new_node();
+}
+
+void insert_word(struct trie_node *root, const char *word, int score) {
+	size_t word_sz = strlen(word);
+	size_t word_i = 0;
+	struct trie_node *curr_node = root;
+
+	while (word_i < word_sz &&
+	       curr_node->children[(unsigned char) (word[word_i]-'a')] != NULL) {
+		curr_node = curr_node->children[(unsigned char) (word[word_i]-'a')];
+		word_i++;
+	}
+
+	if (word_i == word_sz) {
+		// Update the score
+		curr_node->score = score;
+		return;
+	}
+
+	while (word_i < word_sz) {
+		struct trie_node *n = new_node();
+		assert(n != NULL);
+		curr_node->children[(unsigned char) (word[word_i]-'a')] = n;
+		curr_node = n;
+		word_i++;
+	}
+
+	curr_node->score = score;
+}
+
+int word_score(struct trie_node *root, const char *word) {
+	struct trie_node *curr_node = root;
+
+	while (*word != '\0' && curr_node->children[(unsigned char) (*word-'a')] != NULL) {
+		curr_node = curr_node->children[(unsigned char) (*word-'a')];
+		word++;
+	}
+
+	return (curr_node == NULL || *word != '\0') ? -1 : curr_node->score;
+}
+
+
+static void print_words(struct trie_node *root, size_t buff_i) {
+	static char curr_word[MAX_WORD_SZ];
+
+	if (root == NULL) {
+		return;
+	}
+
+	if (root->score != -1) {
+		curr_word[buff_i] = '\0';
+		printf("%s -> %d\n", curr_word, root->score);
+	}
+
+	size_t i;
+	for (i = 0; i < ALPHABET_SZ; i++) {
+		curr_word[buff_i] = 'a'+i;
+		print_words(root->children[i], buff_i+1);
+	}
+}
+
+void print_known_words(struct trie_node *root) {
+	print_words(root, 0);
+}
+
 /* Dummy score function */
 int score(const char *word) {
 	if (!strcmp(word, "e") ||
@@ -192,7 +278,7 @@ static void print_board(char **board, size_t n) {
 }
 
 
-
+static char word_buff[MAX_WORD_SZ];
 int main(void) {
 	srand(time(NULL));
 
@@ -200,10 +286,14 @@ int main(void) {
 	       "I N - Inject an NxN board. This command will scan NxN letters to form a board\n"
 	       "G N - Generates a new NxN board where a letter doesn't appear more than N times\n"
 	       "P - Print the current board\n"
+	       "W N word - Insert a word into the dictionary with score N\n"
+	       "S word - Search for a word and return its score (-1 if no such word exists)\n"
+	       "D - Dump the dictionary with the corresponding scores\n"
 	       "B - Find the best word (word with the highest score)\n"
 	       "Q - Quit\n"
 	       "> ");
 
+	struct trie_node *trie = new_trie();
 	char **board = NULL;
 	size_t board_dim = 0;
 
@@ -223,6 +313,20 @@ int main(void) {
 			destroy_board(board, board_dim);
 			scanf("%zu", &board_dim);
 			board = generate_board(board_dim);
+		} else if (op == 'W') {
+			size_t word_score;
+			scanf("%zu%s", &word_score, word_buff);
+			insert_word(trie, word_buff, word_score);
+		} else if (op == 'S') {
+			scanf("%s", word_buff);
+			int s = word_score(trie, word_buff);
+			if (s == -1) {
+				printf("No such word: %s\n", word_buff);
+			} else {
+				printf("score(%s) = %d\n", word_buff, s);
+			}
+		} else if (op == 'D') {
+			print_known_words(trie);
 		} else if (op == 'B') {
 			char *w = find_best_word(board, board_dim);
 			if (w == NULL) {
