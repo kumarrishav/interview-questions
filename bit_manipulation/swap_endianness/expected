@@ -1,0 +1,44 @@
+Enter an integer to see how it looks when endianness changes
+> Received:
+	Base 10: 128
+	Binary: 00000000 00000000 00000000 10000000
+After swapping endianness:
+	Base 10: 2147483648
+	Binary: 10000000 00000000 00000000 00000000
+> Received:
+	Base 10: 511
+	Binary: 00000000 00000000 00000001 11111111
+After swapping endianness:
+	Base 10: 4278255616
+	Binary: 11111111 00000001 00000000 00000000
+> Received:
+	Base 10: 0
+	Binary: 00000000 00000000 00000000 00000000
+After swapping endianness:
+	Base 10: 0
+	Binary: 00000000 00000000 00000000 00000000
+> Received:
+	Base 10: 1
+	Binary: 00000000 00000000 00000000 00000001
+After swapping endianness:
+	Base 10: 16777216
+	Binary: 00000001 00000000 00000000 00000000
+> Received:
+	Base 10: 38578
+	Binary: 00000000 00000000 10010110 10110010
+After swapping endianness:
+	Base 10: 2996174848
+	Binary: 10110010 10010110 00000000 00000000
+> Received:
+	Base 10: 3485783478
+	Binary: 11001111 11000100 11010101 10110110
+After swapping endianness:
+	Base 10: 3067462863
+	Binary: 10110110 11010101 11000100 11001111
+> Received:
+	Base 10: 4294967295
+	Binary: 11111111 11111111 11111111 11111111
+After swapping endianness:
+	Base 10: 4294967295
+	Binary: 11111111 11111111 11111111 11111111
+> 
