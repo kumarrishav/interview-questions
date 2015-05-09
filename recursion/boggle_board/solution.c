@@ -146,6 +146,8 @@ char *find_best_word(char **board, size_t board_dim) {
 				free(word);
 				word = w;
 				best_score = score;
+			} else {
+				free(w);
 			}
 		}
 	}
@@ -198,7 +200,9 @@ int main(void) {
 	       "I N - Inject an NxN board. This command will scan NxN letters to form a board\n"
 	       "G N - Generates a new NxN board where a letter doesn't appear more than N times\n"
 	       "P - Print the current board\n"
-	       "B - Find the best word (word with the highest score)\n> ");
+	       "B - Find the best word (word with the highest score)\n"
+	       "Q - Quit\n"
+	       "> ");
 
 	char **board = NULL;
 	size_t board_dim = 0;
@@ -227,6 +231,8 @@ int main(void) {
 				printf("Best word: %s\n", w);
 			}
 			free(w);
+		} else if (op == 'Q') {
+			break;
 		} else {
 			fprintf(stderr, "Unrecognized operation: %c\n", op);
 		}
