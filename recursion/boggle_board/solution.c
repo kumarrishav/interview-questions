@@ -161,6 +161,7 @@ char *find_best_word(char **board, size_t board_dim) {
 /* ~~~ Trie implementation to store words and scores ~~~ */
 struct trie_node {
 	int score; // -1 means not a word
+	unsigned children_count;
 	struct trie_node *children[ALPHABET_SZ];
 };
 
@@ -171,6 +172,7 @@ static struct trie_node *new_node(void) {
 	}
 
 	ret->score = -1;
+	ret->children_count = 0;
 	memset(ret->children, 0, sizeof(ret->children));
 
 	return ret;
@@ -178,6 +180,19 @@ static struct trie_node *new_node(void) {
 
 struct trie_node *new_trie(void) {
 	return new_node();
+}
+
+void destroy_trie(struct trie_node *root) {
+	if (root == NULL) {
+		return;
+	}
+
+	size_t i;
+	for (i = 0; i < ALPHABET_SZ; i++) {
+		destroy_trie(root->children[i]);
+	}
+
+	free(root);
 }
 
 void insert_word(struct trie_node *root, const char *word, int score) {
@@ -201,11 +216,43 @@ void insert_word(struct trie_node *root, const char *word, int score) {
 		struct trie_node *n = new_node();
 		assert(n != NULL);
 		curr_node->children[(unsigned char) (word[word_i]-'a')] = n;
+		curr_node->children_count++;
 		curr_node = n;
 		word_i++;
 	}
 
 	curr_node->score = score;
+}
+
+static int delete_word_aux(struct trie_node *root, const char *word, size_t word_i) {
+	if (word[word_i] == '\0') {
+		if (root->score != -1) {
+			root->score = -1;
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+
+	int index = (unsigned char) (word[word_i]-'a');
+
+	if (root->children[index] == NULL) {
+		return 0;
+	}
+
+	int ret = delete_word_aux(root->children[index], word, word_i+1);
+	if (ret && root->children[index]->children_count == 0 &&
+	    root->children[index]->score != -1) {
+		free(root->children[index]);
+		root->children[index] = NULL;
+		root->children_count--;
+	}
+
+	return ret;
+}
+
+void delete_word(struct trie_node *root, const char *word) {
+	delete_word_aux(root, word, 0);
 }
 
 int word_score(struct trie_node *root, const char *word) {
@@ -243,8 +290,23 @@ void print_known_words(struct trie_node *root) {
 	print_words(root, 0);
 }
 
-/* Dummy score function */
+static void print_board(char **board, size_t n) {
+	size_t i;
+	for (i = 0; i < n; i++) {
+		size_t j;
+		for (j = 0; j < n; j++) {
+			putchar(board[i][j]);
+		}
+		putchar('\n');
+	}
+}
+
+
+static char word_buff[MAX_WORD_SZ];
+static struct trie_node *trie;
+
 int score(const char *word) {
+/*
 	if (!strcmp(word, "e") ||
 	    !strcmp(word, "en") ||
 	    !strcmp(word, "eng") ||
@@ -262,23 +324,10 @@ int score(const char *word) {
 	    !strcmp(word, "song")) {
 		return strlen(word);
 	}
-
-	return -1;
+*/
+	return word_score(trie, word);
 }
 
-static void print_board(char **board, size_t n) {
-	size_t i;
-	for (i = 0; i < n; i++) {
-		size_t j;
-		for (j = 0; j < n; j++) {
-			putchar(board[i][j]);
-		}
-		putchar('\n');
-	}
-}
-
-
-static char word_buff[MAX_WORD_SZ];
 int main(void) {
 	srand(time(NULL));
 
@@ -295,9 +344,9 @@ int main(void) {
 	       "Q - Quit\n"
 	       "> ");
 
-	struct trie_node *trie = new_trie();
 	char **board = NULL;
 	size_t board_dim = 0;
+	trie = new_trie();
 
 	char op;
 	while (scanf(" %c", &op) == 1) {
@@ -332,6 +381,9 @@ int main(void) {
 			}
 			insert_word(trie, word_buff, word_score);
 
+		} else if (op == 'R') {
+			scanf("%s", word_buff);
+			delete_word(trie, word_buff);
 		} else if (op == 'S') {
 			scanf("%s", word_buff);
 			int s = word_score(trie, word_buff);
@@ -359,6 +411,7 @@ int main(void) {
 		printf("> ");
 	}
 
+	destroy_trie(trie);
 	destroy_board(board, board_dim);
 
 	return 0;
