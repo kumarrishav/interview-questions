@@ -287,6 +287,8 @@ int main(void) {
 	       "G N - Generates a new NxN board where a letter doesn't appear more than N times\n"
 	       "P - Print the current board\n"
 	       "W N word - Insert a word into the dictionary with score N\n"
+	       "A N word - Insert a word and all prefixes in the dictionary. Non-proper prefixes get a score of 0\n"
+	       "R word - Delete a word\n"
 	       "S word - Search for a word and return its score (-1 if no such word exists)\n"
 	       "D - Dump the dictionary with the corresponding scores\n"
 	       "B - Find the best word (word with the highest score)\n"
@@ -317,6 +319,19 @@ int main(void) {
 			size_t word_score;
 			scanf("%zu%s", &word_score, word_buff);
 			insert_word(trie, word_buff, word_score);
+		} else if (op == 'A') {
+			size_t word_score;
+			scanf("%zu%s", &word_score, word_buff);
+
+			size_t i;
+			for (i = 1; word_buff[i] != '\0'; i++) {
+				char c = word_buff[i];
+				word_buff[i] = '\0';
+				insert_word(trie, word_buff, 0);
+				word_buff[i] = c;
+			}
+			insert_word(trie, word_buff, word_score);
+
 		} else if (op == 'S') {
 			scanf("%s", word_buff);
 			int s = word_score(trie, word_buff);
