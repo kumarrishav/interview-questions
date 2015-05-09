@@ -157,7 +157,6 @@ char *find_best_word(char **board, size_t board_dim) {
 
 /* Dummy score function */
 int score(const char *word) {
-	printf("score called with word = %s\n", word);
 	if (!strcmp(word, "e") ||
 	    !strcmp(word, "en") ||
 	    !strcmp(word, "eng") ||
