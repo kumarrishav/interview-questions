@@ -1,4 +1,20 @@
-
+/* Given the following code:
+ *
+ * #define BUF_SIZE 1024
+ * #define BUFFERS 100
+ *
+ * void *bufs[BUFFERS]; // Each buffer is BUF_SIZE long
+ *
+ * void copy_buf(int dest_idx, int src_idx) {
+ *     // Implement this
+ * }
+ *
+ * Implement `copy_buf()`, a method that copies one buffer in `bufs` to another buffer.
+ * Make it work safely in a multithreaded program.
+ * Each buffer is BUF_SIZE long.
+ *
+ * Source: past interview experience
+ */
 #include <stdio.h>
 #include <pthread.h>
 #include <string.h>
