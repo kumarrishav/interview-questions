@@ -1,4 +1,7 @@
-
+/* Write a function that takes an integer and returns another integer with the opposite endianness
+ *
+ * Source: past interview experience
+ */
 #include <stdio.h>
 #include <limits.h>
 
