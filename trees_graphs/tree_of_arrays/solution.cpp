@@ -1,5 +1,22 @@
-
-
+/* Suppose you have a tree where each node stores an array of words. Each node can have any
+ * number of children. Here's a possible way to do this in C++:
+ *
+ * ~~~
+ * struct tree_node {
+ *	vector<string> words;
+ *	vector<tree_node *> children;
+ * };
+ * ~~~
+ *
+ * Question (a)
+ * - Write a method that finds and prints every node in a tree that contains a given word
+ *
+ * Question (b)
+ * - Given a list of words, find and print every possible path that starts at the root and ends in
+ *   any node, such that each word in the list is matched by a node in the path.
+ *
+ * Source: past interview experience
+ */
 #include <iostream>
 #include <vector>
 #include <set>
