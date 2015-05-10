@@ -1,0 +1,383 @@
+Available commands are:
+F <word> - Find and output every node that contains the word <word>
+P N <word1> <word2> <word3> ... <wordN> - Find and output every path that contains all of the words. Each node matches at most 1 word
+Q - Quit
+> [ hello ];
+[ hello, world ];
+[ hello, cat, dog ];
+> [ a, node ];
+> [ end, of, the, line ];
+> > ~~~ Start of path ~~~
+[ hello ];
+
+|
+v
+
+[ a, node ];
+
+|
+v
+
+[ cat, tac, god ];
+
+|
+v
+
+[ my, dog, is, cute ];
+~~~ End of path ~~~
+
+~~~ Start of path ~~~
+[ hello ];
+
+|
+v
+
+[ a, node ];
+
+|
+v
+
+[ dog, cat ];
+
+|
+v
+
+[ cat, other, words ];
+~~~ End of path ~~~
+
+~~~ Start of path ~~~
+[ hello ];
+
+|
+v
+
+[ a, node ];
+
+|
+v
+
+[ dog, cat ];
+
+|
+v
+
+[ leaf, dog ];
+~~~ End of path ~~~
+
+~~~ Start of path ~~~
+[ hello ];
+
+|
+v
+
+[ hello, world ];
+
+|
+v
+
+[ cat, dog ];
+
+|
+v
+
+[ cat, dog ];
+~~~ End of path ~~~
+
+~~~ Start of path ~~~
+[ hello ];
+
+|
+v
+
+[ hello, world ];
+
+|
+v
+
+[ cat, dog ];
+
+|
+v
+
+[ cat, dog ];
+
+|
+v
+
+[ hello, cat, dog ];
+~~~ End of path ~~~
+
+~~~ Start of path ~~~
+[ hello ];
+
+|
+v
+
+[ hello, world ];
+
+|
+v
+
+[ cat, dog ];
+
+|
+v
+
+[ cat, dog ];
+~~~ End of path ~~~
+
+~~~ Start of path ~~~
+[ hello ];
+
+|
+v
+
+[ hello, world ];
+
+|
+v
+
+[ cat, dog ];
+
+|
+v
+
+[ cat, dog ];
+
+|
+v
+
+[ hello, cat, dog ];
+~~~ End of path ~~~
+
+~~~ Start of path ~~~
+[ hello ];
+
+|
+v
+
+[ hello, world ];
+
+|
+v
+
+[ cat, dog ];
+
+|
+v
+
+[ cat, dog ];
+
+|
+v
+
+[ hello, cat, dog ];
+~~~ End of path ~~~
+
+~~~ Start of path ~~~
+[ hello ];
+
+|
+v
+
+[ hello, world ];
+
+|
+v
+
+[ cat, dog ];
+
+|
+v
+
+[ cat, dog ];
+
+|
+v
+
+[ hello, cat, dog ];
+~~~ End of path ~~~
+
+~~~ Start of path ~~~
+[ hello ];
+
+|
+v
+
+[ hello, world ];
+
+|
+v
+
+[ cat, dog ];
+
+|
+v
+
+[ cat, dog ];
+~~~ End of path ~~~
+
+~~~ Start of path ~~~
+[ hello ];
+
+|
+v
+
+[ hello, world ];
+
+|
+v
+
+[ cat, dog ];
+
+|
+v
+
+[ cat, dog ];
+
+|
+v
+
+[ hello, cat, dog ];
+~~~ End of path ~~~
+
+~~~ Start of path ~~~
+[ hello ];
+
+|
+v
+
+[ hello, world ];
+
+|
+v
+
+[ cat, dog ];
+
+|
+v
+
+[ cat, dog ];
+~~~ End of path ~~~
+
+~~~ Start of path ~~~
+[ hello ];
+
+|
+v
+
+[ hello, world ];
+
+|
+v
+
+[ cat, dog ];
+
+|
+v
+
+[ cat, dog ];
+
+|
+v
+
+[ hello, cat, dog ];
+~~~ End of path ~~~
+
+~~~ Start of path ~~~
+[ hello ];
+
+|
+v
+
+[ hello, world ];
+
+|
+v
+
+[ cat, dog ];
+
+|
+v
+
+[ cat, dog ];
+
+|
+v
+
+[ hello, cat, dog ];
+~~~ End of path ~~~
+
+~~~ Start of path ~~~
+[ hello ];
+
+|
+v
+
+[ hello, world ];
+
+|
+v
+
+[ cat, dog ];
+
+|
+v
+
+[ cat, dog ];
+
+|
+v
+
+[ hello, cat, dog ];
+~~~ End of path ~~~
+
+~~~ Start of path ~~~
+[ hello ];
+
+|
+v
+
+[ hello, world ];
+
+|
+v
+
+[ cat, dog ];
+
+|
+v
+
+[ cat, dog ];
+
+|
+v
+
+[ hello, cat, dog ];
+~~~ End of path ~~~
+
+~~~ Start of path ~~~
+[ hello ];
+
+|
+v
+
+[ hello, world ];
+
+|
+v
+
+[ cat, dog ];
+
+|
+v
+
+[ cat, dog ];
+
+|
+v
+
+[ hello, cat, dog ];
+~~~ End of path ~~~
+
+> > 
