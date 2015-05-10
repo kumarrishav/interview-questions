@@ -1,3 +1,22 @@
+/* Suppose we have the following code:
+ *
+ * ~~~
+ * class Foo {
+ * public:
+ *     Foo() { ... }
+ *     void first(void) { ... }
+ *     void second(void) { ... }
+ *     void third(void) { ... }
+ * };
+ * ~~~
+ *
+ * The same instance of `Foo` will be passed to three different threads. `ThreadA` will
+ * call `first()`, `threadB` will call `second()`, and `threadC` will call `third()`. Design a
+ * mechanism to ensure that `first` is called before `second` and `second` is called
+ * before `third`.
+ *
+ * Source: Cracking the Coding Interview, page 160, question 16.5 (Code adapted to C++)
+ */
 #include <iostream>
 #include <thread>
 #include <semaphore.h>
