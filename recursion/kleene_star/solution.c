@@ -1,4 +1,110 @@
-
+/* 
+ * Question (a):
+ *
+ * Consider the following DFA (Deterministic Finite Automata), where the alphabet
+ * is the set { 0, 1 }, and A is the starting state and D is an accepting state:
+ *
+ *                        +-1-+
+ *                        |   |
+ *                        |   v
+ *      +-------+       +-------+       +-------+
+ *  --->|   A   | --1-->|   B   | --0-->|   C   |
+ *      +-------+       +-------+       +-------+
+ *          |                              |  |
+ *          |      +-------+               |  0
+ *          +--0-->|   E   |<------1-------+  |
+ *                 +-------+                  v
+ *                  |     ^              +------------+
+ *                  |     |          +---| D (accept) |
+ *                  +-0,1-+          |   +------------+
+ *                                   |       ^
+ *                                   |       |
+ *                                   +--0,1--+
+ *
+ * - Which strings are accepted by this automata?
+ * 
+ * - Given the following code:
+ *
+ * ~~~
+ * struct node {
+ *     struct node *next[2]; // next[0] is where you go on "0", etc.
+ *     unsigned char accept; // 1 if (and only if) this is an accept state
+ * };
+ *
+ * struct node *step(int input, struct node *curr_node) {
+ *     // Implement this
+ * }
+ * ~~~
+ *
+ * Implement the function step(), which receives the current state and the next
+ * input symbol, and returns the next state. For example, step(0, "B") should return
+ * the node C.
+ *
+ * - Now, implement the function dfa(), which receives the input string, the starting state,
+ *   and returns true if the input string is accepted by the automata, and false if it isn't.
+ *
+ * ~~~
+ * int dfa(const char *input, struct node *start) {
+ *     // Implement this
+ * }
+ * ~~~
+ *
+ * Question (b):
+ *
+ * Now, let's consider NFAs (non-deterministic finite automata).
+ * In the following example, 'e' represents epsilon transitions. The input alphabet is
+ * the set { 0, 1 }. Consider this example:
+ *
+ *                         |
+ *                         |
+ *                         v
+ *                    +----------+
+ *    +-------------->|    A     |<----------------+
+ *    |               +----------+                 |
+ *    |                 |     |                    |
+ *    |        +---e----+     +------e----+        |
+ *    |        |                          |        |
+ *    |        v                          v        |
+ *    |   +----------+              +-----------+  |
+ *    |   |    B     |              |     C     |  |
+ *    |   +----------+              +-----------+  |
+ *    |        |                          |        |
+ *    |        1                          0        |
+ *    e        |                          |        e
+ *    |        v                          v        |
+ *    |   +----------+              +-----------+  |
+ *    |   |    D     |              |     E     |  |
+ *    |   +----------+              +-----------+  |
+ *    |        |                          |        |
+ *    |        1                          0        |
+ *    |        |                          |        |
+ *    |        v                          v        |
+ *    |   +----------+              +-----------+  |
+ *    +---|    F     |              |     G     |--+
+ *        +----------+              +-----------+
+ *             |                          |
+ *             |       +------------+     |
+ *             +--e--->| H (accept) |<--e-+
+ *                     +------------+
+ *
+ * - Which strings are accepted by this automata?
+ *
+ * - Given the following code:
+ *
+ * ~~~
+ * #define NFA_MAX_BRANCHING 10
+ *
+ * struct nfa_node {
+ *	struct nfa_node *next[2][NFA_MAX_BRANCHING+1]; // Null terminated; where to go on "0", etc. 
+ *	struct nfa_node *epsilon[NFA_MAX_BRANCHING+1]; // Null terminated; epsilon transitions
+ *	unsigned char accept; // 1 if (and only if) this is an accept state
+ * };
+ * ~~~
+ *
+ * Design and implement a method that computes the Kleene closure of a node
+ *
+ * Source: past interview experience
+ */
 #include <stdio.h>
 #include <assert.h>
 #define BUFF_SZ 512
@@ -26,7 +132,7 @@ int dfa(const char *input, struct node *start) {
 	return curr_state->accept;
 }
 
-/* ~~~ The DFA of question (a) ~~~ */
+/* ~~~ The DFA of question (a). This is just for testing purposes. ~~~ */
 static struct node simple_dfa[] = {
 	// A
 	{ .next = { &simple_dfa[4], &simple_dfa[1] }, .accept = 0 },
@@ -52,7 +158,7 @@ struct nfa_node {
 	char id;
 };
 
-/* ~~~ The NFA for question (b) ~~~ */
+/* ~~~ The NFA for question (b). This is just for testing purposes. ~~~ */
 static struct nfa_node simple_nfa[] = {
 	// A
 	{ .next = { { NULL }, { NULL } },
