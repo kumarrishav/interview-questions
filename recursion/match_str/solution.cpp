@@ -1,4 +1,14 @@
-
+/* You are given a pattern where a character stands for a word.
+ * Design and implement an algorithm that receives a pattern, a string, and finds
+ * a word configuration that matches that pattern, if one exists.
+ * EXAMPLE:
+ * Pattern: "abba"
+ * String:  "catdogdogcat"
+ *
+ * Output: a = cat; b = dog
+ *
+ * Source: Glassdoor
+ */
 #include <iostream>
 #include <map>
 
