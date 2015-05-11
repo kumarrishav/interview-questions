@@ -1,4 +1,36 @@
-
+/* Given two binary trees, we want to know if the sequence of nodes visited is equal.
+ * This can be easily implemented by running in-order traversal on one tree, store the
+ * result in an array, run in-order on the second tree, and compare the second sequence
+ * with the first that we stored.
+ *
+ * If the size of the first tree is N and the size of the second is M, this requires O(N+M)
+ * time and O(N) memory.
+ * We are interested in a method that performs both in-order traversals at the same time, so that
+ * we can return prematurely as soon as a pair of nodes does not match.
+ * Design an algorithm to do this. Can you do it in O(N+M) time with O(1) memory?
+ *
+ * EXAMPLE
+ * These trees all have equivalent in-order sequences.
+ * Your method should return true when called with a pair of any of these trees.
+ *
+ *     3
+ *    /
+ *   2
+ *  /
+ * 1
+ *
+ *   2
+ *  / \
+ * 1   3
+ *
+ * 1
+ *  \
+ *   3
+ *  /
+ * 2
+ *
+ * Source: Careercup (Google interview)
+ */
 #include <stdio.h>
 
 struct tree_node {
