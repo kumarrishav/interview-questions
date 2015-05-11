@@ -1,4 +1,15 @@
-
+/* You are given a string where each character is either a 0, a 1,
+ * or a question mark (?). A question mark means that that position can hold
+ * a 1 or a 0.
+ * Write a function that receives one of these strings and prints every possible
+ * string of 0s and 1s according to the wildcards in the input.
+ *
+ * EXAMPLE
+ * Input: 0?1?
+ * Output: 0010, 0011, 0110, 0111
+ *
+ * Source: Careercup (Google interview)
+ */
 #include <stdio.h>
 
 void wildcards_aux(char *str, size_t str_i) {
