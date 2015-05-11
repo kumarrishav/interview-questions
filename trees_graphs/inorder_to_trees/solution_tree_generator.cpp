@@ -1,3 +1,9 @@
+/* You are given an array with the result of the in-order traversal of a tree.
+ * Write a method that generates every tree that yields the same array
+ * for an in-order traversal.
+ *
+ * Source: Careercup (Google interview)
+ */
 #include <memory>
 #include <vector>
 #include <iostream>
