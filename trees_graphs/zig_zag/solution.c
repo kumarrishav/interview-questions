@@ -1,4 +1,22 @@
-
+/* Write a function that receives the root of a binary tree and traverses
+ * the tree doing zig zags, printing each node along the way.
+ * EXAMPLE
+ * For this tree:
+ *
+ *           1
+ *         /   \
+ *        /     \
+ *       /       \
+ *      2         3 
+ *    /   \     /   \
+ *   4     5   6     7
+ *  / \
+ * 8   9
+ *
+ * The code would print: 1, 2, 3, 7, 6, 5, 4, 8, 9
+ *
+ * Source: Careercup (Amazon SDE interviews)
+ */
 #include <stdio.h>
 #include <assert.h>
 #define NODE_BUFF_SZ 512
