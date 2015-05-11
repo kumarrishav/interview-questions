@@ -1,0 +1,8 @@
+Enter number of nodes in tree 1 followed by number of nodes in tree 2,
+followed by tree 1 followed by tree 2.
+For each node, enter: nodeID leftChild rightChild (-1 means no child)
+> Inorder traversal is equal
+> Inorder traversal is equal
+> Inorder traversal is equal
+> Inorder traversal is not equal
+> 
