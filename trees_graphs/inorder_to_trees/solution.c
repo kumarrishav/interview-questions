@@ -1,4 +1,9 @@
-
+/* You are given an array with the result of the in-order traversal of a tree.
+ * Write a method that calculates the number of trees that yield the same array
+ * for an in-order traversal.
+ *
+ * Source: Careercup (Google interview)
+ */
 #include <stdio.h>
 
 static unsigned possible_trees_aux(size_t begin, size_t end) {
