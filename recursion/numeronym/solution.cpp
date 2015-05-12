@@ -1,4 +1,18 @@
-
+/* A numeronym is a string where the first and last characters were preserved, but all the other
+ * letters were removed. Instead, between the first and last letters, a numeronym holds the
+ * number of letters that were removed.
+ * For example, the word "house" turns into "h3e", since we removed 3 letters (o, u and s).
+ * The word "internationalization" turns into "i18n", because we removed 18 letters.
+ *
+ * Question (a)
+ * - Write a function that receives a string and produces the corresponding numeronym.
+ *
+ * Question (b)
+ * - Write a function that receives a numeronym and produces the set of all possible strings
+ *   that generate that same numeronym.
+ *
+ * Source: Careercup (Google interview)
+ */
 #include <iostream>
 #include <sstream>
 #include <vector>
@@ -61,7 +75,7 @@ int main(void) {
 		string numeronym = make_numeronym(str);
 		cout << "Numeronym: " << numeronym << endl;
 
-		cout << "Show possible strings (output may be very large)? [Y/N] ";
+		cout << "Show possible strings (large output; may take a while)? [Y/N] ";
 		char answer;
 		cin >> answer;
 
