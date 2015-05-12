@@ -1,0 +1,6 @@
+Enter the size of the array and the value of k, followed by the array elements.
+Use only elements in the range [0, 10000)
+> Max 2 = [ 9999, 7364 ];
+> Max 20 = [ 9999, 7364, 7364, 6863, 2287, 33, 4, 2, 1, 0 ];
+> Max 5 = [ 9999, 9999, 9999, 445, 333 ];
+> 
