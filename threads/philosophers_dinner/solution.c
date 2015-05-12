@@ -1,4 +1,10 @@
-
+/* In the famous dining philosophers problem, a bunch of philosophers are sitting
+ * around a circular table with one fork between each of them. A philosopher
+ * needs both forks to eat.
+ * Assume that 5 philosophers are sitting around the circular table.
+ * Design and implement an algorithm that is free of deadlocks and ensures that every philosopher
+ * will eventually eat.
+ */
 #include <pthread.h>
 #include <stdio.h>
 #define max(a, b) ((a) > (b) ? (a) : (b))
