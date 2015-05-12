@@ -1,0 +1,12 @@
+Enter two strings to find out the longest common subsequence
+> LCS size = 4
+abat
+> LCS size = 1
+l
+> LCS size = 0
+> LCS size = 4
+nana
+> LCS size = 0
+> LCS size = 3
+ana
+> 
