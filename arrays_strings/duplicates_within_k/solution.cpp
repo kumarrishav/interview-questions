@@ -1,4 +1,8 @@
-
+/* Given an array of N integers and a value K, design and implement an
+ * algorithm that checks if there are duplicates within K indices in the array
+ *
+ * Source: Careercup (Palantir interview)
+ */
 #include <iostream>
 #include <set>
 #include <vector>
