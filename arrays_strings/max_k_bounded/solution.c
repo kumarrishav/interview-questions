@@ -1,4 +1,8 @@
-
+/* Write a function that returns the max k numbers from an unsorted integer array.
+ * Each number in the array is in the range [0, 10000).
+ *
+ * Source: Glassdoor (Google interview)
+ */
 #include <stdio.h>
 #include <string.h>
 #define RANGE_MIN 0
