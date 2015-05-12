@@ -1,4 +1,10 @@
-
+/* You are given printouts from an algorithm which ran over an
+ * unsorted binary tree. One printout is from an in-order run and
+ * another from a pre-order run. Can you reconstruct the tree?
+ * If so, then write and implement an algorithm.
+ *
+ * Source: Careercup (Google interview)
+ */
 #include <stdio.h>
 #include <assert.h>
 #include <stdlib.h>
