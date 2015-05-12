@@ -1,0 +1,11 @@
+Enter a positive integer to calculate the number of binary trees of size N
+and the number of binary search trees of size N
+> Binary trees: 1
+Binary search trees: 1
+> Binary trees: 4
+Binary search trees: 2
+> Binary trees: 18
+Binary search trees: 5
+> Binary trees: 88
+Binary search trees: 14
+> 
