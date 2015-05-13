@@ -1,4 +1,14 @@
-
+/* You are given a set of tasks and their dependencies.
+ * A task can only be performed once all of its dependencies have been executed
+ * Design and implement an algorithm that returns a possible ordering of the tasks
+ * that doesn't break dependencies.
+ *
+ * EXAMPLE
+ * If task 1 depends on task 4 and 5, and task 4 depends on task 3, a possible ordering
+ * is 3, 4, 5, 1
+ *
+ * Source: past interview experience
+ */
 #include <iostream>
 #include <vector>
 #include <map>
@@ -92,6 +102,8 @@ int main(void) {
 		cout << endl;
 
 		clear_graph_nodes();
+
+		cout << "> ";
 	}
 
 	return 0;
