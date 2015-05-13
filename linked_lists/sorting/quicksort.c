@@ -23,8 +23,8 @@ static struct list_node *find_middle(struct list_node *head) {
 	return slow;
 }
 
-static struct list_node *partition(struct list_node *head, struct list_node *pivot,
-				   struct list_node **before_mid) {
+static struct list_node *partition(struct list_node *head, struct list_node *pivot) {
+
 	if (head == NULL) {
 		return NULL;
 	}
@@ -53,19 +53,13 @@ static struct list_node *partition(struct list_node *head, struct list_node *piv
 	}
 
 	tail_lower->next = pivot;
-	if (tail_lower != &head_lower) {
-		*before_mid = tail_lower;
-	} else {
-		*before_mid = NULL;
-	}
 	tail_lower = tail_lower->next;
-
 	tail_higher->next = NULL;
 	tail_lower->next = head_higher.next;
 
 	return head_lower.next;
 }
-static void print_list(struct list_node *head);
+
 struct list_node *quicksort(struct list_node *head) {
 	if (head == NULL || head->next == NULL) {
 		return head;
@@ -73,8 +67,7 @@ struct list_node *quicksort(struct list_node *head) {
 
 	struct list_node *middle = find_middle(head);
 	//printf("middle = %d\n", middle->val);
-	struct list_node *before_mid;
-	struct list_node *head_partitioned = partition(head, middle, &before_mid);
+	struct list_node *head_partitioned = partition(head, middle);
 
 	/*printf("Partitioned list:\n");
 	print_list(head_partitioned);
@@ -85,6 +78,24 @@ struct list_node *quicksort(struct list_node *head) {
 		printf("%d\n", before_mid->val);
 		}*/
 
+	struct list_node *after_mid = middle->next;
+	middle->next = NULL;
+	after_mid = quicksort(after_mid);
+	head_partitioned = quicksort(head_partitioned);
+	
+	struct list_node *final_head = after_mid;
+	if (head_partitioned != NULL) {
+		struct list_node *last = head_partitioned;
+		while (last->next != NULL) {
+			last = last->next;
+		}
+		last->next = final_head;
+		final_head = head_partitioned;
+	}
+
+	return final_head;
+
+/*
 	middle->next = quicksort(middle->next);
 	struct list_node *new_head = middle;
 
@@ -99,7 +110,7 @@ struct list_node *quicksort(struct list_node *head) {
 	}
 
 	return new_head;
-
+*/
 }
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
