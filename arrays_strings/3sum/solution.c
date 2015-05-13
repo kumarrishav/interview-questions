@@ -1,4 +1,8 @@
-
+/* Given an array of integers, write a function to check if any 3 integers in that
+ * array sum to 0
+ *
+ * Source: Glassdoor (Facebook interview)
+ */
 #include <stdio.h>
 
 // A good opportunity to review quicksort
