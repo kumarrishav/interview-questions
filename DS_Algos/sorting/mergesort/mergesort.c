@@ -2,12 +2,6 @@
 #include <string.h>
 #include <assert.h>
 
-void swap(int arr[], size_t i, size_t j) {
-	int tmp = arr[i];
-	arr[i] = arr[j];
-	arr[j] = tmp;
-}
-
 void mergesort_aux(int arr[], size_t low, size_t high, int helper[]) {
 
 	if (low >= high) {
