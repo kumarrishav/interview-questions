@@ -1,0 +1,6 @@
+Enter an array name, an index name, the number of dimensions, and the size of each dimension
+> arr[i] = arr[(i%24)/8][(i%8)/2][(i%2)/1]
+> arr[i] = arr[(i%12)/4][(i%4)/1]
+> arr[i] = arr[(i%5)/1]
+> arr[i] = arr[(i%680400)/136080][(i%136080)/45360][(i%45360)/5670][(i%5670)/810][(i%810)/162][(i%162)/27][(i%27)/3][(i%3)/1]
+> 
