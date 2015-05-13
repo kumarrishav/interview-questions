@@ -1,4 +1,4 @@
-
+/* The code below sorts a linked list using quicksort */
 #include <stdio.h>
 
 struct list_node {
@@ -66,17 +66,7 @@ struct list_node *quicksort(struct list_node *head) {
 	}
 
 	struct list_node *middle = find_middle(head);
-	//printf("middle = %d\n", middle->val);
 	struct list_node *head_partitioned = partition(head, middle);
-
-	/*printf("Partitioned list:\n");
-	print_list(head_partitioned);
-	printf("before_mid = ");
-	if (before_mid == NULL) {
-		printf("NULL\n");
-	} else {
-		printf("%d\n", before_mid->val);
-		}*/
 
 	struct list_node *after_mid = middle->next;
 	middle->next = NULL;
@@ -94,23 +84,6 @@ struct list_node *quicksort(struct list_node *head) {
 	}
 
 	return final_head;
-
-/*
-	middle->next = quicksort(middle->next);
-	struct list_node *new_head = middle;
-
-	if (before_mid != NULL) {
-		before_mid->next = NULL;
-		struct list_node *left = quicksort(head_partitioned);
-		new_head = left;
-		while (left->next != NULL) {
-			left = left->next;
-		}
-		left->next = middle;
-	}
-
-	return new_head;
-*/
 }
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
