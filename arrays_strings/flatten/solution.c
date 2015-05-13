@@ -1,4 +1,31 @@
-
+/* Consider the C model of arrays, where multi-dimensional arrays are linearly laid
+ * out in memory and consist of arrays of arrays.
+ * For example, an array a[3][4] consists of 3 contiguous arrays of 4 elements each.
+ *
+ * Since array dimensions are conceptual, one of the tasks a C compiler must perform is to convert,
+ * or flatten, a set of dimension index values to an absolute offset. For the above example,
+ * a[1][3] would be translated into offset 7, since the element a[1][3] is 7 positions away
+ * from &a[0][0].
+ *
+ * You are to write a function that accomplishes this conversion - it derives the formula to flatten
+ * a set of dimension indexing values into a single value.
+ *
+ * You are given the array name as a string, the number of dimensions, the name of each dimension
+ * indexing variable and the size of each dimension. Output the string that corresponds to the
+ * equivalent offset indexing.
+ *
+ * EXAMPLE
+ * Consider that:
+ * The array name is "arr"
+ * The array has 2 dimensions
+ * The indexing variables are "i" and "j" (so we want to convert the form arr[i][j])
+ * The dimensions sizes are 3 and 4
+ *
+ * Output: "arr[i*4+j]" (or any mathematically equivalent expression)
+ *         This means that the absolute offset of arr[i][j] is i*4+j
+ *
+ * Source: Invented (the opposite question of the unflatten question)
+ */
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
