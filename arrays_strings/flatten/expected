@@ -1,0 +1,7 @@
+Enter an array name, the number of dimensions, the size of each dimension, and
+the name of each dimension index variable
+> arr[i][j][k] = arr[i*8+j*2+k*1]
+> arr[i][j] = arr[i*4+j*1]
+> arr[i] = arr[i*1]
+> arr[a][b][c][d][e][f][g][h] = arr[a*136080+b*45360+c*5670+d*810+e*162+f*27+g*3+h*1]
+> 
