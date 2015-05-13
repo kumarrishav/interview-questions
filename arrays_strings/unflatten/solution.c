@@ -40,6 +40,7 @@
  *                      char *out) {
  *     // Implement this
  * }
+ * ~~~
  *
  * Source: Past interview experience
  */
