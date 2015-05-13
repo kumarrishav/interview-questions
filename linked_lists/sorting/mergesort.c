@@ -1,4 +1,4 @@
-
+/* The code below sorts a linked list using mergesort */
 #include <stdio.h>
 
 struct list_node {
