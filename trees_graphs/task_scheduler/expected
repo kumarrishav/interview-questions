@@ -1,0 +1,8 @@
+Enter the number of tasks, and for each task, enter a line of the form:
+<task_id> <number of dependencies> <dependency1 task id> <...> <dependencyN task id>
+> Order: 7, 9, 2, 4, 5, 1, 6, 3
+> Order: 7, 9, 2, 4, 5, 1, 6, 3, 8, 14, 15
+> Order: 8, 7, 14, 9, 2, 4, 100, 5, 1, 6, 3, 15, 99
+> Order: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+> Order: 5, 1, 2, 3, 4, 6, 7, 8, 9, 10
+> 
