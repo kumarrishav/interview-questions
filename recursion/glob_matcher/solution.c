@@ -1,4 +1,28 @@
-
+/* Regular expressions are a useful tool to match text against arbitrarily complex patterns.
+ * In this exercise, let's consider a simplified version of regular expressions, where
+ * a regular expression consists of ordinary characters and one or more of special-meaning
+ * characters:
+ *
+ * '.' - matches any character
+ * '*' - matches zero or more occurrences of the previous entity in the pattern
+ *
+ * Write a function that receives an input string, a simplified regex,
+ * and returns whether the string matches the regex.
+ *
+ * EXAMPLE
+ * ~~~
+ * Assume match() receives the string followed by the pattern. Then, we have:
+ *
+ * - match("aa", "a") = false
+ * - match("aa", "aa") = true
+ * - match("aaa", "aa") = false
+ * - match("ab", ".*") = true
+ * - match("aab", "c*a*b") = true
+ * - match("ccca", "cc*ca") = true
+ * ~~~
+ *
+ * Source: Careercup (Yahoo interview)
+ */
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
