@@ -1,4 +1,10 @@
-
+/* Given a string, find the first non-repeating character in a single pass of the string.
+ * Assume a big character set is in use, like UTF-8, which makes it unfeasible to use a
+ * character frequency count table.
+ * Avoid any inner loops to have an optimal runtime. Only one pass through the string is allowed.
+ *
+ * Source: Careercup (Yahoo interview)
+ */
 #include <iostream>
 #include <map>
 
