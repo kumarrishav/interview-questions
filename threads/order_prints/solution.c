@@ -1,4 +1,10 @@
-
+/* There are 3 different threads in a process.
+ * The first thread prints '1' forever, the second thread prints '2' forever, and the
+ * third thread prints '3' forever.
+ * How would you force the output sequence to be '1' '2' '3' '1' '2' '3' ...?
+ *
+ * Source: Careercup (Salesforce interview)
+ */
 #include <stdio.h>
 #include <pthread.h>
 #include <semaphore.h>
