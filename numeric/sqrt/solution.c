@@ -1,4 +1,8 @@
-
+/* Given a number less than 10000, determine whether that number is a perfect square.
+ * If it is, find the square root in O(1) time.
+ *
+ * Source: Careercup (Microsoft interview)
+ */
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>
