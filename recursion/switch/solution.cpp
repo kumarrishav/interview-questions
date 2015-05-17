@@ -1,4 +1,17 @@
-
+/* You are given two boolean arrays, A and B, of the same size.
+ *
+ * There is an auxiliary function, switch_op(bool *, size_t, size_t), which
+ * receives an array, its size N, and an index i, and flips the boolean value
+ * in position i-1 (if i > 0), i, and i+1 (if i < N-1).
+ *
+ * For example, for the array [true, false, false, true], switch_op() on 0 will turn it into
+ * [false, true, false, true]. switch_op() on 1 will turn it into [false, true, true, true],
+ * and switch_op() on 3 turns it into [true, false, true, false].
+ *
+ * Write a function that finds the necessary steps to transform A into B using only switch_op().
+ *
+ * Source: StackOverflow (http://stackoverflow.com/questions/7292118/interview-question-recursion-backtracking)
+ */
 #include <iostream>
 #include <sstream>
 #include <algorithm>
