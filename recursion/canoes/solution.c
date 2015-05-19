@@ -11,8 +11,11 @@ static void swap(unsigned arr[], size_t i, size_t j) {
 }
 
 static unsigned canoes_aux(size_t N, unsigned kids[N], size_t kid_i) {
-	if (kid_i >= N || kids[kid_i] > MAX_CANOE_WEIGHT) {
+	if (kid_i >= N) {
 		return 0;
+	}
+	if (kids[kid_i] > MAX_CANOE_WEIGHT) {
+		return UINT_MAX;
 	}
 
 	unsigned res = UINT_MAX;
@@ -24,11 +27,17 @@ static unsigned canoes_aux(size_t N, unsigned kids[N], size_t kid_i) {
 		}
 		swap(kids, kid_i+1, i);
 		unsigned canoes_i = canoes_aux(N, kids, kid_i+2);
-		res = min(res, canoes_i+1);
+		if (canoes_i != UINT_MAX) {
+			res = min(res, canoes_i+1);
+		}
 		swap(kids, kid_i+1, i);
 	}
 
 	unsigned canoes_alone = canoes_aux(N, kids, kid_i+1);
+	if (canoes_alone == UINT_MAX) {
+		return UINT_MAX;
+	}
+
 	return min(res, canoes_alone+1);
 }
 
