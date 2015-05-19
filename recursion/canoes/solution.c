@@ -9,6 +9,12 @@
 #define MAX_CANOE_WEIGHT 150
 #define min(a, b) ((a) < (b) ? (a) : (b))
 
+/* Note: this approach is very inefficient. It is O(n!), but it is a good illustration of how to
+ * use recursion, and it is surely a great way to practice recursion.
+ * The optimal approach is an iterative solution that runs in a much more acceptable O(n log(n))
+ * time. See solution_iterative.cpp
+ */
+
 static void swap(unsigned arr[], size_t i, size_t j) {
 	unsigned tmp = arr[i];
 	arr[i] = arr[j];
