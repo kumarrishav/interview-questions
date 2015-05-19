@@ -1,4 +1,9 @@
-
+/* A canoe can hold 2 kids and a maximum of 150 lbs.
+ * Given a list of each kid's weight, write a function that computes the minimum number of canoes
+ * needed to take all the kids on a trip.
+ *
+ * Source: Careercup (Google interview)
+ */
 #include <stdio.h>
 #include <limits.h>
 #define MAX_CANOE_WEIGHT 150
