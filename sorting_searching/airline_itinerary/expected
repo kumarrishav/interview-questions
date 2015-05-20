@@ -1,0 +1,3 @@
+Enter the number of tickets, followed by each ticket's source and destination
+> [CDG, MUC] -> [MUC, LHR] -> [LHR, SFO] -> [SFO, SJC]
+> 
