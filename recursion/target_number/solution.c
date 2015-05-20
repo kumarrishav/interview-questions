@@ -1,4 +1,24 @@
-
+/* You are given an array of integers, and a target number. You are to write a method that finds and
+ * prints all sequences of operations on the array elements that yield the target number.
+ * Two arithmetic operations can be used: add (+) and subtract (-).
+ *
+ * You can't modify the array, and you have to use all elements in the original order.
+ *
+ * EXAMPLE
+ *
+ * Input:
+ * array  = [ 1, 9, 1, 2 ]
+ * target = 9
+ *
+ * Output:
+ * 1+9+1-2
+ *
+ * Explanation:
+ * The only combination that yields 9 is by performing 2 consecutive additions followed by a
+ * subtraction.
+ *
+ * Source: Careercup
+ */
 #include <stdio.h>
 #include <string.h>
 
