@@ -1,4 +1,16 @@
-
+/* You are given a set of airline tickets with the source and destination airports.
+ * Write a method that takes a set of tickets and reconstructs the itinerary.
+ *
+ * EXAMPLE
+ *
+ * Input:
+ * [MUC, LHR], [CDG, MUC], [SFO, SJC], [LHR, SFO]
+ *
+ * Output:
+ * [CDG, MUC] -> [MUC, LHR] -> [LHR, SFO] -> [SFO, SJC]
+ *
+ * Source: Careercup (Google interview)
+ */
 #include <iostream>
 #include <set>
 #include <map>
