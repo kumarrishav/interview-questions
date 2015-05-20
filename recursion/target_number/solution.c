@@ -17,7 +17,7 @@
  * The only combination that yields 9 is by performing 2 consecutive additions followed by a
  * subtraction.
  *
- * Source: Careercup
+ * Source: Careercup (Flipkart interview)
  */
 #include <stdio.h>
 #include <string.h>
