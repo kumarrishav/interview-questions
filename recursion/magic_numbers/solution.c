@@ -56,9 +56,7 @@ static unsigned magic_numbers_aux(char *pattern, size_t patt_i, int res_so_far) 
 	for (i = 1; i < 10; i++) {
 		int new_res = next_result(pattern, patt_i, i, res_so_far);
 		pattern[patt_i] = '0'+i;
-		if (magic_numbers_aux(pattern, patt_i+2, new_res)) {
-			matches++;
-		}
+		matches += magic_numbers_aux(pattern, patt_i+2, new_res);
 	}
 
 	pattern[patt_i] = '_';
