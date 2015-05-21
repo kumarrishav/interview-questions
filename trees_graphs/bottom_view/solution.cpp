@@ -1,4 +1,18 @@
-
+/* Consider a pair of nodes x and y in a binary tree, where y is the parent of x.
+ * We define the horizontal distance of x, hd(x), as follows:
+ *
+ * hd(x) = hd(y)-1 if x is the left child of y
+ * hd(x) = hd(y)+1 if x is the right child of y
+ *
+ * The bottom view of a binary tree consists of a set of nodes. A node x is in the bottom view set
+ * if (and only if) there is no other node y deeper than x such that hd(y) = hd(x). In other words,
+ * x is the deepest node in the tree with the horizontal distance hd(x).
+ *
+ * Write a function that finds and prints the bottom view of a binary tree. Nodes should be printed
+ * as if the tree is traversed left to right, level by level.
+ *
+ * Source: Careercup
+ */
 #include <iostream>
 #include <map>
 #include <vector>
