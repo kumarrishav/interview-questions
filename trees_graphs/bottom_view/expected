@@ -1,0 +1,6 @@
+Enter the number of nodes in the tree, followed by each node. Each node is a line of the format:
+<nodeID> <left child> <right child> (-1 means no child)
+> 4 2 5 6 8 7 
+> 4 2 5 6 8 9 
+> 8 4 9 10 12 5 6 11 13 14 7 15 
+> 
