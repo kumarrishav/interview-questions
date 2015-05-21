@@ -1,0 +1,12 @@
+Enter an expression pattern to find matches.
+> No matches found.
+> 1+13+5=19
+2+13+4=19
+3+13+3=19
+4+13+2=19
+5+13+1=19
+Total: 5
+> No matches found.
+> 5=5
+Total: 1
+> 
