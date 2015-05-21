@@ -1,4 +1,20 @@
-
+/* You are given an equation in the form of a string. The only arithmetic operators allowed
+ * are + and -.
+ * Assume that each missing value is an integer n such that 1 <= n <= 9. Missing values are
+ * represented by _.
+ * Write a function that receives the equation and prints every solution to the equation.
+ *
+ * EXAMPLE:
+ *
+ * Input:
+ * _+13-_=6
+ *
+ * Output:
+ * 1+13-8=6
+ * 2+13-9=6
+ *
+ * Source: Invented
+ */
 #include <stdio.h>
 #include <assert.h>
 
