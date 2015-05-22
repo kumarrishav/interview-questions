@@ -1,8 +1,92 @@
+/* You are given an equation in the form of a string. The only arithmetic operators allowed
+ * are + and -.
+ * Assume that each missing value is an integer n such that 1 <= n <= 9. Missing values are
+ * represented by _.
+ * Write a function that receives the equation and prints every solution to the equation.
+ *
+ * EXAMPLE:
+ *
+ * Input:
+ * _+13-_=6
+ *
+ * Output:
+ * 1+13-8=6
+ * 2+13-9=6
+ *
+ * FOLLOW UP
+ * Now consider that expressions can be arbitrarily complex, and include multiplication and
+ * division, and the order of evaluation can be changed using parenthesis.
+ *
+ * Example: (_+13)*_/(_+_)=66
+ *
+ * How would you solve it?
+ *
+ * Source: Invented
+ */
 
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
 #include <stdlib.h>
+
+/* This is a significantly different approach. To deal with priorities, we can write a small grammar
+ * that forces the order of evaluation according to each operator's precedence rules.
+ *
+ * The following grammar does exactly that. It was taken from the Dragon book, where it is used as
+ * an example of how to build a grammar with precedence and associativity rules embedded in the
+ * grammar structure.
+ *
+ * expr -> expr + term
+ *       | expr - term
+ *       | term
+ *
+ * term -> term * factor
+ *       | term / factor
+ *       | factor
+ *
+ * factor -> number
+ *         | ( expr )
+ *
+ * This raw grammar has a problem though: it is left recursive, so we can't simply implement each
+ * rule as a function, because the recursion would never stop. The grammar can be transformed into
+ * a right recursive grammar by doing some manipulation. Consider a grammar rule that is left
+ * recursive:
+ *
+ * A -> Aa | B
+ *
+ * Where a and B are sequences of terminals and nonterminals that do not start with A.
+ *
+ * This rule can be transformed into a right recursive rule by transforming it into:
+ *
+ * A -> BR
+ * R -> aR | e
+ *
+ * Where 'e' denotes epsilon (the empty string)
+ *
+ * Doing this in the original expressions grammar yields:
+ *
+ * expr -> term expr_r
+ *
+ * expr_r -> + term expr_r
+ *         | - term expr_r
+ *         | e
+ *
+ * term -> factor term_r
+ *
+ * term_r -> * factor term_r
+ *         | / factor term_r
+ *         | e
+ *
+ * factor -> number
+ *         | ( expr )
+ *
+ * This is the grammar that the code implements
+ *
+ * The algorithm works by generating every possible ordered sequence of numbers in the range [1-9],
+ * builds the equivalent expression, parses it using the above grammar, and then checks whether the
+ * result is equal to the desired result.
+ *
+ */
 
 /* Expressions parser */
 static int expr(const char *expr_str, size_t *cursor);
