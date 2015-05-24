@@ -1,4 +1,7 @@
-
+/* Write a function that counts the number of 1-bits in a char array.
+ *
+ * Source: Careercup (Microsoft interview)
+ */
 #include <stdio.h>
 
 // Assumption: a char is 8 bits
