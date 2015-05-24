@@ -1,9 +1,81 @@
-
+/* You are given an arbitrary arithmetic expression, such as:
+ *
+ * 5+2
+ * ((4*8)+3)
+ * 4/(3/2)
+ *
+ * How would you go about implementing an expression evaluator that not only
+ * evaluates the result of an arithmetic expression, but also removes all
+ * pairs of redundant parentheses?
+ *
+ * EXAMPLE:
+ *
+ * Input 1: ((4*8)+3)
+ * Input 2: 4*(8+3)
+ *
+ * Output 1: 4*8+3 = 35
+ * Output 2: 4*(8+3) = 44
+ *
+ * Source: Careercup
+ */
 
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <assert.h>
+
+/* NOTE: The core implementation is based on the well-known arithmetic expressions parser grammar
+ *       outlined in the first chapters of the Dragon Book:
+ *
+ * expr -> expr + term
+ *       | expr - term
+ *       | term
+ *
+ * term -> term * factor
+ *       | term / factor
+ *       | factor
+ *
+ * factor -> number
+ *         | ( expr )
+ *
+ * This raw grammar has a problem though: it is left recursive, so we can't simply implement each
+ * rule as a function, because the recursion would never stop. The grammar can be transformed into
+ * a right recursive grammar by doing some manipulation. Consider a grammar rule that is left
+ * recursive:
+ *
+ * A -> Aa | B
+ *
+ * Where a and B are sequences of terminals and nonterminals that do not start with A.
+ *
+ * This rule can be transformed into a right recursive rule by transforming it into:
+ *
+ * A -> BR
+ * R -> aR | e
+ *
+ * Where 'e' denotes epsilon (the empty string)
+ *
+ * Doing this in the original expressions grammar yields:
+ *
+ * expr -> term expr_r
+ *
+ * expr_r -> + term expr_r
+ *         | - term expr_r
+ *         | e
+ *
+ * term -> factor term_r
+ *
+ * term_r -> * factor term_r
+ *         | / factor term_r
+ *         | e
+ *
+ * factor -> number
+ *         | ( expr )
+ *
+ * This is the grammar that the code implements. A set of clever but simple little steps in the
+ * parsing of the rule factor -> ( expr ) are all it takes to determine if a given pair of
+ * parenthesis is really necessary.
+ *
+ */
 
 enum {
 	PLUS,
@@ -160,6 +232,9 @@ static struct ops_list factor(const char *expr_str, size_t *cursor, unsigned cha
 
 }
 
+/* Top-level evaluator. Returns a new string which has no redundant parenthesis
+ * Returns the result in `out_value`.
+ */
 char *eval_expr(const char *expr_str, int *out_value) {
 	size_t expr_len = strlen(expr_str);
 	unsigned char ignore[expr_len];
@@ -182,7 +257,7 @@ char *eval_expr(const char *expr_str, int *out_value) {
 		}
 	}
 
-	new_expr[j++] = '\0';
+	new_expr[j] = '\0';
 
 	return new_expr;
 }
