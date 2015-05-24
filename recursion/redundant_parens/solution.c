@@ -194,12 +194,16 @@ int main(void) {
 
 	while (scanf("%s", input_buff) == 1) {
 		int result;
+
 		char *canonical = eval_expr(input_buff, &result);
+
 		if (canonical == NULL) {
 			fprintf(stderr, "Error evaluating expression - out of memory?\n");
 		} else {
 			printf("%s = %d\n", canonical, result);
 		}
+
+		free(canonical);
 		printf("> ");
 	}
 
