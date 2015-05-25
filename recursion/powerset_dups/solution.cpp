@@ -1,4 +1,33 @@
-
+/* You are given an array of elements which can have duplicates.
+ *
+ * Write a function that finds and prints every possible sub-array.
+ *
+ * Each sub-array can contain any number of elements of the original array, in any order.
+ * Do not print the same sub-array more than once. A sub-array is considered duplicate if it contains
+ * exactly the same elements with the same frequency counts (order is irrelevant). So,
+ * [ 4, 2, 3, 1 ] and [ 1, 4, 2, 3 ] are seen as duplicates.
+ *
+ * EXAMPLE
+ *
+ * Input: [ 1, 2, 3, 1 ]
+ * Output:
+ * [ ]
+ * [ 1 ]
+ * [ 2 ]
+ * [ 3 ]
+ * [ 1, 1 ]
+ * [ 1, 2 ]
+ * [ 1, 3 ]
+ * [ 2, 3 ]
+ * [ 1, 1, 2 ]
+ * [ 1, 1, 3 ]
+ * [ 1, 2, 3 ]
+ * [ 1, 1, 2, 3 ]
+ *
+ * You can print the arrays in any order
+ *
+ * Source: Careercup
+ */
 #include <iostream>
 #include <algorithm>
 #include <vector>
