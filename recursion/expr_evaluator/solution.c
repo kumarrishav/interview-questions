@@ -1,4 +1,13 @@
-
+/* Write an arithmetic expressions parser.
+ * The parser should take into consideration the usual arithemtic operators precedence.
+ * Parenthesized expressions are allowed and have the usual effect.
+ *
+ * EXAMPLE
+ *
+ * Input: 4*(5+2)-1
+ * Output: 27
+ *
+ */
 #include <stdio.h>
 #include <assert.h>
 
