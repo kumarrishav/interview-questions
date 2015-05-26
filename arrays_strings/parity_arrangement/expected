@@ -1,0 +1,7 @@
+Enter length of array, followed by the elements.
+Note: there must be the same number of even and odd elements.
+> [ 1, 2, 3, 4, 7, 24, 9, 98 ]
+> [ 1, 2 ]
+> [ 1, 2 ]
+> [ 1, 2, 1, 2, 1, 2, 1, 2, 1, 2 ]
+> 
