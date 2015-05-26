@@ -1,4 +1,18 @@
-
+/* You are given an array of even length that has the same number of odd elements and even elements.
+ *
+ * Write a function that rearranges the array elements such that every even element is stored in an
+ * odd index, and every odd element is stored in an even index.
+ *
+ * EXAMPLE
+ *
+ * Input:
+ * [ 2, 1, 3, 4, 7, 9, 24, 98 ]
+ *
+ * Output:
+ * [ 1, 2, 3, 4, 7, 24, 9, 98 ] (or any other order, as long as the indexes rule isn't broken)
+ *
+ * Source: Careercup (VMWare interview)
+ */
 #include <stdio.h>
 
 static void swap(int arr[], size_t i, size_t j) {
