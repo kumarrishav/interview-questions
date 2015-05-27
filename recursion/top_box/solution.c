@@ -114,15 +114,19 @@ int main(void) {
 
 	while (1) {
 		size_t i;
+
 		for (i = 0; i < top_box_rows; i++) {
 			size_t j;
 			for (j = 0; j < top_box_dims[i]; j++) {
 				scanf(" %c", &box[i][j]);
 			}
 		}
-		if (scanf("%s", word) == 1) {
-			top_box(word, box);
+
+		if (scanf("%s", word) != 1) {
+			return 0;
 		}
+
+		top_box(word, box);
 
 		printf("> ");
 	}
