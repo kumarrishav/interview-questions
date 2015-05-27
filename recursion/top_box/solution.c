@@ -1,4 +1,54 @@
-
+/* You are given a set top box which contains every letter in the alphabet exactly once,
+ * in any order.
+ *
+ * This is an example of a box:
+ *
+ * +-------------------+
+ * | a | b | c | d | e |
+ * | - | - | - | - | - |
+ * | f | g | h | i | j |
+ * | - | - | - | - | - |
+ * | k | l | m | n | o |
+ * | - | - | - | - | - |
+ * | p | q | r | s | t |
+ * | - | - | - | - | - |
+ * | u | v | w | x | y |
+ * | - | - | - | - | - |
+ * | z |   |   |   |   |
+ * +-------------------+
+ *
+ * There is a cursor that always starts on the top left corner position of the box.
+ *
+ * You are to write a method that prints out the steps necessary to form a given word. These steps
+ * are described in the form of a path.
+ *
+ * Each time the cursor moves left, right, up or down, the respective move is added to the path
+ * ("LEFT", "RIGHT", "UP", "DOWN")
+ *
+ * To select a position in the path as part of the word, add the word "OK" to the path.
+ *
+ * EXAMPLE:
+ *
+ * For the above box, we get the word "con" with the following steps (you can find and print any
+ * valid path that forms the word; this is just one of them):
+ *
+ * RIGHT (moves the cursor to 'b')
+ * RIGHT (moves the cursor to 'c')
+ * OK (selects this position - the word so far is "c")
+ * LEFT (moves the cursor to 'b')
+ * LEFT (moves the cursor to 'a')
+ * DOWN (moves the cursor to 'f')
+ * RIGHT (moves the cursor to 'g')
+ * RIGHT (moves the cursor to 'h')
+ * RIGHT (moves the cursor to 'i')
+ * RIGHT (moves the cursor to 'j')
+ * DOWN (moves the cursor to 'o')
+ * OK (selects this position - the word so far is "co")
+ * LEFT (moves the cursor to 'n')
+ * OK (selects this position - the word so far is "con")
+ *
+ * Source: Careercup (Google interview)
+ */
 #include <stdio.h>
 #include <string.h>
 
