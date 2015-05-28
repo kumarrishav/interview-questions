@@ -1,4 +1,12 @@
-
+/* Suppose you are given a puzzle that is represented as a matrix with 0s and 1s, where a 0
+ * indicates you're allowed to move into that position and 1 means you're not.
+ *
+ * Write a function that given a start position and an end position, returns a boolean value
+ * indicating if there exists a path from start to end. You are only allowed to move up, left,
+ * right and down. Diagonal movement is not allowed.
+ *
+ * Source: Careercup (Amazon interview)
+ */
 #include <stdio.h>
 
 static int valid_move(int x, int y, int puzzle[x][y], int pos_x, int pos_y) {
