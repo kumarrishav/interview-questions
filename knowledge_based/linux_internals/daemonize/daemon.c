@@ -131,6 +131,10 @@ int daemonize(void) {
 int main(void) {
 	printf("Started %s\n", DAEMON_NAME);
 	daemonize();
+	
+	// What happens here? O.o
+	syslog(LOG_INFO, "%s\n", getlogin());
+
 	while (1);
 	return 0;
 }
