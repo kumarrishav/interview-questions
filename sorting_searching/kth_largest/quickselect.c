@@ -1,4 +1,7 @@
-
+/* Write a function that finds and returns the k-th largest element of an array.
+ *
+ * Source: Careercup (Amazon interview)
+ */
 #include <stdio.h>
 
 static void swap(int arr[], size_t i, size_t j) {
