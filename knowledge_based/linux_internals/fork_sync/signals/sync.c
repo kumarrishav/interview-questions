@@ -4,8 +4,6 @@
 #include <string.h>
 #include <stdio.h>
 
-#define REPEATS 10
-
 static volatile sig_atomic_t sig_flag;
 static sigset_t newmask, oldmask, zeromask;
 static struct sigaction sig_action_buf;
@@ -14,7 +12,7 @@ static void sigusr_handler(int signo) {
 	sig_flag = 1;
 }
 
-void TELL_INIT(void) {
+void NOTIFY_INIT(void) {
 	sig_flag = 0;
 
 	sig_action_buf.sa_handler = sigusr_handler;
@@ -46,7 +44,7 @@ static char msg_buff[] = "A message from a process.\n";
 
 static void write_msgs(const char *proc) {
 	int i;
-	for (i = 0; i < REPEATS; i++) {
+	for (i = 0; i < 10; i++) {
 		write(STDOUT_FILENO, proc, strlen(proc));
 		write(STDOUT_FILENO, msg_buff, sizeof(msg_buff)-1);
 		sleep(1);
@@ -55,7 +53,7 @@ static void write_msgs(const char *proc) {
 
 int main(void) {
 	printf("Started\n");
-	TELL_INIT();
+	NOTIFY_INIT();
 
 	pid_t f = fork();
 	if (f < 0) {
@@ -66,16 +64,18 @@ int main(void) {
 	if (f == 0) {
 		write_msgs("child: ");
 		NOTIFY(getppid());
-		/* Now we wait for the parent to tell us it's time to exit */
 		WAIT_NOTIFY();
+		printf("Child exiting\n");
+		NOTIFY(getppid());
 	} else {
 		/* Child goes first */
 		WAIT_NOTIFY();
 		write_msgs("parent: ");
-
 		printf("Press any key to terminate\n");
 		getchar();
 		NOTIFY(f);
+		WAIT_NOTIFY();
+		printf("Parent exiting\n");
 	}
 
 	return 0;
