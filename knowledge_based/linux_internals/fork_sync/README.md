@@ -45,3 +45,9 @@ This method makes use of record locking: the initializer function creates a temp
 So, `NOTIFY()` locks the file, writes the target PID into the file, and unlocks it. `WAIT_NOTIFY()` locks the file, reads its contents, unlocks it, and checks if the contents match its PID. If there is a match, `WAIT_NOTIFY()` returns, otherwise, we repeat the same steps again.
 
 The main problem of this approach is obvious: polling. The waiting processes waste CPU time by repeatedly reading the file contents, which is clearly suboptimal, but it is the only way to do it with record locks (recall that locks are not inherited by a child process, so any lock that the initializer function acquires will stay with the parent only).
+
+## Method 3: pipes
+
+A parent and its child can be synchronized with a pair of half-duplex pipes: one pipe is used to flow messages from the parent to the child, and another is used to flow messages from the child to the parent. Thus, the initializer function creates a pair of pipes, and then notifying consists of writing something into the pipe, whereas waiting is as simple as issuing a blocking read on the pipe. The main advantage of this approach is that it is extremely easy and fast to implement, but there is a major drawback: we can't implement the generic notify API; this method is only usable with the more constrained API showed in the book. Furthermore, it only works for a parent with a single child. This stems from the fact that pipes are different from regular files in that there isn't the concept of a file offset; once we read the data from the pipe, it's gone. If multiple children are blocked in a read from the same pipe, only one will succeed, and there is no way to guarantee that this is the correct child that the parent wanted to notify in the first place.
+
+For these reasons, the pipe implementation, although perhaps the easiest to understand and implement, places some severe constraints on the API design and usage.
