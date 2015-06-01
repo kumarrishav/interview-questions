@@ -1,4 +1,27 @@
-
+/* You are given two streams `s_a` and `s_b` of digits. Each stream represents an integer `a` and
+ * `b` from least significant to most significant digit. For example, 2048 is represented in the
+ * stream as 8, 4, 0, 2.
+ *
+ * Write a function that subtracts the two integers in each stream, and returns the result as a
+ * string. You are not allowed to buffer the contents of any stream, i.e., you may access only a
+ * single digit on each stream at a time. Reading a digit from the stream consumes it, and any
+ * future read operations will return the next digit on the stream.
+ *
+ * Assume that `a` >= `b`.
+ *
+ * EXAMPLE
+ *
+ * Input:
+ *
+ * s_a = 8 4 0 2
+ * s_b = 4 2 0 1
+ *
+ * Output:
+ *
+ * "1024"
+ *
+ * Source: Careercup (Google interview)
+ */
 #include <iostream>
 #include <istream>
 #include <cstdio>
