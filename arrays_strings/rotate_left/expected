@@ -1,0 +1,20 @@
+Enter a string and a value to rotate it left.
+> abcdefgh
+> bcdefgha
+> cdefghab
+> defghabc
+> efghabcd
+> fghabcde
+> ghabcdef
+> habcdefg
+> abcdefgh
+> bcdefgha
+> cdefghab
+> a
+> a
+> a
+> ab
+> ba
+> ab
+> ba
+> 
