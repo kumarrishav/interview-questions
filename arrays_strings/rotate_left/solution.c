@@ -1,4 +1,13 @@
-
+/* Given a string, rotate it left by a given amount N.
+ *
+ * EXAMPLE
+ * Input: str = "helloworld", N = 5
+ * Output: "worldhello"
+ *
+ * FOLLOW UP
+ *
+ * Can you do it in O(n) time and O(1) memory?
+ */
 #include <stdio.h>
 #include <string.h>
 
