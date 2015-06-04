@@ -1,4 +1,11 @@
-
+/* A heap-based priority queue. Higher priorities correspond to lower priority values.
+ * Thus, a min-heap is used.
+ *
+ * enqueue: O(log(N))
+ * dequeue: O(log(N))
+ * peek: O(1)
+ *
+ */
 #include <iostream>
 #include <vector>
 #include <cassert>
