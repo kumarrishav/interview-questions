@@ -1,0 +1,25 @@
+Commands available:
+E p v - enqueue an element with priority p and value v
+D - dequeue
+P - peek
+Q - quit
+> > > > > > > > > > > > > Head contains element 6 with priority -4
+> Dequeued element 6 with priority -4
+> Head contains element 3 with priority 1
+> > Head contains element 12 with priority -19
+> Dequeued element 12 with priority -19
+> Head contains element 3 with priority 1
+> Dequeued element 3 with priority 1
+> Head contains element 2 with priority 2
+> Dequeued element 2 with priority 2
+> Head contains element 0 with priority 4
+> Dequeued element 0 with priority 4
+> Dequeued element 7 with priority 5
+> Dequeued element 8 with priority 6
+> > Dequeued element 13 with priority 5
+> Dequeued element 1 with priority 6
+> Dequeued element 10 with priority 10
+> Dequeued element 4 with priority 10
+> Dequeued element 9 with priority 11
+> Dequeued element 11 with priority 12
+> 
