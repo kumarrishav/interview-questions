@@ -1,0 +1,22 @@
+Enter an unsigned number to check if it's a power of 2.
+0 is a power of 2.
+1 is a power of 2.
+2 is a power of 2.
+3 is not a power of 2.
+4 is a power of 2.
+5 is not a power of 2.
+6 is not a power of 2.
+7 is not a power of 2.
+8 is a power of 2.
+9 is not a power of 2.
+10 is not a power of 2.
+11 is not a power of 2.
+12 is not a power of 2.
+13 is not a power of 2.
+14 is not a power of 2.
+15 is not a power of 2.
+16 is a power of 2.
+128 is a power of 2.
+129 is not a power of 2.
+130 is not a power of 2.
+256 is a power of 2.
