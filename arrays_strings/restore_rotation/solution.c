@@ -1,6 +1,10 @@
 /* You are given an array that has been rotated an unknown number of times.
+ *
  * Originally, the array was sorted in increasing order.
- * Write a function to find the index of the largest element in the array.
+ * Write a function to find the rotation spot. The rotation spot is the index i
+ * such that array[i] > array[i+1].
+ *
+ * If no such index exists, the function should return -1.
  *
  * FOLLOW UP
  * How would you restore the array back to its original configuration?
