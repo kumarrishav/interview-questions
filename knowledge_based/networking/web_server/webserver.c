@@ -1,4 +1,12 @@
-
+/* Write a simple webserver that is capable of processing only one request.
+ * The server can only serve one client at any point in time, and the only command
+ * implemented by the server is HTTP GET for html files.
+ *
+ * If a requested html file does not exist or the path is otherwise invalid, the server
+ * should reply with the 404 Not Found error message.
+ *
+ * Source: Adapted from Kurose & Ross
+ */
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/socket.h>
