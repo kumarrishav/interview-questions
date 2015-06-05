@@ -1,0 +1,10 @@
+Enter a string with parentheses to count max nesting level.
+> Max nesting level = 3
+> Max nesting level = 0
+> Max nesting level = 2
+> Max nesting level = 6
+> Max nesting level = 1
+> Max nesting level = 41
+> Max nesting level = 41
+> Max nesting level = 1
+> 
