@@ -1,4 +1,11 @@
-
+/* Write a function that counts the maximum nesting level of parenthesis in a string.
+ *
+ * EXAMPLE
+ *
+ * For the string "abc(123(xyz))m(((n)))o", the maximum nesting level is 3.
+ *
+ * Source: Careercup
+ */
 #include <stdio.h>
 #include <assert.h>
 #define max(a, b) ((a) > (b) ? (a) : (b))
