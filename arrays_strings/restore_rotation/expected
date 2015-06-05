@@ -1,0 +1,40 @@
+Enter array size, followed by the array elements
+> Rotation spot = -1
+Restored array: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
+> Rotation spot = 8
+Restored array: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
+> Rotation spot = 7
+Restored array: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
+> Rotation spot = 6
+Restored array: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
+> Rotation spot = 5
+Restored array: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
+> Rotation spot = 4
+Restored array: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
+> Rotation spot = 3
+Restored array: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
+> Rotation spot = 2
+Restored array: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
+> Rotation spot = 1
+Restored array: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
+> Rotation spot = 0
+Restored array: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
+> Rotation spot = -1
+Restored array: [ 2 ];
+> Rotation spot = -1
+Restored array: [ 1, 2 ];
+> Rotation spot = 0
+Restored array: [ 1, 2 ];
+> Rotation spot = 0
+Restored array: [ 1, 1, 1, 1, 2 ];
+> Rotation spot = -1
+Restored array: [ 1, 1, 1, 1, 2 ];
+> Rotation spot = 2
+Restored array: [ 1, 1, 1, 1, 2 ];
+> Rotation spot = 1
+Restored array: [ 1, 1, 1, 1, 2 ];
+> Rotation spot = 3
+Restored array: [ 1, 1, 1, 1, 2 ];
+> Rotation spot = -1
+Restored array: [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ];
+> 
