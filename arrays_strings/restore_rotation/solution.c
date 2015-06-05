@@ -1,4 +1,12 @@
-
+/* You are given an array that has been rotated an unknown number of times.
+ * Originally, the array was sorted in increasing order.
+ * Write a function to find the index of the largest element in the array.
+ *
+ * FOLLOW UP
+ * How would you restore the array back to its original configuration?
+ *
+ * Source: Careercup (Google interview)
+ */
 #include <stdio.h>
 #include <assert.h>
 
