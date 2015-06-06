@@ -16,6 +16,67 @@
 #define PING_MESSAGES 10
 #define TIMEOUT_SECS 1
 
+/* Some interesting times measured when testing this code:
+ *
+ * Source machine running the client was located in Lisbon, Portugal.
+ *
+ * It is interesting to see how ping times increase with distance.
+ *
+ * Results for a virtual server from DigitalOcean running in San Francisco, CA, where
+ * packets (probably) had to go through a transatlantic link (either that, or satellite).
+ *
+ * PING 104.***.***.***: 209.3490 ms
+ * PING 104.***.***.***: 204.2170 ms
+ * PING 104.***.***.***: 204.0840 ms
+ * PING 104.***.***.***: 204.0750 ms
+ * PING 104.***.***.***: 204.1260 ms
+ * PING 104.***.***.***: 203.5260 ms
+ * PING 104.***.***.***: 203.9290 ms
+ * PING 104.***.***.***: 203.9460 ms
+ * PING 104.***.***.***: 204.1560 ms
+ * PING 104.***.***.***: 203.7490 ms
+ *
+ * Results for an OVH server running in Roubaix, France.
+ * It is expected that the ping times are slightly lower, since the packets never leave Europe.
+ * Also, this is a dedicated server rather than a VPS, but this is usually irrelevant.
+ *
+ * PING *.kimsufi.com: 44.2090 ms
+ * PING *.kimsufi.com: 40.5510 ms
+ * PING *.kimsufi.com: 39.9340 ms
+ * PING *.kimsufi.com: 39.9480 ms
+ * PING *.kimsufi.com: 40.1100 ms
+ * PING *.kimsufi.com: 40.8410 ms
+ * PING *.kimsufi.com: 40.0790 ms
+ * PING *.kimsufi.com: 41.0890 ms
+ * PING *.kimsufi.com: 40.8160 ms
+ * PING *.kimsufi.com: 39.8980 ms
+ *
+ * Results for a server running in the same LAN as the client:
+ * PING 192.168.1.91: 1.1860 ms
+ * PING 192.168.1.91: 0.5220 ms
+ * PING 192.168.1.91: 0.7420 ms
+ * PING 192.168.1.91: 0.6920 ms
+ * PING 192.168.1.91: 0.4170 ms
+ * PING 192.168.1.91: 0.7390 ms
+ * PING 192.168.1.91: 0.4060 ms
+ * PING 192.168.1.91: 0.3660 ms
+ * PING 192.168.1.91: 0.3530 ms
+ * PING 192.168.1.91: 0.3630 ms
+ *
+ * Results for localhost:
+ * PING localhost: 0.1810 ms
+ * PING localhost: 0.1460 ms
+ * PING localhost: 0.1470 ms
+ * PING localhost: 0.1470 ms
+ * PING localhost: 0.1470 ms
+ * PING localhost: 0.1460 ms
+ * PING localhost: 0.1180 ms
+ * PING localhost: 0.0410 ms
+ * PING localhost: 0.0840 ms
+ * PING localhost: 0.0730 ms
+ *
+ */
+
 void do_ping(const char *target, int sock, struct sockaddr *dest, socklen_t dest_sz) {
 	static const char ping_request[] = "PING\r\n";
 	static const char ping_reply[] = "PONG\r\n";
