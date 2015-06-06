@@ -18,6 +18,8 @@
 
 void do_ping(const char *target, int sock, struct sockaddr *dest, socklen_t dest_sz) {
 	static const char ping_request[] = "PING\r\n";
+	static const char ping_reply[] = "PONG\r\n";
+	static char sock_buff[1024];
 
 	int i;
 	for (i = 0; i < PING_MESSAGES; i++) {
@@ -48,8 +50,19 @@ void do_ping(const char *target, int sock, struct sockaddr *dest, socklen_t dest
 		} else if (res == 0) {
 			printf("TIMEOUT\n");
 		} else {
-			double millisecs = (after.tv_sec-before.tv_sec)*1000+(after.tv_usec-before.tv_usec)/1000.0;
-			printf("%.4f ms\n", millisecs);
+			ssize_t received;
+			if ((received = recvfrom(sock, sock_buff, sizeof(sock_buff)-1, 0, NULL, NULL)) < 0) {
+				printf("error - %s\n", strerror(errno));
+				continue;
+			}
+
+			sock_buff[received] = '\0';
+			if (strcmp(sock_buff, ping_reply)) {
+				printf("error - unexpected reply\n");
+			} else {
+				double millisecs = (after.tv_sec-before.tv_sec)*1000+(after.tv_usec-before.tv_usec)/1000.0;
+				printf("%.4f ms\n", millisecs);
+			}
 		}
 	}
 }
