@@ -1,4 +1,8 @@
-
+/* Write a program that takes a filename as an argument and outputs
+ * the first unique word in that file.
+ *
+ * Source: Careercup
+ */
 #include <iostream>
 #include <fstream>
 #include <map>
