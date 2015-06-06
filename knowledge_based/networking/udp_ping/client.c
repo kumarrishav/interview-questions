@@ -1,4 +1,16 @@
-
+/* Implement a simple PING service on top of UDP.
+ *
+ * Your ping program is to send 10 ping messages to the target server over UDP.
+ * For each message, your client is to determine and print the RTT (Round Trip Time)
+ * when the corresponding message is returned.
+ *
+ * Because UDP is an unreliable protocol, a packet sent by the client or server may be lost.
+ * For this reason, the client cannot wait indefinitely for a reply to a ping message.
+ * You should have the client wait up to one second for a reply from the server; if no reply is
+ * received, the client should assume that the packet was lost and print a message accordingly.
+ *
+ * Source: Adapted from Kurose & Ross
+ */
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/socket.h>
