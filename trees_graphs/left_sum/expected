@@ -1,0 +1,32 @@
+Enter number of nodes, and for each node, enter the node's value, left and right children (-1 means no child)
+Root is node 0
+> *** Before:
+1 -> 2 3
+2 -> 4 5
+4 -> 8 9
+8 -> NULL NULL
+9 -> NULL NULL
+5 -> NULL NULL
+3 -> 6 7
+6 -> NULL NULL
+7 -> 10 NULL
+10 -> 11 NULL
+11 -> 12 13
+12 -> NULL NULL
+13 -> NULL NULL
+*** After:
+Total sum: 91
+29 -> 23 9
+23 -> 12 5
+12 -> 8 9
+8 -> NULL NULL
+9 -> NULL NULL
+5 -> NULL NULL
+9 -> 6 53
+6 -> NULL NULL
+53 -> 46 NULL
+46 -> 23 NULL
+23 -> 12 13
+12 -> NULL NULL
+13 -> NULL NULL
+> 
