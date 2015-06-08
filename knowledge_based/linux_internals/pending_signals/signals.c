@@ -1,3 +1,8 @@
+/* Describe and show how a pending signal can be canceled.
+ *
+ * Source: StackOverflow
+ */
+
 #include <signal.h>
 #include <stdio.h>
 #include <sys/types.h>
