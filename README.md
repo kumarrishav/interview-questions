@@ -8,7 +8,6 @@ Coding Interview practice with questions from various sources:
 * Cracking the Coding Interview (5th Edition)
 * Programming Interviews Exposed (3rd Edition)
 * Questions I invented
-* Actual interviews I attended where I didn't sign an NDA
 
 The knowledge based section includes some exercises adapted from:
 
