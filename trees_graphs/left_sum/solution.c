@@ -1,4 +1,8 @@
-
+/* Given a binary tree, change the value in each node to the sum of that node's value with all the
+ * values on that node's left subtree.
+ *
+ * Source: Careercup (Yahoo interview)
+ */
 #include <stdio.h>
 
 struct tree_node {
