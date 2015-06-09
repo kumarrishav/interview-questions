@@ -1,4 +1,7 @@
-
+/* Write a function that prints a singly linked list left-to-right and right-to-left
+ *
+ * Source: Careercup
+ */
 #include <stdio.h>
 
 struct list_node {
