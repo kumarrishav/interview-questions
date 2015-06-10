@@ -1,4 +1,14 @@
-
+/* Given a sorted array, write a function to find the number of occurrences of a number
+ * in that array
+ *
+ * EXAMPLE
+ *
+ * Input array: [ 1, 1, 2, 3, 3, 3, 4, 5 ]
+ * Input value: 3
+ * Output:      3 (the number 3 occurs 3 times)
+ *
+ * Source: Careercup (Google interview)
+ */
 #include <stdio.h>
 #include <assert.h>
 
