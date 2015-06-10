@@ -1,0 +1,17 @@
+Enter array size, followed by the elements, followed by the element to count occurrences
+Note: array must be sorted
+> 3 occurs 3 times in the array
+> 1 occurs 2 times in the array
+> 2 occurs 1 times in the array
+> 4 occurs 1 times in the array
+> 5 occurs 1 times in the array
+> -4 does not occur in the array
+> 20 does not occur in the array
+> 1 occurs 1 times in the array
+> 2 does not occur in the array
+> 0 does not occur in the array
+> 1 occurs 2 times in the array
+> 3 does not occur in the array
+> 2 occurs 1 times in the array
+> 1 occurs 10 times in the array
+> 
