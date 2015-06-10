@@ -1,4 +1,8 @@
-
+/* Given a max-heap represented as an array, find and return the k-th largest element
+ * without modifying the heap.
+ *
+ * Source: Careercup (Google interview)
+ */
 #include <stdio.h>
 
 struct heap_node {
