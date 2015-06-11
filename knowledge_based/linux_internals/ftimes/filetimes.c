@@ -11,6 +11,38 @@
 #include <errno.h>
 #include <string.h>
 
+/* This example shows the results for two files, `xpto` and `example`,
+ * where the original values of atime, mtime and ctime were 06/11 19:55
+ *
+ * filipe@filipe-Kubuntu:~$ ls -l xpto example # mtime
+ * -rw-rw-r-- 1 filipe filipe 58 Jun 11 19:55 example
+ * -rw-rw-r-- 1 filipe filipe 21 Jun 11 19:55 xpto
+ *
+ * filipe@filipe-Kubuntu:~$ ls -lu xpto example # atime
+ * -rw-rw-r-- 1 filipe filipe 58 Jun 11 19:55 example
+ * -rw-rw-r-- 1 filipe filipe 21 Jun 11 19:55 xpto
+ * filipe@filipe-Kubuntu:~$ ls -lc xpto example # ctime
+ * -rw-rw-r-- 1 filipe filipe 58 Jun 11 19:55 example
+ * -rw-rw-r-- 1 filipe filipe 21 Jun 11 19:55 xpto
+ *
+ * After running this program, both mtime and atime remain untouched because of the call
+ * to futimens(), but ctime is changed:
+ *
+ * filipe@filipe-Kubuntu:~$ date
+ * Qui Jun 11 19:56:20 WEST 2015
+ * filipe@filipe-Kubuntu:~$ ./a.out xpto example
+ * filipe@filipe-Kubuntu:~$ ls -l xpto example
+ * -rw-rw-r-- 1 filipe filipe 0 Jun 11 19:55 example
+ * -rw-rw-r-- 1 filipe filipe 0 Jun 11 19:55 xpto
+ * filipe@filipe-Kubuntu:~$ ls -lu xpto example
+ * -rw-rw-r-- 1 filipe filipe 0 Jun 11 19:55 example
+ * -rw-rw-r-- 1 filipe filipe 0 Jun 11 19:55 xpto
+ * filipe@filipe-Kubuntu:~$ ls -lc xpto example
+ * -rw-rw-r-- 1 filipe filipe 0 Jun 11 19:56 example
+ * -rw-rw-r-- 1 filipe filipe 0 Jun 11 19:56 xpto
+ *
+ */
+
 int main(int argc, char *argv[]) {
 	if (argc < 2) {
 		fprintf(stderr, "Usage: %s file1 file2 file3 ... fileN\n", argv[0]);
