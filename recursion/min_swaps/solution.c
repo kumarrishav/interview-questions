@@ -1,4 +1,8 @@
-
+/* Given a source array and a target array with the same elements, determine the minimum number
+ * of swaps to transform source into target.
+ *
+ * Source: invented
+ */
 #include <stdio.h>
 #include <assert.h>
 
