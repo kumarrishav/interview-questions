@@ -1,4 +1,8 @@
-
+/* Write a program that calls uname and prints all the fields in the utsname structure.
+ * Compare the output to the output from the uname(1) command.
+ *
+ * Source: Advanced Programming in the UNIX Environment, 3rd edition, exercise 6.3
+ */
 #include <sys/utsname.h>
 #include <stdlib.h>
 #include <stdio.h>
