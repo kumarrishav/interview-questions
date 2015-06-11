@@ -2,6 +2,8 @@
  * Demonstrate your ideas by implementing a bare-bones login program that
  * prompts the user for his password and checks if the password matches with
  * the stored password entry for that user.
+ *
+ * Source: Adapted from Advanced Programming in the UNIX Environment, 3rd Edition
  */
 #include <sys/types.h>
 #include <sys/stat.h>
