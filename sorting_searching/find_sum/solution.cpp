@@ -1,4 +1,10 @@
-
+/* You have a very large array of integers.
+ *
+ * How would you go about finding if there are 2 elements in the array that sum to a
+ * given value?
+ *
+ * Source: Careercup (Facebook interview)
+ */
 #include <iostream>
 #include <algorithm>
 #include <vector>
