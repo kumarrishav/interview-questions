@@ -1,4 +1,10 @@
-
+/* Describe the different ways a process can terminate. What is the difference between the
+ * termination status and the exit status?
+ *
+ * How can a parent process know what happened to a child?
+ *
+ * Source: Adapted from Advanced Programming in the UNIX Enviornment, 3rd Edition
+ */
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
