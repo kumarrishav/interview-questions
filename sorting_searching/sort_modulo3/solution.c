@@ -1,4 +1,28 @@
-
+/* Write a function to sort an array modulo 3, that is, in increasing order of array[i]%3
+ * Can you do it in O(N) time and O(1) memory?
+ *
+ * EXAMPLE
+ *
+ * Input:  [ 1, 2, 3, 4, 5 ]
+ * Output: [ 3, 1, 4, 2, 5 ] (or other valid ordering)
+ *
+ * Explanation:
+ * 1%3 = 1
+ * 2%3 = 2
+ * 3%3 = 0
+ * 4%3 = 1
+ * 5%3 = 2
+ *
+ * Thus, the sorted sequence modulo 3 will be [ 0, 1, 1, 2, 2 ]
+ * So, the possible solutions are:
+ *
+ * [ 3, 1, 4, 2, 5 ]
+ * [ 3, 1, 4, 5, 2 ]
+ * [ 3, 4, 1, 2, 5 ]
+ * [ 3, 4, 1, 5, 2 ]
+ *
+ * Source: Careercup
+ */
 #include <stdio.h>
 
 void swap(int arr[], size_t i, size_t j) {
