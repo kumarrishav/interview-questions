@@ -1,4 +1,15 @@
-
+/* A magnitude pole of an array A consisting of N integers is an index K such that all elements with
+ * smaller indexes have values lower than or equal to A[K] and all elements with greater indexes
+ * have values greater than or equal to A[K].
+ *
+ * For example, for A = [ 4, 2, 2, 3, 1, 4, 7, 8, 6, 9 ], there is a magnitude pole for K = 5,
+ * since A[0..4] <= A[5] <= A[6..9]. Furthermore, the array doesn't have any other magnitude poles.
+ *
+ * Write a function, magnitude_pole(), that given an array, returns the index of any of its
+ * magnitude poles.
+ *
+ * Source: Careercup
+ */
 #include <iostream>
 #include <limits>
 #include <vector>
