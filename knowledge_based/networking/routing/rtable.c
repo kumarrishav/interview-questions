@@ -1,4 +1,16 @@
-
+/* Routing tables are of paramount importance to keep the internet up and running.
+ *
+ * How do routing tables get populated? What are the classes of different algorithms that
+ * can be used to fill a routing table?
+ *
+ * Imagine you are to implement a router's routing table. How would you implement it?
+ * How can you apply the longest prefix matching rule efficiently?
+ * What if we want to save memory?
+ *
+ * Source: invented (this is kind of an open-ended question)
+ *
+ * NOTE: Compile with -DTEST_RTABLE to run as a standalone program
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
