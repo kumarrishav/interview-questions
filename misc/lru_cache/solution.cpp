@@ -135,7 +135,7 @@ public:
 			return;
 		}
 
-		entry_it.set_value(val);
+		entry_it->set_value(val);
 		increase_key(entry_it-min_heap.begin(), curr_time);
 	}
 
@@ -202,29 +202,61 @@ ostream &operator << (ostream &os, const LRUCache<Key, Value> &cache) {
 }
 
 int main(void) {
-	LRUCache<uintptr_t, int> cache(16, 4);
+	cout << "Cache size in blocks: ";
+	LRUCache<uintptr_t, int>::size_type blocks;
+	cin >> blocks;
+	cout << "Cache associativity: ";
+	LRUCache<uintptr_t, int>::size_type assoc;
+	cin >> assoc;
 
-	cache.insert(4, 1);
-	cache.insert(8, 2);
-	cache.insert(16, 3);
-	cache.insert(32, 4);
+	LRUCache<uintptr_t, int> cache(blocks, assoc);
 
-	int myval;
-	if (cache.get(4, myval)) {
-		cout << "Accessed location 4, value = " << myval << endl;
-	} else {
-		cout << "Oops! Couldn't find address 4 in cache" << endl;
+	cout << "*** LRU Cache of " << blocks << " blocks (" << assoc << "-way set associative) created" << endl;
+	cout << "Commands available:" << endl;
+	cout << "I ptr value - cache the memory location `ptr` storing the value `value`" << endl;
+	cout << "U ptr value - update the already cached memory location `ptr` to store the value `value`" << endl;
+	cout << "G ptr - find out if memory location `ptr` is cached, and if it is, return the value stored" << endl;
+	cout << "P - print cache contents" << endl;
+	cout << "Q - quit" << endl;
+	cout << "Note: Please use integer values only. Memory locations should be entered using hexadecimal notation" << endl << endl;
+	cout << "> ";
+
+	char op;
+	while (cin >> op) {
+		if (op == 'I') {
+			void *address;
+			int value;
+			cin >> address;
+			cin >> value;
+			cache.insert((uintptr_t) address, value);
+			cout << "Inserted: (" << address << " -> " << value << ")" << endl;
+		} else if (op == 'U') {
+			void *address;
+			int newval;
+			cin >> address;
+			cin >> newval;
+			cache.update((uintptr_t) address, newval);
+			cout << "Updated " << address << " value to " << newval << endl;
+		} else if (op == 'G') {
+			bool res;
+			int val;
+			void *address;
+			cin >> address;
+			res = cache.get((uintptr_t) address, val);
+			if (res) {
+				cout << "(" << address << " -> " << val << ")" << endl;
+			} else {
+				cout << address << " is not cached." << endl;
+			}
+		} else if (op == 'P') {
+			cout << cache;
+		} else if (op == 'Q') {
+			break;
+		} else {
+			cerr << "Unrecognized command: " << op << endl;
+		}
+		cout << "> ";
 	}
-
-	cache.insert(64, 5);
-
-	if (!cache.get(8, myval)) {
-		cout << "8 has been removed from cache" << endl;
-	} else {
-		cout << "Oops! 8 is still in the cache!" << endl;
-	}
-
-	cout << cache;
 
 	return 0;
 }
