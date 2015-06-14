@@ -1,0 +1,31 @@
+This is a simulation of a router's forwarding table.
+The commands available are:
+D ip - Set the default gateway to `ip`. This should be the first step before any other query
+I ip/mask destination - Insert a new entry for the CIDR-ized address ip/mask to be forwarded to `destination`
+                        Example: I 192.168.1.0/24 192.168.1.254 will forward 192.168.1.0/24 to the router 192.168.1.254
+L ip - Find the next hop for a packet with the destination `ip`. As usual, longest prefix matching is used.
+P - Print the routing table
+Q - quit
+
+> > > Dest = 24.0.0.0, Next hop = 192.168.255.255
+> Dest = 27.0.0.0, Next hop = 192.168.2.2
+> > Dest = 24.0.0.0, Next hop = 192.168.255.255
+> Dest = 27.0.0.0, Next hop = 192.168.2.254
+> Dest = 26.0.0.0, Next hop = 192.168.2.2
+> > > Dest = 93.45.65.7, Next hop = 192.168.5.3
+> Dest = 93.45.129.2, Next hop = 192.168.5.3
+> Dest = 93.45.200.4, Next hop = 192.168.5.4
+> Dest = 93.45.255.5, Next hop = 192.168.5.4
+> Dest = 93.44.255.255, Next hop = 192.168.5.3
+> Dest = 93.64.2.2, Next hop = 192.168.255.255
+> > > Dest = 93.32.5.99, Next hop = 192.168.5.3
+> Dest = 93.45.132.12, Next hop = 192.168.5.37
+> Dest = 93.45.196.122, Next hop = 192.168.5.4
+> Dest = 27.2.2.2, Next hop = 192.168.2.254
+> Dest = 26.2.2.2, Next hop = 192.168.2.2
+> Dest = 30.4.5.7, Next hop = 192.168.254.254
+> > Dest = 85.85.85.88, Next hop = 192.168.255.255
+> Dest = 85.85.85.85, Next hop = 192.168.1.2
+> > Dest = 85.85.85.88, Next hop = 192.168.55.33
+> Dest = 85.85.85.85, Next hop = 192.168.1.2
+> 
