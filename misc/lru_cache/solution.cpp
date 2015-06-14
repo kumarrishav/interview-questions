@@ -139,7 +139,20 @@ public:
 		increase_key(entry_it-min_heap.begin(), curr_time);
 	}
 
+	template <class K, class V>
+	friend ostream &operator << (ostream &os, const CacheLine<K, V> &cline);
+
 };
+
+template <class Key, class Value>
+ostream &operator << (ostream &os, const CacheLine<Key, Value> &cline) {
+	for (typename vector<CacheLineEntry<Key, Value> >::const_iterator entry_it = cline.min_heap.begin();
+	     entry_it != cline.min_heap.end();
+	     entry_it++) {
+		os << "| (" << entry_it->get_key() << " -> " << entry_it->get_value() << ") ";
+	}
+	return os;
+}
 
 template <class Key, class Value>
 class LRUCache {
@@ -171,7 +184,22 @@ public:
 	void update(const Key &k, const Value &val) {
 		lines[k%lines_count].update(timestamp++, k, val);
 	}
+
+	template <class K, class V>
+	friend ostream &operator << (ostream &os, const LRUCache<K, V> &cache);
 };
+
+template <class Key, class Value>
+ostream &operator << (ostream &os, const LRUCache<Key, Value> &cache) {
+
+	for (typename vector<CacheLine<Key, Value> >::const_iterator line_it = cache.lines.begin();
+	     line_it != cache.lines.end();
+	     line_it++) {
+		os << line_it-cache.lines.begin() << ":\t" << *line_it << endl;
+	}
+
+	return os;
+}
 
 int main(void) {
 	LRUCache<uintptr_t, int> cache(16, 4);
@@ -195,6 +223,8 @@ int main(void) {
 	} else {
 		cout << "Oops! 8 is still in the cache!" << endl;
 	}
+
+	cout << cache;
 
 	return 0;
 }
