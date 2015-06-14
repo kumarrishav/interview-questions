@@ -17,18 +17,14 @@ void set_defl_gateway(uint32_t ip) {
 	root.dest = ip;
 }
 
-void print_binary(uint32_t n) {
-	uint32_t i = 1 << 31;
-	while (i != 0) {
-		putchar('0'+!!(n&i));
-		i >>= 1;
-	}
-	putchar('\n');
-}
-
 void add_entry(uint32_t ip, uint8_t cidr_val, uint32_t dest) {
 	uint32_t curr_mask = 1 << 31;
-	uint32_t mask_lim = 1 << (31 - cidr_val);
+
+	uint32_t mask_lim = 0;
+	if (cidr_val < 32) {
+		mask_lim = 1 << (31 - cidr_val);
+	}
+
 	uint32_t curr_val = !!(ip & curr_mask);
 	struct trie_node *curr_node = &root;
 
@@ -140,8 +136,10 @@ int main(void) {
 			read_ip_mask(ip_mask);
 			add_entry(ip_mask[0], ip_mask[1], read_ip());
 		} else if (op == 'L') {
-			uint32_t res = lookup(read_ip());
-			printf("Next hop = %s\n", ip_to_str(res));
+			uint32_t ip = read_ip();
+			uint32_t res = lookup(ip);
+			printf("Dest = %s", ip_to_str(ip));
+			printf(", Next hop = %s\n", ip_to_str(res));
 		} else if (op == 'P') {
 			print_table(&root, 0);
 		} else if (op == 'Q') {
