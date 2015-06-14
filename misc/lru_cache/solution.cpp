@@ -1,4 +1,13 @@
-
+/* Describe how a cache is structured and how it works.
+ *
+ * Discuss the various replacement strategies. Design and implement a
+ * program that illustrates the cache interface and how it works inside.
+ *
+ * For the purposes of your program, assume that the replacement strategy
+ * is LRU (Least Recently Used). How can you implement an LRU cache efficiently?
+ *
+ * Source: Careercup (Amazon interview)
+ */
 #include <iostream>
 #include <stdexcept>
 #include <algorithm>
