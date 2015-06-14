@@ -1,0 +1,33 @@
+Cache size in blocks: Cache associativity: *** LRU Cache of 16 blocks (16-way set associative) created
+Commands available:
+I ptr value - cache the memory location `ptr` storing the value `value`
+U ptr value - update the already cached memory location `ptr` to store the value `value`
+G ptr - find out if memory location `ptr` is cached, and if it is, return the value stored
+P - print cache contents
+Q - quit
+Note: Please use integer values only. Memory locations should be entered using hexadecimal notation
+
+> 0:	
+> 0 is not cached.
+> 0x1 is not cached.
+> Inserted: (0x4 -> 1)
+> Inserted: (0x8 -> 2)
+> Inserted: (0x10 -> 3)
+> 0:	| (4 -> 1) | (8 -> 2) | (16 -> 3) 
+> Inserted: (0x5 -> 4)
+> Inserted: (0x6 -> 5)
+> 0:	| (4 -> 1) | (8 -> 2) | (16 -> 3) | (5 -> 4) | (6 -> 5) 
+> Inserted: (0x7 -> 6)
+> 0:	| (4 -> 1) | (8 -> 2) | (16 -> 3) | (5 -> 4) | (6 -> 5) | (7 -> 6) 
+> Inserted: (0x20 -> 7)
+> 0:	| (4 -> 1) | (8 -> 2) | (16 -> 3) | (5 -> 4) | (6 -> 5) | (7 -> 6) | (32 -> 7) 
+> (0x4 -> 1)
+> Inserted: (0x40 -> 8)
+> 0:	| (8 -> 2) | (5 -> 4) | (16 -> 3) | (4 -> 1) | (6 -> 5) | (7 -> 6) | (32 -> 7) | (64 -> 8) 
+> Updated 0x10 value to 99
+> Updated 0x20 value to 77
+> 0:	| (8 -> 2) | (5 -> 4) | (7 -> 6) | (4 -> 1) | (6 -> 5) | (16 -> 99) | (32 -> 77) | (64 -> 8) 
+> Inserted: (0x80 -> 44)
+> 0:	| (8 -> 2) | (5 -> 4) | (7 -> 6) | (4 -> 1) | (6 -> 5) | (16 -> 99) | (32 -> 77) | (64 -> 8) | (128 -> 44) 
+> (0x6 -> 5)
+> 

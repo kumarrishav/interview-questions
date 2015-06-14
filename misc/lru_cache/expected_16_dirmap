@@ -1,0 +1,153 @@
+Cache size in blocks: Cache associativity: *** LRU Cache of 16 blocks (1-way set associative) created
+Commands available:
+I ptr value - cache the memory location `ptr` storing the value `value`
+U ptr value - update the already cached memory location `ptr` to store the value `value`
+G ptr - find out if memory location `ptr` is cached, and if it is, return the value stored
+P - print cache contents
+Q - quit
+Note: Please use integer values only. Memory locations should be entered using hexadecimal notation
+
+> 0:	
+1:	
+2:	
+3:	
+4:	
+5:	
+6:	
+7:	
+8:	
+9:	
+10:	
+11:	
+12:	
+13:	
+14:	
+15:	
+> 0 is not cached.
+> 0x1 is not cached.
+> Inserted: (0x4 -> 1)
+> Inserted: (0x8 -> 2)
+> Inserted: (0x10 -> 3)
+> 0:	| (16 -> 3) 
+1:	
+2:	
+3:	
+4:	| (4 -> 1) 
+5:	
+6:	
+7:	
+8:	| (8 -> 2) 
+9:	
+10:	
+11:	
+12:	
+13:	
+14:	
+15:	
+> Inserted: (0x5 -> 4)
+> Inserted: (0x6 -> 5)
+> 0:	| (16 -> 3) 
+1:	
+2:	
+3:	
+4:	| (4 -> 1) 
+5:	| (5 -> 4) 
+6:	| (6 -> 5) 
+7:	
+8:	| (8 -> 2) 
+9:	
+10:	
+11:	
+12:	
+13:	
+14:	
+15:	
+> Inserted: (0x7 -> 6)
+> 0:	| (16 -> 3) 
+1:	
+2:	
+3:	
+4:	| (4 -> 1) 
+5:	| (5 -> 4) 
+6:	| (6 -> 5) 
+7:	| (7 -> 6) 
+8:	| (8 -> 2) 
+9:	
+10:	
+11:	
+12:	
+13:	
+14:	
+15:	
+> Inserted: (0x20 -> 7)
+> 0:	| (32 -> 7) 
+1:	
+2:	
+3:	
+4:	| (4 -> 1) 
+5:	| (5 -> 4) 
+6:	| (6 -> 5) 
+7:	| (7 -> 6) 
+8:	| (8 -> 2) 
+9:	
+10:	
+11:	
+12:	
+13:	
+14:	
+15:	
+> (0x4 -> 1)
+> Inserted: (0x40 -> 8)
+> 0:	| (64 -> 8) 
+1:	
+2:	
+3:	
+4:	| (4 -> 1) 
+5:	| (5 -> 4) 
+6:	| (6 -> 5) 
+7:	| (7 -> 6) 
+8:	| (8 -> 2) 
+9:	
+10:	
+11:	
+12:	
+13:	
+14:	
+15:	
+> Updated 0x10 value to 99
+> Updated 0x20 value to 77
+> 0:	| (64 -> 8) 
+1:	
+2:	
+3:	
+4:	| (4 -> 1) 
+5:	| (5 -> 4) 
+6:	| (6 -> 5) 
+7:	| (7 -> 6) 
+8:	| (8 -> 2) 
+9:	
+10:	
+11:	
+12:	
+13:	
+14:	
+15:	
+> Inserted: (0x80 -> 44)
+> 0:	| (128 -> 44) 
+1:	
+2:	
+3:	
+4:	| (4 -> 1) 
+5:	| (5 -> 4) 
+6:	| (6 -> 5) 
+7:	| (7 -> 6) 
+8:	| (8 -> 2) 
+9:	
+10:	
+11:	
+12:	
+13:	
+14:	
+15:	
+> (0x6 -> 5)
+> 
