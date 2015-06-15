@@ -8,6 +8,10 @@
 #include <assert.h>
 #include <time.h>
 
+/* Note about rand_zero() and range_rand():
+ * See numeric/rand_shrink to learn how it works
+ */
+
 /* Returns a random integer in the range [0..max]
  * with the same distribution as stdlib's rand()
  *
