@@ -1,4 +1,20 @@
-
+/* A non-empty zero-indexed array A consisting of N numbers is given.
+ * The absolute distinct count of this array is the number of distinct absolute
+ * values among the elements of the array.
+ *
+ * For example, consider the following array:
+ *
+ * [ -5, -3, -1, 0, 3, 6 ]
+ *
+ * The absolute distinct count of this array is 5, because there are 5 distinct absolute values
+ * among the elements of this array, namely: 0, 1, 3, 5 and 6.
+ *
+ * Write a function, abs_distinct(), that, given an array, returns its absolute distinct count.
+ *
+ * Assume that the input array is sorted
+ *
+ * Source: Careercup
+ */
 #include <stdio.h>
 #include <assert.h>
 
