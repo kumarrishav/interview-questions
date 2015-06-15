@@ -1,4 +1,7 @@
-
+/* Write a function that generates a sorted sequence of unique random integers in an interval [0..N]
+ *
+ * Source: Adapted from Programming Pearls
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
