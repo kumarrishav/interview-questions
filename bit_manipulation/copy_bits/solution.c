@@ -1,4 +1,8 @@
-
+/* Given two integers A and B, a start index i and an end index j, write a function
+ * that copies the bits in A[i..j] to B[i..j]
+ *
+ * Source: Careercup
+ */
 #include <stdio.h>
 #include <assert.h>
 #include <limits.h>
