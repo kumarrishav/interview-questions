@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 static volatile sig_atomic_t sig_flag;
-static sigset_t newmask, oldmask, zeromask;
+static sigset_t old_nousr;
 static struct sigaction sig_action_buf;
 
 static void sigusr_handler(int signo) {
@@ -20,12 +20,14 @@ void NOTIFY_INIT(void) {
 	sig_action_buf.sa_flags = 0;
 	sigaction(SIGUSR1, &sig_action_buf, NULL);
 
-	sigemptyset(&newmask);
-	sigemptyset(&zeromask);
 
-	sigaddset(&newmask, SIGUSR1);
+	sigset_t usrmask;
+	sigemptyset(&usrmask);
+	sigaddset(&usrmask, SIGUSR1);
 
-	sigprocmask(SIG_BLOCK, &newmask, &oldmask);
+	// Aditionally block SIGUSR1
+	sigprocmask(SIG_BLOCK, &usrmask, &old_nousr);
+	sigdelset(&old_nousr, SIGUSR1);
 }
 
 void NOTIFY(pid_t pid) {
@@ -34,11 +36,10 @@ void NOTIFY(pid_t pid) {
 
 void WAIT_NOTIFY(void) {
 	while (sig_flag == 0) {
-		sigsuspend(&zeromask);
+		sigsuspend(&old_nousr);
 	}
 
 	sig_flag = 0;
-	sigprocmask(SIG_SETMASK, &oldmask, NULL);
 }
 
 static char msg_buff[] = "A message from a process.\n";
