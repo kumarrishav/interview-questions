@@ -17,6 +17,7 @@ void NOTIFY_INIT(void) {
 
 	sig_action_buf.sa_handler = sigusr_handler;
 	sigemptyset(&sig_action_buf.sa_mask);
+	sig_action_buf.sa_flags = 0;
 	sigaction(SIGUSR1, &sig_action_buf, NULL);
 
 	sigemptyset(&newmask);
