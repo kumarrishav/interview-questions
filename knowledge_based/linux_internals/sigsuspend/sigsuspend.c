@@ -1,5 +1,6 @@
 /* Describe the differences between sigsuspend(2) and pause(2). What is the need for sigsuspend(2)?
  * Why can't we just set up a handler and call pause(2)?
+ *
  * Illustrate your explanation with a code sample.
  *
  * Source: Adapted from Advanced Programming in the UNIX Environment, 3rd ed. (Chapter 10 - Signals)
@@ -13,6 +14,8 @@
 void sigint(int signo) {
 	printf("Caught SIGINT\n");
 }
+
+#ifndef USE_SIGSUSPEND
 
 int main(void) {
 	sigset_t block, old;
@@ -51,3 +54,47 @@ int main(void) {
 
 	return 0;
 }
+
+#else
+
+int main(void) {
+	sigset_t block, old, sigmask;
+
+	sigemptyset(&sigmask);
+
+	sigemptyset(&block);
+	sigaddset(&block, SIGINT);
+	if (sigprocmask(SIG_SETMASK, &block, &old) < 0) {
+		perror("Couldn't block SIGINT");
+		exit(EXIT_FAILURE);
+	}
+
+	printf("SIGINT blocked\n");
+	raise(SIGINT);
+	printf("SIGINT now pending\n");
+
+	struct sigaction sigint_act;
+	sigint_act.sa_handler = sigint;
+	sigemptyset(&sigint_act.sa_mask);
+	sigint_act.sa_flags = 0;
+
+	if (sigaction(SIGINT, &sigint_act, NULL) < 0) {
+		perror("Couldn't set handler for SIGINT");
+		exit(EXIT_FAILURE);
+	}
+
+	// Atomically unblock SIGINT and pause
+	printf("Calling sigsuspend()\n");
+	sigsuspend(&sigmask);
+
+	if (sigprocmask(SIG_SETMASK, &old, NULL) < 0) {
+		perror("Couldn't restore original signal mask");
+		exit(EXIT_FAILURE);
+	}
+
+	printf("Restored signal mask\n");
+
+	return 0;
+}
+
+#endif /* USE_SIGSUSPEND */
