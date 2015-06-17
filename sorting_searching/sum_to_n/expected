@@ -1,0 +1,41 @@
+Enter size of array, followed by elements, followed by N
+Note: array must be sorted
+> Found: arr[0]+arr[9..9] = 0+22 = 22 >= 22
+Found: arr[1]+arr[9..9] = 2+22 = 24 >= 22
+Found: arr[2]+arr[9..9] = 4+22 = 26 >= 22
+Found: arr[3]+arr[9..9] = 5+22 = 27 >= 22
+Found: arr[4]+arr[9..9] = 7+22 = 29 >= 22
+Found: arr[5]+arr[8..9] = 8+14 = 22 >= 22
+Found: arr[6]+arr[7..9] = 10+12 = 22 >= 22
+Found: arr[7]+arr[8..9] = 12+14 = 26 >= 22
+Found: arr[8]+arr[9..9] = 14+22 = 36 >= 22
+13
+> Found: arr[0]+arr[1..9] = 0+2 = 2 >= 0
+Found: arr[1]+arr[2..9] = 2+4 = 6 >= 0
+Found: arr[2]+arr[3..9] = 4+5 = 9 >= 0
+Found: arr[3]+arr[4..9] = 5+7 = 12 >= 0
+Found: arr[4]+arr[5..9] = 7+8 = 15 >= 0
+Found: arr[5]+arr[6..9] = 8+10 = 18 >= 0
+Found: arr[6]+arr[7..9] = 10+12 = 22 >= 0
+Found: arr[7]+arr[8..9] = 12+14 = 26 >= 0
+Found: arr[8]+arr[9..9] = 14+22 = 36 >= 0
+45
+> 0
+> Found: arr[0]+arr[9..11] = -10+4 = -6 >= -7
+Found: arr[1]+arr[8..11] = -7+2 = -5 >= -7
+Found: arr[2]+arr[6..11] = -5+-2 = -7 >= -7
+Found: arr[3]+arr[4..11] = -3+-3 = -6 >= -7
+Found: arr[4]+arr[5..11] = -3+-3 = -6 >= -7
+Found: arr[5]+arr[6..11] = -3+-2 = -5 >= -7
+Found: arr[6]+arr[7..11] = -2+-2 = -4 >= -7
+Found: arr[7]+arr[8..11] = -2+2 = 0 >= -7
+Found: arr[8]+arr[9..11] = 2+4 = 6 >= -7
+Found: arr[9]+arr[10..11] = 4+6 = 10 >= -7
+Found: arr[10]+arr[11..11] = 6+10 = 16 >= -7
+49
+> Found: arr[0]+arr[1..1] = 1+2 = 3 >= 2
+1
+> Found: arr[0]+arr[1..1] = 1+2 = 3 >= -3
+1
+> 0
+> 
