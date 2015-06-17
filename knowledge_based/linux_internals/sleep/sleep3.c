@@ -1,3 +1,22 @@
+/* This code implements a reliable, POSIX compliant sleep(3).
+ *
+ * It addresses every issue in sleep1.c and sleep2.c:
+ *
+ * - It doesn't destroy other signal handlers execution because it doesn't use setjmp/longjmp
+ * - There's no race condition between the call to alarm(2) and the signal waiting time, because
+ *   it uses sigsuspend(2) to atomically unblock SIGALRM and wait for it. Furthermore, it blocks
+ *   SIGALRM prior to calling alarm(2).
+ * - It restores the process's original signal mask and SIGALRM disposition upon exiting
+ *
+ * POSIX leaves up to the implementation to define what happens when sleep(3) is called in a
+ * situation where alarm(2) has been called by user code before. In this implementation,
+ * that alarm is cleared and overriden by our sleep. The manpage for sleep(3) explicitly says
+ * that it is not a good idea to play with sleep(3) and alarm(2) at the same time.
+ *
+ * Finally, it is worth mentioning that Linux these days implements sleep(3) with nanosleep(2).
+ * nanosleep(2) does away with SIGALRM and signal handling altogether, and is a much better choice
+ * because it doesn't mess with signals at all.
+ */
 
 #include <stdio.h>
 #include <signal.h>
