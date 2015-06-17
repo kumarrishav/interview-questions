@@ -16,7 +16,7 @@
  * In the best case, these 5 increments take place in the next 5 positions, so if A[0] == 1,
  * 6 can't appear before A[5].
  *
- * We keep doing this iteratively
+ * We keep doing this iteratively. This is still O(n) though (but it's slightly optimized)
  */
 ssize_t find_elem(int arr[], size_t arr_sz, int val) {
 	size_t i = 0;
