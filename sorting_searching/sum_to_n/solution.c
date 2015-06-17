@@ -1,4 +1,8 @@
-
+/* Given a sorted array and a value n, count the number of pairs (i,j)
+ * such that A[i]+A[j] >= n
+ *
+ * Source: Careercup (Google interview)
+ */
 #include <stdio.h>
 
 /* Find first index in arr[] s.t. arr[i] >= val */
