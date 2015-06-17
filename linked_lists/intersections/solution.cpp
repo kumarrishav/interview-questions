@@ -1,4 +1,44 @@
-
+/* You have an array of `N` linked lists where `array[i]` holds a pointer to the head of list `i`.
+ *
+ * Design and implement an algorithm that for each list `i` finds and prints the list head of every
+ * list `j` in `array[i+1..N]` for which the intersection of list `array[i]` with list `array[j]` is not empty.
+ *
+ * EXAMPLE
+ *
+ * If the input consists of an array with these lists:
+ *
+ * array[0] = 1 -> 2 -> 3 -> 4 -> 5
+ * array[1] = 6 -> 7 -> 8 -> 4 -> 5
+ * array[2] = 8 -> 9 -> 10 -> 11 -> 12
+ * array[3] = 13 -> 14 -> 15 -> 12
+ * array[4] = 16 -> 17 -> 18
+ *
+ * Then the output is:
+ *
+ * 1 6
+ * 6 8
+ * 8 13
+ * 13
+ * 16
+ *
+ * Explanation:
+ *
+ * The list that starts with 1 (at array[0]), when intersected with the list at array[1],
+ * yields a non-empty set. Furthermore, it's the only list with index greater than 0 on which
+ * this happens. So the result for list 0 is the line "1 6".
+ *
+ * The list at array[1] (head = 6) has a non-empty intersection with the list at array[2]. It
+ * is the only list with a non-empty intersection. So the result for list 1 is the line "6 8".
+ *
+ * A similar thing happens with the list at array[2], generating the line "8 13".
+ *
+ * The list at array[3] does not have any non-empty intersection with any list at array[4..N-1],
+ * so the algorithm just prints the list head (13).
+ *
+ * A similar thing happens with the list at array[4].
+ *
+ * Source: Careercup (Amazon interview)
+ */
 #include <iostream>
 #include <vector>
 #include <map>
