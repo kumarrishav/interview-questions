@@ -1,4 +1,12 @@
-
+/* Given a sorted array with only 0s and 1s, count the number of 0s.
+ *
+ * EXAMPLE
+ *
+ * Input: [ 0, 0, 0, 0, 1, 1 ]
+ * Output: 4
+ *
+ * Source: Careercup (Amazon interview)
+ */
 #include <stdio.h>
 
 size_t zero_count(int arr[], size_t arr_sz) {
