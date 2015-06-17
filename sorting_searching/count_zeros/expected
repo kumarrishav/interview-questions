@@ -1,0 +1,32 @@
+Enter size of array, followed by the elements.
+> Input:
+[ 0, 0, 0, 0, 1, 1 ]
+Number of zeros: 4
+> Input:
+[ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ]
+Number of zeros: 0
+> Input:
+[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+Number of zeros: 10
+> Input:
+[ 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ]
+Number of zeros: 5
+> Input:
+[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1 ]
+Number of zeros: 11
+> Input:
+[ 1 ]
+Number of zeros: 0
+> Input:
+[ 0 ]
+Number of zeros: 1
+> Input:
+[ 1, 1 ]
+Number of zeros: 0
+> Input:
+[ 0, 1 ]
+Number of zeros: 1
+> Input:
+[ 0, 0 ]
+Number of zeros: 2
+> 
