@@ -71,21 +71,7 @@ void delete_red_strip(int rows, int cols, char grid[rows][cols], int row, int co
 	}
 }
 
-static void print_map(int rows, int cols, char grid[rows][cols]) {
-	int i, j;
-	for (i = 0; i < rows; i++) {
-		for (j = 0; j < cols; j++) {
-			putchar(grid[i][j]);
-			putchar(' ');
-		}
-		putchar('\n');
-	}
-}
-
 int min_strips(int rows, int cols, char grid[rows][cols]) {
-	printf("Entered min_strips()\n");
-	print_map(rows, cols, grid);
-
 	int i;
 	for (i = 0; i < rows; i++) {
 		int j;
@@ -104,12 +90,10 @@ int min_strips(int rows, int cols, char grid[rows][cols]) {
 				res = min(res, res_red+1);
 
 				delete_red_strip(rows, cols, grid, i, j, filled);
-				printf("returning %d\n", res);
 				return res;
 			}
 		}
 	}
-	printf("returning 0\n");
 	return 0;
 }
 
