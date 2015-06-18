@@ -1,4 +1,19 @@
-
+/* We define a palindromic reordering of a list as follows:
+ *
+ * For a list of size N, palindromically reordering that list will cause node i to become
+ * the predecessor of node N-i-1, 0 <= i <= N/2, and node N-i-1 becomes the predecessor of i+1.
+ *
+ * For example, the list 1 -> 2 -> 3 -> 4 -> 5 becomes 1 -> 5 -> 2 -> 4 -> 3.
+ * The list 1 -> 2 -> 3 -> 4 becomes 1 -> 4 -> 2 -> 3.
+ *
+ * In other words, the first node is paired with the last node, the second node is paired with the
+ * second to last, the third node is paired with the third to last, and so forth.
+ *
+ * Design and implement an algorithm that, given the head of a list of unknown size, palindromically
+ * reorders the list.
+ *
+ * Source: Stackoverflow
+ */
 #include <stdio.h>
 
 struct list_node {
@@ -6,7 +21,7 @@ struct list_node {
 	struct list_node *next;
 };
 
-struct list_node *palindromic_reorder_aux(struct list_node *slow, struct list_node *fast) {
+static struct list_node *palindromic_reorder_aux(struct list_node *slow, struct list_node *fast) {
 	if (fast->next == NULL) {
 		// Odd
 		struct list_node *saved = slow->next;
