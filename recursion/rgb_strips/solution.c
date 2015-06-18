@@ -1,3 +1,42 @@
+/* A color matrix is represented as a 2D array where each element is one of 'R', 'G', 'B', or '.'.
+ * Elements marked with '.' have no color.
+ *
+ * You are to fill the colorless spots such that the entire matrix is colored.
+ * To do so, you have an infinite set of spare stripes. A stripe can be red or blue.
+ *
+ * If a red stripe is placed in position (i, j), then it will color every colorless position
+ * downwards until the end of the matrix or until a colored position is found.
+ *
+ * A blue stripe is similar, but it expands to the right instead of going down.
+ *
+ * For example, in this matrix:
+ *
+ * . . B . .
+ * . . G R R
+ * . . B . .
+ * R . . . .
+ * R . . . .
+ *
+ * Placing a blue stripe in position (0,0) would yield:
+ *
+ * B B B . .
+ * . . G R R
+ * . . B . .
+ * R . . . .
+ * R . . . .
+ *
+ * Placing a red string in (0, 0) would yield:
+ * R . B . .
+ * R . G R R
+ * R . B . .
+ * R . . . .
+ * R . . . .
+ *
+ * Design and implement an algorithm that finds the minimum number of stripes that must be
+ * used in order to color the entire matrix
+ *
+ * Source: Careercup
+ */
 #include <stdio.h>
 #include <limits.h>
 #define min(a, b) ((a) < (b) ? (a) : (b))
