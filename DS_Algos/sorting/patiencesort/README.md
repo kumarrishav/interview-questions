@@ -23,3 +23,6 @@ The cards are dealt one by one into a sequence of piles on the table, according 
 Note that at each step, the top elements in each pile form an increasing sequence from left to right. To obtain the sorted array, find the smallest element among all the elements in the top of each pile, write it to the output array, and pop it out of the pile. Repeat this until every element has been processed. To efficiently find the smallest element among all elements in the top of each pile, use a priority queue with O(log(N)) extract-min. This can be accomplished with a min heap.
 
 With an efficient priority queue implementation, the overall complexity is O(N log(N)).
+
+## Note
+To see the O(N log(N)) algorithm for the Longest Increasing Subsequence using Patience Sorting, see [DS_Algos/LIS/optimized1.cpp](https://github.com/filipegoncalves/interview-questions/blob/master/DS_Algos/LIS/optimized1.cpp).
