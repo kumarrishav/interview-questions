@@ -1,4 +1,27 @@
-
+/* This file implements a multithreaded work queue system where a master thread inserts jobs into
+ * the queue and worker threads pick them.
+ *
+ * The system works as follows:
+ * - Worker threads sleep until the queue becomes non-empty. When that happens, at least one of
+ *   the worker threads is woken up by the master thread using condition variables.
+ *
+ * - The master thread places a new job in the queue and uses condition variables to notify the
+ *   worker threads that the state of the queue has changed.
+ *
+ * The use of condition variables here is important to avoid polling. Without condition variables,
+ * worker threads would wastefully test the state of the queue repeatedly. Instead, worker threads
+ * sleep until the state of the queue changes.
+ *
+ * Note that the master thread signalizes the condition after it releases the mutex that protects
+ * the work queue. Thus, there is a time window between releasing the mutex and signaling the
+ * condition where a worker thread that is not sleeping accesses the queue and invalidates the
+ * condition. This is why worker threads check that the queue is not empty even after returning
+ * from pthread_cond_wait(3). Recall that pthread_cond_wait(3) must be called with the mutex locked,
+ * because that mutex is used internally to add the current thread to the list of threads waiting
+ * for a condition. Then, the mutex is unlocked inside pthread_cond_wait(3) and the thread is put to
+ * sleep until the condition is signaled. Upon waking up, pthread_cond_wait(3) returns again with
+ * the mutex locked.
+ */
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,6 +53,7 @@ struct job_node {
 
 struct job_node *get_job(void) {
 	pthread_mutex_lock(&workq_lock);
+	// The while is necessary to avoid race conditions
 	while (workq == NULL) {
 		pthread_cond_wait(&workq_cond, &workq_lock);
 	}
