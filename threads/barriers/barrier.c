@@ -34,6 +34,30 @@ void thread_barrier_destroy(struct thread_barrier *barrier) {
 	pthread_cond_destroy(&barrier->condv);
 }
 
+/* It is important to mention here that in this scenario, unlike in other examples,
+ * we most definitely can't release the lock before calling pthread_cond_broadcast(3).
+ * Unlocking the mutex only after broadcast is called guarantees that no additional threads
+ * will block on pthread_cond_wait(3) and be mistakenly woken up by the last thread of the previous
+ * barrier use.
+ * An example often helps. Assume that we unlock the mutex and then call broadcast. Further assume
+ * that the barrier counter has been initialized to 5. Here's what could happen:
+ * - Thread1, thread2, thread3 and thread4 call thread_barrier_wait() and block in
+ *   pthread_cond_wait().
+ * - Thread5 enters barrier_wait and notices it's the last thread on the barrier. It is ready to
+ *   wake up every thread that is waiting on the barrier.
+ * - Thread5 unlocks the mutex, but it loses CPU just before calling broadcast on the condition
+ *   variable.
+ * - Meanwhile, another set of new threads, say, thread6, thread7 and thread8, all called
+ *   thread_barrier_wait() and blocked in pthread_cond_wait().
+ * - Thread5 is rescheduled and resumes execution, calling broadcast().
+ * - Now, all 8 threads are wrongfully woken up. A barrier that was supposed to synchronize
+ *   5 threads ended up synchronizing 8 threads. This breaks the specification.
+ *
+ * To avoid this, the thread that broadcasts cannot unlock before calling broadcast.
+ * By calling broadcast first, we are sure that any possible new threads are blocked trying to
+ * acquire the mutex (rather than being blocked on cond_wait()), and so the broadcast will
+ * wake up the correct threads only.
+ */
 int thread_barrier_wait(struct thread_barrier *barrier) {
 	pthread_mutex_lock(&barrier->lock);
 	if (++barrier->counter == barrier->target) {
