@@ -1,4 +1,8 @@
-
+/* What synchronization primitives would you need to implement a barrier?
+ * Provide an implementation of the pthread_barrier_wait(3) function.
+ *
+ * Source: Advanced Programming in the UNIX Environment, 3rd Ed., Chapter 11, Exercise 11.5
+ */
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
