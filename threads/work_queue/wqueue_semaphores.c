@@ -1,5 +1,15 @@
 /* This is a multithreaded worker queue implemented with semaphores.
  *
+ * This approach is in some ways more elegant than the implementation that uses condition variables:
+ *
+ * - get_job() doesn't need to reevaluate to make sure it still holds. Semaphores keep the counter
+ *   state internally, so there's no harm if the master thread calls sem_post() when none of the
+ *   worker threads is blocked in sem_wait() - they will eventually wait on the semaphore, and when
+ *   that happens, sem_wait() returns immediately, as opposed to pthread_cond_wait(), which blocks
+ *   when the master issues pthread_cond_signal() before the worker calls pthread_cond_wait().
+ *   Also, since a semaphore is just a thread-safe counter, it is not possible for sem_wait() to
+ *   return and the queue be empty, because the master thread posts to the semaphore for each item
+ *   inserted   
  */
 
 #include <semaphore.h>
