@@ -1,4 +1,4 @@
-
+/* Implement a semaphore library. How can you avoid busy waiting on sem_wait()? */
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
