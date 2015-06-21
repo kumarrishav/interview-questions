@@ -1,6 +1,33 @@
-
+/* You have an M by N rectangle formed by nodes. You can think of the rectangle as a set of layers
+ * of nodes, where the outermost layer defines the rectangle, and then each inner layer is also
+ * filled with nodes.
+ *
+ * For example, for M = 5 and N = 3, we would have the following nodes:
+ *
+ * O O O O O
+ * O O O O O
+ * O O O O O
+ *
+ * Let A be the upper left node. Let B be the bottom right node.
+ * Design and implement an algorithm that finds the number of paths from A to B.
+ *
+ * Source: Careercup
+ */
 #include <iostream>
 #include <vector>
+
+/* This question is deliberately underspecified to see if the candidate asks good
+ * questions before rushing to code.
+ *
+ * One important question to ask is how are nodes connected, that is, where can we go
+ * from a node?
+ *
+ * The solution in this file assumes that one can go in any direction - left, right, up, down. So,
+ * the rectangle is conceptually an undirected cyclic graph where node (i, j) is connected to
+ * nodes (i, j-1), (i, j+1), (i-1, j) and (i+1, j).
+ *
+ * The number of possible paths explodes and grows very quickly; the code is O(4^(NM)).
+ */
 
 using namespace std;
 
