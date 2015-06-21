@@ -1,4 +1,19 @@
-
+/* Implement a function, next_perm(), that receives an array and returns the next permutation
+ * of that array. The next permutation of an array is the smallest array with the same elements
+ * that is considered to be greater than the original array.
+ *
+ * Do it inplace with O(1) memory and O(n) time.
+ *
+ * EXAMPLES
+ *
+ * Input: [ 1, 2, 3, 4 ]
+ * Output: [1, 2, 4, 3 ]
+ *
+ * Input: [ 1, 3, 4, 2 ]
+ * Output: [ 1, 4, 2, 3 ]
+ *
+ * Source: StackOverflow
+ */
 #include <iostream>
 #include <algorithm>
 #include <vector>
