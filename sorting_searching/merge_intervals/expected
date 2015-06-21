@@ -1,0 +1,57 @@
+Enter a sorted array of non-overlapping intervals as follows:
+First, indicate the number of intervals (line 1)
+Then, for each interval, indicate the start and end values
+Then, indicate the interval to insert
+> Inserting [14, 22] into:
+[1, 3], [7, 10]
+After insertion:
+[1, 3], [7, 10], [14, 22]
+> Inserting [0, 2] into:
+[4, 7], [9, 15]
+After insertion:
+[0, 2], [4, 7], [9, 15]
+> Inserting [7, 9] into:
+[4, 7], [9, 15]
+After insertion:
+[4, 15]
+> Inserting [5, 6] into:
+[4, 7], [9, 15]
+After insertion:
+[4, 7], [9, 15]
+> Inserting [8, 9] into:
+[4, 7], [10, 15]
+After insertion:
+[4, 7], [8, 9], [10, 15]
+> Inserting [2, 100] into:
+[4, 10], [14, 20], [22, 30], [31, 40], [52, 55]
+After insertion:
+[2, 100]
+> Inserting [10, 40] into:
+[4, 10], [14, 20], [22, 30], [31, 40], [52, 55]
+After insertion:
+[4, 40], [52, 55]
+> Inserting [5, 37] into:
+[4, 10], [14, 20], [22, 30], [31, 40], [52, 55]
+After insertion:
+[4, 40], [52, 55]
+> Inserting [5, 52] into:
+[4, 10], [14, 20], [22, 30], [31, 40], [52, 55]
+After insertion:
+[4, 55]
+> Inserting [4, 10] into:
+[4, 10], [14, 20], [22, 30], [31, 40], [52, 55]
+After insertion:
+[4, 10], [14, 20], [22, 30], [31, 40], [52, 55]
+> Inserting [55, 80] into:
+[4, 10], [14, 20], [22, 30], [31, 40], [52, 55]
+After insertion:
+[4, 10], [14, 20], [22, 30], [31, 40], [52, 80]
+> Inserting [0, 4] into:
+[4, 10], [14, 20], [22, 30], [31, 40], [52, 55]
+After insertion:
+[0, 10], [14, 20], [22, 30], [31, 40], [52, 55]
+> Inserting [29, 32] into:
+[4, 10], [14, 20], [22, 30], [31, 40], [52, 55]
+After insertion:
+[4, 10], [14, 20], [22, 40], [52, 55]
+> 
