@@ -1,3 +1,22 @@
+/* Given a set of non-overlapping intervals, write a function to return the new set of intervals
+ * after insert a new interval, coalescing when possible.
+ *
+ * Assume that the intervals were initially sorted according to their start times.
+ *
+ * EXAMPLE 1:
+ *
+ * Input sequence: [1, 3], [6,9]
+ * Interval to insert: [2, 5]
+ * Result: [1, 5], [6, 9]
+ *
+ * EXAMPLE 2:
+ *
+ * Input sequence: [1, 2], [3, 5], [6, 7], [8, 10], [12, 16]
+ * Interval to insert: [4, 9]
+ * Result: [1, 2], [3, 10], [12, 16]
+ *
+ * Source: Careercup (LinkedIn interview)
+ */
 
 #include <iostream>
 #include <vector>
