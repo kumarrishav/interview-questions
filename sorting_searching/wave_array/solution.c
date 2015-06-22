@@ -1,4 +1,19 @@
-
+/* A wave array is an array that starts off with an increasing sequence of values up to an unknown
+ * index i, followed by a decreasing sequence of values.
+ *
+ * For example, this is a wave array:
+ *
+ * A = [ 1, 2, 5, 8, 13, 9, 3, -1 ]
+ *
+ * Because the values in A[0..4] are increasing and the values in A[4..7] are decreasing.
+ *
+ * Write a function that finds an element in the array. If the element is there, the function
+ * returns the index of that element, otherwise, it returns -1.
+ *
+ * Avoid linear scans.
+ *
+ * Source: Careercup
+ */
 #include <stdio.h>
 #include <assert.h>
 
