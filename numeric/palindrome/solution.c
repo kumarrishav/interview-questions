@@ -1,4 +1,16 @@
-
+/* Write a function to check if an integer is a palindrome.
+ *
+ * An integer is considered to be a palindrome if the digits composing it
+ * in base-10 form a palindrome.
+ *
+ * Negative integers are never palindromes.
+ *
+ * EXAMPLE
+ *
+ * 123321 is a palindrome
+ * 123421 is not a palindrome
+ *
+ */
 #include <stdio.h>
 
 int is_palindrome(int n) {
