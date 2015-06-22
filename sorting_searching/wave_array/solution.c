@@ -27,7 +27,8 @@ static size_t find_max(size_t arr_sz, int arr[arr_sz]) {
 	ssize_t r = arr_sz;
 	ssize_t m = l+(r-l)/2;
 
-	while (arr[m-1] >= arr[m] || arr[m+1] >= arr[m]) {
+	while (m < arr_sz-1 && (arr[m-1] >= arr[m] || arr[m+1] >= arr[m])) {
+		assert(m > 0);
 		if (arr[m-1] > arr[m]) {
 			r = m;
 		} else {
@@ -36,7 +37,11 @@ static size_t find_max(size_t arr_sz, int arr[arr_sz]) {
 		m = l+(r-l)/2;
 	}
 
-	return m;
+	if (m == arr_sz-1) {
+		return m-1;
+	} else {
+		return m;
+	}
 }
 
 ssize_t find_elem(size_t arr_sz, int arr[arr_sz], int val) {
