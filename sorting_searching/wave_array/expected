@@ -1,0 +1,43 @@
+Enter array size, followed by the elements, followed by element to find
+> Found at array[0]
+> Found at array[1]
+> Found at array[2]
+> Found at array[3]
+> Found at array[4]
+> Found at array[5]
+> Found at array[6]
+> Found at array[7]
+> Not found.
+> Not found.
+> Found at array[0]
+> Found at array[1]
+> Not found.
+> Not found.
+> Found at array[0]
+> Found at array[1]
+> Found at array[2]
+> Found at array[3]
+> Found at array[4]
+> Found at array[5]
+> Found at array[6]
+> Found at array[7]
+> Found at array[8]
+> Not found.
+> Not found.
+> Found at array[0]
+> Found at array[1]
+> Found at array[2]
+> Found at array[3]
+> Found at array[4]
+> Found at array[5]
+> Found at array[6]
+> Found at array[8]
+> Not found.
+> Found at array[0]
+> Found at array[1]
+> Found at array[2]
+> Found at array[3]
+> Not found.
+> Found at array[4]
+> Not found.
+> 
