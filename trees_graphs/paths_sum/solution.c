@@ -31,7 +31,7 @@ static void print_path(struct tree_node *path[], size_t path_sz) {
 }
 
 static void paths_sum_aux(struct tree_node *node, struct tree_node *path[], size_t depth,
-	       int curr_sum, int sum) {
+			  int curr_sum, int sum) {
 
 	if (node == NULL) {
 		return;
