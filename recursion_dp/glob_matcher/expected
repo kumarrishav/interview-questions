@@ -1,0 +1,30 @@
+Enter a string and a glob pattern to see if the string matches the pattern.
+To generate an empty string, type ! (example: ! a* matches the empty string against a*)
+> match("aa", "a") = false
+> match("aa", "aa") = true
+> match("aaa", "aa") = false
+> match("aa", "a*") = true
+> match("a", "a*") = true
+> match("aa", ".*") = true
+> match("ab", ".*") = true
+> match("aab", "c*a*b") = true
+> match("aab", "c*a*b*") = true
+> match("ccca", "ca*") = false
+> match("ccc", "ccca*") = true
+> match("ccc", "c*a*") = true
+> match("ccca", "c*a*") = true
+> match("ccca", "c*ca*") = true
+> match("ccca", "cc*a*") = true
+> match("ccca", "cccc*a*") = true
+> match("a", ".") = true
+> match("aa", "..") = true
+> match("aa", "a.") = true
+> match("aa", ".a") = true
+> match("", "a*") = true
+> match("", ".*") = true
+> match("", ".") = false
+> match("", "") = true
+> match("aaa", "") = false
+> match("b", "") = false
+> match("", "aaa") = false
+> 

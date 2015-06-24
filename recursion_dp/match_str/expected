@@ -1,0 +1,10 @@
+Enter a pattern followed by a string
+> a -> aa
+b -> cc
+> a -> cat
+b -> dog
+> Pattern abba does not match catdogdogcatr
+> Pattern aacacacaa does not match worldofcccworldofcccworldofcccworldofworldof
+> a -> worldof
+c -> ccc
+> 
