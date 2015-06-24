@@ -8,17 +8,10 @@
 
 extern char **environ;
 
-pthread_once_t init_flag = PTHREAD_ONCE_INIT;
 pthread_key_t env_key;
 pthread_mutex_t key_lock = PTHREAD_MUTEX_INITIALIZER;
 
-void init_env_key(void) {
-	pthread_key_create(&env_key, free);
-}
-
 char *getenv_thr_safe(const char *name) {
-
-	pthread_once(&init_flag, init_env_key);
 
 	char *envbuf = pthread_getspecific(env_key);
 
@@ -38,7 +31,8 @@ char *getenv_thr_safe(const char *name) {
 	for (i = 0; environ[i] != NULL; i++) {
 		if (strncmp(environ[i], name, name_sz) == 0 &&
 		    environ[i][name_sz] == '=') {
-			strncpy(envbuf, &environ[i][name_sz+1], MAX_STR_SIZE);
+			strncpy(envbuf, &environ[i][name_sz+1], MAX_STR_SIZE-1);
+			envbuf[MAX_STR_SIZE-1] = '\0';
 			ret = envbuf;
 			break;
 		}
@@ -57,6 +51,11 @@ void *thr_fn(void *arg) {
 #define THREADS_CREATED 4
 
 int main(void) {
+
+	if (pthread_key_create(&env_key, free) < 0) {
+		perror("pthread_key_create()");
+		exit(EXIT_FAILURE);
+	}
 
 	pthread_t threads[THREADS_CREATED];
 	char *names[] = { "PATH", "SHELL", "PWD", "HOME" };
