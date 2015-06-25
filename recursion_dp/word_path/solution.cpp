@@ -1,4 +1,21 @@
-
+/* Given a start string, and end string, and a set of words, find if there exists
+ * a path from the start string to the end string using words in the set.
+ *
+ * A path exists if we can get to the end string from the start string by changing
+ * only one character at a time. The new string generated after changing one character
+ * must be in the words set.
+ *
+ * EXAMPLE:
+ *
+ * Words set: bag, cag, cat, fag, con, rat, sat, fog
+ * start: cog
+ * end: bad
+ *
+ * One possible path is:
+ * cog -> fog -> fag -> bag -> bad
+ *
+ * Source: Careercup
+ */
 #include <iostream>
 #include <set>
 #include <vector>
@@ -8,16 +25,12 @@ using namespace std;
 bool word_path_aux(set<string> &words, string &start, string &end,
 		   vector<string> &path_buff, vector<string> &result) {
 
-	//cout << "Entered: start = " << start << " end = " << end << endl;
-
 	if (start == end) {
 		result = path_buff;
-		//cout << "leaving: start == end" << endl;
 		return true;
 	}
 
 	if (words.size() == 0) {
-		//cout << "leaving: no words left" << endl;
 		return false;
 	}
 
@@ -42,7 +55,6 @@ bool word_path_aux(set<string> &words, string &start, string &end,
 
 			if (found) {
 				result = res_tmp;
-				//cout << "leaving inside loop" << endl;
 				return true;
 			}
 
