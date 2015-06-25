@@ -1,3 +1,10 @@
+/* You have a knapsack that can take at most a total weight of W.
+ * There is a set of N items, and each item i weighs w[i] and is worth v[i].
+ *
+ * Write a function that computes the largest possible value that can be carried
+ * in the knapsack without exceeding its capacity.
+ *
+ */
 
 #include <iostream>
 #include <vector>
