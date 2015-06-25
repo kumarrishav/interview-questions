@@ -1,7 +1,18 @@
+/* You are given a piece of wood of length N, and an array of N elements, where A[i] stores the
+ * price of a piece of wood of length i+1 (0 <= i < N).
+ *
+ * Write a function that finds the optimal cutting sequence in order to maximize profit.
+ *
+ */
 
 #include <iostream>
 #include <algorithm>
 #include <vector>
+
+/* Top down DP optimization. Much faster than naive approach.
+ * We can convert it into bottom up easily. Bottom up has the advantage
+ * of not suffering with stack overflow.
+ */
 
 using namespace std;
 
