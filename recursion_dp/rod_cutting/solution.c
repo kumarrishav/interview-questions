@@ -1,6 +1,14 @@
+/* You are given a piece of wood of length N, and an array of N elements, where A[i] stores the
+ * price of a piece of wood of length i+1 (0 <= i < N).
+ *
+ * Write a function that finds the optimal cutting sequence in order to maximize profit.
+ *
+ */
 
 #include <stdio.h>
 #include <assert.h>
+
+/* Naive approach */
 
 int max(int a, int b) {
 	return a > b ? a : b;
