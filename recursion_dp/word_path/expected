@@ -1,0 +1,34 @@
+Enter size of words set, followed by the words in the set, followed by start and end words
+> 
+cog
+fog
+fag
+bag
+bad
+> 
+cog
+fog
+fag
+bag
+cag
+cat
+> 
+No path found.
+> 
+aat
+sat
+sag
+bag
+> 
+cat
+cat
+> 
+No path found.
+> 
+xyz
+nyz
+nyo
+nao
+nat
+cat
+> 
