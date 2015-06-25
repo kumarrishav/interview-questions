@@ -31,7 +31,7 @@ int knapsack(const vector<unsigned> &values, const vector<unsigned> &weights, un
 }
 
 int main(void) {
-	cout << "Enter number of items, followed by weights, followed by values, followed by capacity" << endl;
+	cout << "Enter number of items, followed by the weights, followed by the values, followed by capacity" << endl;
 	cout << "> ";
 
 	vector<unsigned>::size_type items;
