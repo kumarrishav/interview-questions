@@ -1,4 +1,10 @@
-
+/* Given an array where every element occurs exactly three times, except for one of them,
+ * write a function to find that element.
+ *
+ * Can you do it in O(N) time and O(1) memory?
+ *
+ * Source: InterviewBit (Google Interview)
+ */
 #include <stdio.h>
 #include <assert.h>
 
