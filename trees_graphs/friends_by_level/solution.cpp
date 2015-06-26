@@ -1,3 +1,26 @@
+/* Given a person and a list of his friends, print all his friends by level of
+ * association.
+ *
+ * EXAMPLE
+ *
+ * Consider these friendship relations:
+ *
+ * A: B, C, D
+ * D: B, E, F
+ * E: C, F, G
+ *
+ * This means that person A is friends with B, C and D.
+ * Person D is friends with B, E and F.
+ * Etc...
+ *
+ * If the source person is A, then the output will be:
+ *
+ * Level 1: B C D
+ * Level 2: E F
+ * Level 3: G
+ *
+ * Source: Careercup (Amazon interview)
+ */
 
 #include <iostream>
 #include <vector>
