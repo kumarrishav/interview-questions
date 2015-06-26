@@ -1,4 +1,7 @@
-
+/* Design a system to serialize and deserialize a binary tree
+ *
+ * Source: Careercup (Uber interview)
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -91,7 +94,7 @@ struct tree_node *deserialize(void) {
 	return deserialize_internal(&buff[0], &buff[i/2], i/2);
 }
 
-int main(int argc, char *argv[]) {
+int main(void) {
 	// Dog fooding at its best
 
 	printf("Enter preorder traversal followed by inorder traversal\n");
