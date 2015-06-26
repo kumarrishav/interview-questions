@@ -1,0 +1,20 @@
+Enter: size N of graph, followed by N lines, where each line is of the form:
+I C c1 c2 c3 ... cN
+Where I is a node's ID, C is the number of friends, and c1, c2, ..., cN are the IDs of I's friends
+Followed by the source person
+> Level 1: B C D 
+Level 2: E F 
+Level 3: G 
+> Level 1: D C F G 
+Level 2: B A 
+> Level 1: B 
+Level 2: C D E F 
+> Level 1: B 
+Level 2: A C D F 
+> Level 1: A C D E F 
+> Level 1: B C D E F G H 
+> Level 1: A 
+Level 2: C D E F G H 
+> > Level 1: D 
+Level 2: B 
+> > 
