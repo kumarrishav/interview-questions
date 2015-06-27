@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <assert.h>
 
+/* Note: For simplicity this assumes a binary search tree with unique keys */
+
 struct tree_node {
 	int value;
 	struct tree_node *left;
