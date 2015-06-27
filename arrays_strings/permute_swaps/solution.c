@@ -1,4 +1,15 @@
-
+/* Given a source string and a target string that is a permutation of the source string, print the
+ * steps necessary to go from source to target if only adjacent swaps are allowed.
+ *
+ * EXAMPLE
+ *
+ * Source: cat
+ * Target: tac
+ *
+ * Possible output: cat -> act -> atc -> tac
+ *
+ * Source: Careercup
+ */
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>
