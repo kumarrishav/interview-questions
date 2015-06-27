@@ -1,4 +1,18 @@
-
+/* A non decreasing sorted array is rotated by some random amount.
+ *
+ * Write a function to find out the amount on which the array was rotated.
+ * Assume clockwise rotations only.
+ *
+ * EXAMPLE
+ *
+ * Input: [ 6, 7, 8, 1, 2, 3, 4, 5 ]
+ * Output: 3
+ *
+ * Input: [ 2, 2, 1, 1, 1, 2 ]
+ * Output: 2
+ *
+ * Source: Careercup (Microsoft interview)
+ */
 #include <stdio.h>
 
 ssize_t find_rotation_amount(int arr[], ssize_t l, ssize_t r, ssize_t len) {
