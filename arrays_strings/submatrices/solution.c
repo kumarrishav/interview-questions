@@ -1,4 +1,62 @@
-
+/* Given a matrix of N rows by M columns, write a program to find and print
+ * every submatrix of that matrix.
+ *
+ * EXAMPLE
+ *
+ * Consider the 2x2 matrix:
+ *
+ *  --- ---
+ * | 1 | 2 |
+ *  --- ---
+ * | 3 | 4 |
+ *  --- ---
+ *
+ * The submatrices are:
+ *
+ *  ---
+ * | 1 |
+ *  ---
+ *
+ *  ---
+ * | 2 |
+ *  ---
+ *
+ *  ---
+ * | 3 |
+ *  ---
+ *
+ *  ---
+ * | 4 |
+ *  ---
+ *
+ *  --- ---
+ * | 1 | 2 |
+ *  --- ---
+ *
+ *  --- ---
+ * | 3 | 4 |
+ *  --- ---
+ *
+ *  ---
+ * | 1 |
+ *  ---
+ * | 3 |
+ *  ---
+ *
+ *  ---
+ * | 2 |
+ *  ---
+ * | 4 |
+ *  ---
+ *
+ *  --- ---
+ * | 1 | 2 |
+ *  --- ---
+ * | 3 | 4 |
+ *  --- ---
+ *
+ * Source: Careercup
+ */
 #include <stdio.h>
 
 static void print_submatrix(size_t N, size_t M, int matrix[N][M],
