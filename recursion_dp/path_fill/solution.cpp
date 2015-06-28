@@ -1,4 +1,62 @@
-
+/* You have a 5x5 grid numbered 1-25 and a set of 5 start-end point pairs.
+ *
+ * For each pair, you are to find a path that goes from the start point to the end point.
+ *
+ * The paths must meet some requirements:
+ *
+ * - Only horizontal and vertical moves are allowed
+ * - Paths cannot cross. That is, if position (i, j) is part of a path, then no other path can
+ *   have (i, j) as part of it.
+ * - Taken together, all the disjoint paths must cover the entire grid.
+ *
+ * Assume that the input is such that there is always at least one valid solution. 
+ *
+ * EXAMPLE
+ *
+ * Consider the grid:
+ *
+ *  ---- ---- ---- ---- ----
+ * | 1  | 2  | 3  | 4  | 5  |
+ *  ---- ---- ---- ---- ----
+ * | 6  | 7  | 8  | 9  | 10 |
+ *  ---- ---- ---- ---- ----
+ * | 11 | 12 | 13 | 14 | 15 |
+ *  ---- ---- ---- ---- ----
+ * | 16 | 17 | 18 | 19 | 20 |
+ *  ---- ---- ---- ---- ----
+ * | 21 | 22 | 23 | 24 | 25 |
+ *  ---- ---- ---- ---- ----
+ *
+ * And the following pairs of points:
+ *
+ * (0, 0) -> (4, 1) (Go from 1 to 22)
+ * (0, 3) -> (3, 1) (Go from 4 to 17)
+ * (0, 4) -> (3, 2) (Go from 5 to 18)
+ * (1, 3) -> (2, 2) (Go from 9 to 13)
+ * (3, 4) -> (4, 2) (Go from 20 to 23)
+ *
+ * Then the only solution is:
+ *
+ * First pair:
+ * (0, 0) -> (1, 0) -> (2, 0) -> (3, 0) -> (4, 0) -> (4, 1)
+ *
+ * Second pair:
+ * (0, 3) -> (0, 2) -> (0, 1) -> (1, 1) -> (2, 1) -> (3, 1)
+ *
+ * Third pair:
+ * (0, 4) -> (1, 4) -> (2, 4) -> (2, 3) -> (3, 3) -> (3, 2)
+ *
+ * Fourth pair:
+ * (1, 3) -> (1, 2) -> (2, 2)
+ *
+ * Fifth pair:
+ * (3, 4) -> (4, 4) -> (4, 3) -> (4, 2)
+ *
+ * This is the only solution because there is no other set of disjoint paths that covers the entire
+ * grid and satisfies the start/end points
+ *
+ * Source: Careercup
+ */
 #include <iostream>
 #include <algorithm>
 #include <vector>
