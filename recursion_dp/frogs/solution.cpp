@@ -1,3 +1,23 @@
+/* A lake contains a rectangular grid of stones evenly separated.
+ *
+ * Each stone has an attribute K that represents the maximum jump distance that a frog
+ * can achieve when attempting to jump from that stone to another stone.
+ *
+ * Formally, given a stone (i, j) with some value K, the farthest stones that the frog can reach
+ * with a single jump are those at (i+di, j+dj) such that abs(di)+abs(dj) = K.
+ *
+ * For example, if the stone at (2, 3) has K = 2, then the farthest stones reachable within one jump
+ * are (2, 3+2) = (2, 5); (2, 3-2) = (2, 1); (2+1, 3+1) = (3, 4); (2+1, 3-1) = (3, 2);
+ * (2-1, 3+1) = (1, 4); (2-1, 3-1) = (1, 2); (2+2, 3) = (4, 3) and (2-2, 3) = (0, 3)
+ *
+ * Write a program that finds and prints the path that minimizes the number of jumps to go from a
+ * source stone to a destination stone.
+ *
+ * The frog is not allowed to go outside the bounds of the stones grid. Furthermore, the frog
+ * doesn't necessarily have to jump the maximum distance K on each stone.
+ *
+ * Source: Careercup
+ */
 
 #include <iostream>
 #include <vector>
