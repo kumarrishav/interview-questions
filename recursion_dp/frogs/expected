@@ -1,0 +1,6 @@
+Enter lake dimensions followed by a K for each grid element.
+Then, enter the starting and ending positions for the frog.
+> (0, 0) -> (2, 2)
+> (0, 0) -> (1, 1) -> (1, 4)
+> (0, 0) -> (1, 1) -> (2, 4)
+> 
