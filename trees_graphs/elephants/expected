@@ -1,0 +1,6 @@
+Enter the number of input lines of information. Then, for each line, enter either of:
+T id1 id2 - this means that elephant with ID `id1` is taller than elephant with ID `id2`
+S id1 id2 - this means that elephant with ID `id1` is smaller than elephant with ID `id2`
+> 3 1 2 
+> 1 4 2 6 7 5 
+> 
