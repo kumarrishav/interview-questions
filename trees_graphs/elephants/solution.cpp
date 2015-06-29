@@ -1,4 +1,33 @@
-
+/* Consider a group of elephants in the jungle. There are no two elephants with the same height.
+ *
+ * You know the relative relations between the elephants heights, but you don't know the absolute
+ * heights.
+ * For example, in a group of 3 elephants, you might know that elephant 1 is taller than elephant 3,
+ * that elephant 3 is smaller than elephant 2, and that elephant 2 is taller than elephant 1.
+ *
+ * Given these relations, you are to sort the elephants by height.
+ *
+ * Assume that you always have enough information sort all the elephants.
+ *
+ * EXAMPLE
+ *
+ * Consider a group of 3 elephants. For conciseness, we will denote them by E1, E2 and E3.
+ *
+ * You know that:
+ *
+ * - E1 is taller than E3
+ * - E3 is smaller than E2
+ * - E2 is taller than E1
+ *
+ * Then the output is:
+ *
+ * E3, E1, E2
+ *
+ * Explanation: Given the above constraints, we know that E3 must be the smallest elephant in the
+ * group, followed by E1 and E2.
+ *
+ * Source: Careercup
+ */
 #include <iostream>
 #include <vector>
 #include <map>
