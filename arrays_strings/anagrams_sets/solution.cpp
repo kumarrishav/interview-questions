@@ -1,4 +1,24 @@
-
+/* Given a list of strings, return the number of sets of anagrams.
+ *
+ * EXAMPLE
+ *
+ * Input: abc cab dac beed deb few acd
+ *
+ * Output: 5
+ *
+ * Explanation:
+ * The anagrams by group are:
+ *
+ * < abc, cab >
+ * < dac, acd >
+ * < beed >
+ * < deb >
+ * < few >
+ *
+ * There are 5 groups, so the output is 5.
+ *
+ * Source: Careercup (Google interview)
+ */
 #include <iostream>
 #include <algorithm>
 #include <vector>
