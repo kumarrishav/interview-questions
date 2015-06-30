@@ -67,6 +67,48 @@
 #include <stdio.h>
 #include <assert.h>
 
+/* A naive approach to this problem would be to have an array of stacks and update the necessary
+ * stacks on each folding operation. The problem is that each fold requires us to reverse half of
+ * the stacks at each step, or, to put it another way, pop everything from half of the stacks
+ * and push it again on the other half.
+ *
+ * When processing the i-th fold, each stack has 2^i elements, and we would have to pop
+ * 2^i elements out of 2^N/2^(i+1) stacks and push them back into the other 2^N/2^(i+1) stacks.
+ * So for each step we pop half of the total elements and push them again.
+ *
+ * For an array of size M, this amounts to O(M log(M)), since there are log(M) steps, and each step
+ * does O(M/2 + M/2) work (pop + push).
+ *
+ * This code goes a little further and optimizes the stack merging step by doing it in O(1). To do
+ * so, it has each stack element point to two elements - the node below and the node underneath.
+ * These pointers are not always accurante: because we don't actually reverse the stacks when
+ * merging, traversing a stack from top to bottom is not as easy as following pointers to the
+ * element that comes next, since a merge operation effectively turns a stack upside down
+ * (so the element below is now the element above, and vice versa). We just have to be careful
+ * with this when traversing the stack by following the link that does NOT takes us to the previous
+ * node we just came from.
+ *
+ * Also, each stack base (the bottommost node, that never changes) in the array keeps a pointer to
+ * the current top of the stack whose bottom is that node. This ensures that we can find the top
+ * of a stack in O(1) given any node in the array, and merge them in O(1).
+ *
+ * This optimization reduces the runtime down to O(M) at the cost of a little memory overhead to
+ * store the pointers.
+ *
+ * Note that a naive complexity analysis would argue that the runtime is still O(M log(M)), because
+ * at each step we do at most M/2 merges and there are log(M) steps. This is wrong though: O(1)
+ * merges amortize the total runtime to O(M/2) because the stack sizes double on each step.
+ *
+ * So, step 1 does M/2 merges, step 2 does M/4, step 3 does M/8:
+ *
+ * M/2 + M/4 + M/8 + M/16 + ...
+ *
+ * Which is bounded by 2M and thus the algorithm is O(M).
+ *
+ * Note, however, that M = 2^N, but we need to at least represent the paper elements to move them
+ * around, so this is probably the best asymptotic complexity we can get.
+ */
+
 struct array_node {
 	int value;
 	struct array_node *up;
