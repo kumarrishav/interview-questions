@@ -1,5 +1,69 @@
-
-
+/* A piece of translucid paper contains a series of consecutive numbers from 1 up to
+ * (and including) 2^N.
+ *
+ * For example, for N = 1, the paper contains the values:
+ * 1 2
+ *
+ * For N = 2, the paper contains the values:
+ * 1 2 3 4
+ *
+ * And so forth.
+ *
+ * We are going to fold the paper N times. At each step, we can either fold left or right:
+ *
+ * Fold left: this folds the paper by putting the left half above the right half
+ * Fold right: this folds the paper by putting the right half above the left half
+ *
+ * For example, if the paper currently has 1 2 3 4, then after folding left we will have
+ * 2 1. Below 2 we can find 3, and below 1 we can find 4.
+ *
+ * If the paper currently has 1 2 3 4, then after folding right we will have 4 3. Below 4
+ * we will find 1, and below 3 we will find 2.
+ *
+ * Since we always fold the paper N times and the paper is 2^N long, we always end up with a paper
+ * of length 1 (and height 2^N), where all numbers but the bottommost sit above another number.
+ *
+ * Design an algorithm that prints the sequence of numbers that we will find from top to bottom
+ * after folding the paper N times.
+ *
+ * EXAMPLE
+ *
+ * For N = 3, we have this paper:
+ *
+ * 1 2 3 4 5 6 7 8
+ *
+ * Input: L R L (Fold left, then right, then left)
+ * Output: 5 4 1 8 7 2 3 6
+ *
+ * Explanation:
+ * After folding left, the paper has length 4 and 2 layers. Here's a view from topmost to bottommost
+ * layer:
+ *
+ * 4 3 2 1
+ * 5 6 7 8
+ *
+ * After folding right, we get:
+ *
+ * 8 7
+ * 1 2
+ * 4 3
+ * 5 6
+ *
+ * Finally, we fold left again, getting:
+ *
+ * 5
+ * 4
+ * 1
+ * 8
+ * 7
+ * 2
+ * 3
+ * 6
+ *
+ * So, going from top to bottom, we will see the numbers 5 4 1 8 7 2 3 6
+ *
+ * Source: Careercup
+ */
 #include <stdio.h>
 #include <assert.h>
 
