@@ -42,6 +42,11 @@ void sighup_handler(int signo) {
 	/* ... */
 }
 
+void terminate_handler(int signo) {
+	syslog(LOG_INFO, "Got %s, terminating...\n", strsignal(signo));
+	exit(EXIT_SUCCESS);
+}
+
 int daemonize(void) {
 
 	umask(0);
@@ -121,13 +126,27 @@ int daemonize(void) {
 
 	struct sigaction sighandler;
 	sighandler.sa_handler = sighup_handler;
+	sighandler.sa_flags = 0;
 	sigemptyset(&sighandler.sa_mask);
+
 	if (sigaction(SIGHUP, &sighandler, NULL) < 0) {
 		syslog(LOG_ERR, "Couldn't catch SIGHUP.\n");
 		exit(EXIT_FAILURE);
 	}
 
+	sighandler.sa_handler = terminate_handler;
+	if (sigaction(SIGINT, &sighandler, NULL) < 0) {
+		syslog(LOG_ERR, "Couldn't catch SIGINT.\n");
+		exit(EXIT_FAILURE);
+	}
+
+	if (sigaction(SIGTERM, &sighandler, NULL) < 0) {
+		syslog(LOG_ERR, "Couldn't catch SIGTERM.\n");
+		exit(EXIT_FAILURE);
+	}
+
 	syslog(LOG_INFO, "daemonize() complete. PID = %ld\n", (long) getpid());
+	syslog(LOG_INFO, "Send SIGTERM or SIGINT to terminate\n");
 
 	return 0;
 }
@@ -144,7 +163,11 @@ int main(void) {
 		syslog(LOG_INFO, "getlogin(3) returned %s\n", login_name);
 	}
 
-	while (1);
+	while (1) {
+		sigset_t mask;
+		sigemptyset(&mask);
+		sigsuspend(&mask);
+	}
 
 	return 0;
 }
