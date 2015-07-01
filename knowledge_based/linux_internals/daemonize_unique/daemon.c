@@ -1,3 +1,42 @@
+/* This version of daemonize ensures that only one instance of the daemon is running.
+ * It does so by using record locking. daemonize() calls already_running(), which checks
+ * if the daemon is already running by attempting to atomically obtain a write lock across
+ * the entire file. If it is successful, then it means no other instance is running. The lock
+ * file is updated to contain the current PID of the daemon process and the lock is not released.
+ *
+ * If the locking attempt is not successful, it means another active instance of the daemon is
+ * running, so already_running() returns 1 and the daemon process exits prematurely.
+ *
+ * Note that it is necessary to pass F_SETLK to fcntl(2) to avoid blocking. The goal is to
+ * atomically test for the existence of a lock, and if there isn't one, get it. This is an
+ * atomic operation: it is not equivalent to call fcntl(2) with F_GETLK and then F_SETLK,
+ * because there would be a window of time between these calls where another instance
+ * of the daemon could start.
+ *
+ * Also note that by default the file written to is /var/run/my_daemon.pid. Usually, a process
+ * needs super user privileges to create a file and write into it in this directory.
+ *
+ * Sample interaction
+ *
+ * This session shows what happens when we attempt to run 6 instances of this daemon in parallel.
+ * Only one of them will be successful, as expected (ignore the getlogin(3) error - this is because
+ * of what we're doing in main()):
+ *
+ * Jul  1 16:11:15 filipe-Kubuntu my_daemon: daemonize() complete. PID = 21764
+ * Jul  1 16:11:15 filipe-Kubuntu my_daemon: Send SIGTERM or SIGINT to terminate
+ * Jul  1 16:11:15 filipe-Kubuntu my_daemon: getlogin(3) error: Inappropriate ioctl for device
+ * Jul  1 16:11:27 filipe-Kubuntu my_daemon: Daemon is already running. See /var/run/my_daemon.pid
+ * Jul  1 16:11:32 filipe-Kubuntu my_daemon: Daemon is already running. See /var/run/my_daemon.pid
+ * Jul  1 16:11:33 filipe-Kubuntu my_daemon: Daemon is already running. See /var/run/my_daemon.pid
+ * Jul  1 16:11:33 filipe-Kubuntu my_daemon: Daemon is already running. See /var/run/my_daemon.pid
+ * Jul  1 16:11:33 filipe-Kubuntu my_daemon: Daemon is already running. See /var/run/my_daemon.pid
+ *
+ * The PID file:
+ *
+ * root@filipe-Kubuntu:~# cat /var/run/my_daemon.pid 
+ * 21764
+ * root@filipe-Kubuntu:~#
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
