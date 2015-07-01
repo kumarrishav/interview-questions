@@ -4,6 +4,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <errno.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/time.h>
@@ -65,6 +67,8 @@ int daemonize(void) {
 	int max_fd;
 	if (getrlimit(RLIMIT_NOFILE, &rlim) < 0 || rlim.rlim_cur == RLIM_INFINITY) {
 		max_fd = 1024;
+	} else {
+		max_fd = rlim.rlim_cur;
 	}
 
 	int i;
@@ -102,8 +106,8 @@ int daemonize(void) {
 		close(sink);
 	}
 
-	dup2(sink, STDOUT_FILENO);
-	dup2(sink, STDERR_FILENO);
+	dup2(STDIN_FILENO, STDOUT_FILENO);
+	dup2(STDIN_FILENO, STDERR_FILENO);
 
 	/* Catch SIGHUP. SIGHUP on daemons is typically used to force the daemon to reread its
 	 * configuration file.
@@ -133,8 +137,14 @@ int main(void) {
 	daemonize();
 	
 	// What happens here? O.o
-	syslog(LOG_INFO, "%s\n", getlogin());
+	char *login_name = getlogin();
+	if (login_name == NULL) {
+		syslog(LOG_INFO, "getlogin(3) error: %s\n", strerror(errno));
+	} else {
+		syslog(LOG_INFO, "getlogin(3) returned %s\n", login_name);
+	}
 
 	while (1);
+
 	return 0;
 }
