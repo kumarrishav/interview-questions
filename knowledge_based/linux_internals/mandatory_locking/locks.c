@@ -1,3 +1,29 @@
+/* This program tests whether the operating system supports mandatory locking.
+ * It works by having the parent process acquire a write lock in the entire file,
+ * and then a child process attempts to read from the file without protection.
+ *
+ * Advanced Programming in the UNIX Environment claims that Solaris 10 supports mandatory
+ * locking. Sadly, we can't say the same about Linux:
+ *
+ * filipe@filipe-Kubuntu:~$ ./a.out test 
+ * Read lock denied, error = 11 (Resource temporarily unavailable)
+ * read(2) returned success: abcdefg; mandatory locking doesn't work.
+ * filipe@filipe-Kubuntu:~$
+ *
+ * Further investigation on the manpage of fcntl(2) reveals that the Linux implementation of
+ * mandatory locks is unreliable and should not be used:
+ *
+ * The implementation of mandatory locking in all known versions of Linux is subject to race
+ * conditions which render it unreliable: a write(2) call that overlaps with a lock may modify data
+ * after the mandatory lock is acquired; a read(2) call that overlaps with a lock may detect changes
+ * to data that were made only after a write lock was acquired. Similar races exist between
+ * mandatory locks and mmap(2). It is therefore inadvisable to rely on mandatory locking.
+ *
+ * Another reason read(2) may have returned successfully in the above interaction is that the
+ * filesystem where this was tested was not mounted with the `mand` option. According to the
+ * manpage, the filesystem needs to be mounted with `-o mand` if using the mount(1) command,
+ * or with the `MS_MANDLOCK` flag if using mount(2).
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
