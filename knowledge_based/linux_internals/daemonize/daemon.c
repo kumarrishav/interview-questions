@@ -43,7 +43,7 @@ void sighup_handler(int signo) {
 }
 
 void terminate_handler(int signo) {
-	syslog(LOG_INFO, "Got %s, terminating...\n", strsignal(signo));
+	syslog(LOG_INFO, "Terminating...\n");
 	exit(EXIT_SUCCESS);
 }
 
@@ -155,7 +155,14 @@ int main(void) {
 	printf("Started %s\n", DAEMON_NAME);
 	daemonize();
 	
-	// What happens here? O.o
+	/* What happens here? O.o
+	 *
+	 * MAC OS X seems to preserve the login name even in a daemonized process
+	 * (tested on Yosemite)
+	 *
+	 * Linux, on the other hand, returns with errno set to ENOTTY, which makes a lot
+	 * more sense
+	 */
 	char *login_name = getlogin();
 	if (login_name == NULL) {
 		syslog(LOG_INFO, "getlogin(3) error: %s\n", strerror(errno));
