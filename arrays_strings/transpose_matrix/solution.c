@@ -1,3 +1,4 @@
+/* Write code to transpose a matrix inplace */
 
 #include <stdio.h>
 
