@@ -5,6 +5,12 @@
  * Source: Advanced Programming in the UNIX Environment, 3rd Edition, Chapter 14, Exercise 14.1
  */
 
+/* This was tested in Linux, where a writer process is blatantly starved as long as readers exist.
+ * This is suboptimal, to say the least. Combine this with the buggy mandatory locking
+ * implementation in Linux that has race conditions all over the place. It's about time someone
+ * improves this on Linux.
+ */
+
 #include <signal.h>
 #include <unistd.h>
 #include <fcntl.h>
