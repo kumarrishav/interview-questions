@@ -6,6 +6,7 @@ Coding Interview practice with questions from various sources:
 * Glassdoor
 * StackOverflow
 * Cracking the Coding Interview (5th Edition)
+* Cracking the Coding Interview (6th Edition)
 * Programming Interviews Exposed (3rd Edition)
 * Questions I invented
 
