@@ -1,3 +1,10 @@
+/* Write a test program that illustrates your system's behavior when a process is blocked
+ * while trying to write lock a range of a file and additional read-lock requests are made.
+ * Is the process requesting a write lock starved by the processes read locking the file?
+ *
+ * Source: Advanced Programming in the UNIX Environment, 3rd Edition, Chapter 14, Exercise 14.1
+ */
+
 #include <signal.h>
 #include <unistd.h>
 #include <fcntl.h>
