@@ -3,6 +3,11 @@
  * is a rearrangement of letters. The palindrome does not need to be limited to just dictionary
  * words.
  *
+ * EXAMPLE
+ *
+ * Input: tactcoa
+ * Output: true (permutations: "tacocat", "atcocta", etc.)
+ *
  * Source: Cracking the Coding Interview (6th Ed.), page 91, exercise 1.4
  */
 
