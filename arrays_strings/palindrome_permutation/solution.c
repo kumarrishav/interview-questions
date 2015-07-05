@@ -1,3 +1,10 @@
+/* Given a string, write a function to check if it is a permutation of a palindrome.
+ * A palindrome is a word or phrase that is the same forwards and backwards. A permutation
+ * is a rearrangement of letters. The palindrome does not need to be limited to just dictionary
+ * words.
+ *
+ * Source: Cracking the Coding Interview (6th Ed.), page 91, exercise 1.4
+ */
 
 #include <stdio.h>
 #include <string.h>
