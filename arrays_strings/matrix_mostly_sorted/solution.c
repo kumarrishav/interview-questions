@@ -1,3 +1,22 @@
+/* Rearrange a matrix such that rows are in ascending order and columns are in descending order.
+ *
+ * EXAMPLE
+ *
+ * For the following 3x2 matrix:
+ *
+ * [  9 4 ]
+ * [ 10 5 ]
+ *
+ * The result is:
+ *
+ * [ 9 10 ]
+ * [ 4  5 ]
+ *
+ * For bigger matrices, there may be numerous possibilities. Any rearrangement that fulfills the
+ * requirements is fine.
+ *
+ * Source: Careercup (Amazon interview)
+ */
 
 #include <stdio.h>
 
