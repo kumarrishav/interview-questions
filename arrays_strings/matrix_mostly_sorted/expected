@@ -7,6 +7,11 @@ Enter matrix dimensions followed by the elements
 4	5	5	7	8	
 1	1	1	3	3	
 -4	-2	0	0	1	
+> 12	17	21	22	
+5	7	8	10	
+3	3	4	5	
+1	1	1	1	
+-4	-2	0	0	
 > 3	4	
 1	2	
 > 3	4	
