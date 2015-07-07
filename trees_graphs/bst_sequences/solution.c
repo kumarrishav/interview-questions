@@ -1,4 +1,22 @@
-
+/* A binary search tree was created by traversing through an array from left to right and inserting
+ * each element. Given a binary search tree with distinct elements, print all possible arrays that
+ * could have led to this tree.
+ *
+ * EXAMPLE
+ *
+ * Input:
+ *
+ *        2
+ *      /   \
+ *     1     3
+ *
+ * Output:
+ * 
+ * [ 2, 1, 3 ]
+ * [ 2, 3, 1 ]
+ *
+ * Source: Cracking the Coding Interview, 6th Edition, Exercise 4.9 (page 110)
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -31,7 +49,6 @@ static void print_array(struct tree_node *array[], size_t array_sz) {
 }
 
 static void bst_sequences_aux(struct tree_node *array[], size_t array_sz, size_t nodes) {
-	/*printf("Entered bst_sequences_aux(), array_sz = %zu, nodes = %zu\n", array_sz, nodes);*/
 	if (array_sz == 0) {
 		print_array(array-nodes, nodes);
 		return;
@@ -132,26 +149,6 @@ static void destroy_tree(struct tree_node *root) {
 	free(root);
 }
 
-static void visit_tree(struct tree_node *root) {
-	if (root == NULL) {
-		return;
-	}
-	printf("%d: ", root->value);
-	if (root->left) {
-		printf("L: %d", root->left->value);
-	} else {
-		printf("L: NULL");
-	}
-	if (root->right) {
-		printf(" R: %d", root->right->value);
-	} else {
-		printf(" R: NULL");
-	}
-	printf("\n");
-	visit_tree(root->left);
-	visit_tree(root->right);
-}
-
 int main(void) {
 	printf("Enter the number of nodes in the BST, followed by the preorder traversal, followed by the inorder traversal\n");
 	printf("> ");
@@ -159,7 +156,6 @@ int main(void) {
 	size_t nodes;
 	while (scanf("%zu", &nodes) == 1) {
 		struct tree_node *root = deserialize(nodes);
-		/*visit_tree(root);*/
 		bst_sequences(root);
 		destroy_tree(root);
 		printf("> ");
