@@ -1,0 +1,40 @@
+## Step 1: Scope the Problem
+
+We are specifically told that our system should support about 1000 users, which is good (most questions are not so specific), but this doesn't mean that we can be sloppy with the design: our service can get popular overnight; it should still be able to scale horizontally in a cost effective manner.
+
+There aren't particularly many features or use cases for this system. As a user, we use the service to get stock price information. So, we can define 4 basic operations:
+
+* `GetOpenPrice(sID)`: gets the open price of the stock with id `sID`.
+* `GetClosePrice(sID)`: gets the close price of the stock with id `sID`.
+* `GetHighPrice(sID)`: gets the highest price for the day of the stock with id `sID`.
+* `GetLowPrice(sID)`: gets the lowest price for the day of the stock with id `sID`.
+
+We can also define a higher level convenience function to get all prices at once:
+
+* `GetInfo(sID)`: gets the open, close, high and low prices of the stock with id `sID`.
+
+We assume that in this first version of the system users can only get stock price information for the current day, but business needs dictate that we should store all past information for analytics purposes. To be more specific, we are trying to get rich by developing new models to predict the stock market trends, so it will be useful to have a long historical database of the evolution of stock prices over time. For this reason, we should expect to accumulate quite a large database over time.
+
+## Step 2: Make reasonable assumptions
+
+Let's make some back of the envelope calculations to get a feel for how big and how busy our system might be. Our expected userbase is not large - 1,000 users/day. That's about 40 users/hour. However, we should think about peak traffic and when it occurs. It is likely that by the end of the day, users will be more interested in querying the system. When developing services over the web, a good heuristic for peak traffic is to predict that approximately 15% to 20% of the total traffic for the day occurs in a single hour. In other words, the peak hour eats up between 15% and 20% of the total traffic. Let's err on the safe side and assume 20% - that gives us a peak traffic of 200 users/hour = 3.333 users/minute, so roughly 0.05 users/second. Not exactly large scale.
+
+There are over 100K publicly traded companies in the world. Again, just to be safe, let's place an upper bound of 500K. An alphanumeric, case-sensitive ID can be used to identify stocks. This implies that the IDs use log_62(500K) characters, which is roughly 19/6 = 3, so we will go ahead and use IDs of length 4.
+
+For the purposes of our analytics needs, it is also important to predict how large our dataset can grow. Let's consider a time window of 20 years. Analytics don't have to be very precise, so we are ok with storing stock prices once in an hour. Each price is stored as a 64-bit float, so, 8 bytes. We assumed 500K publicly registered traded companies, so that is roughly 4 MB of data per hour, or 96MB/day = 2.88 GB/month, approximately 35 GB per year. In a period of 20 years, this adds up to 700 GB.
+
+So, if we are to register every stock price of every possible traded company every hour over 20 years, we would mostly be good with 1 or 2 servers. That's good to know. We don't exactly need a super powerful cluster of machines for analytics. A 1 TB harddrive is enough!
+
+## Step 3: Start designing
+
+We start off small (and that is probably going to be enough for our userbase) with 1 single server to answer requests. This specific question seems to place some relevance on how we choose to store and present the data, so we will be a little more detailed than usual.
+
+One possibility is to run an HTTP server that uses a MySQL database in the backend to store and retrieve prices. Each request is served by querying the DB with the given stock ID. This query effectively fetches the price for the client. The result is written back in a dynamically generated webpage, perhaps using PHP, and sent back to the client. This works and is relatively simple to set up, but there are some drawbacks: MySQL is a complex beast. The users requests only read from the database - do we *really* need to have a MySQL engine behind offering ACID guarantees (Atomicity, Consistency, Isolation, Durability)? If users only read from the database, we shouldn't really be worried about ACID properties. Furthermore, the whole process to satisfy a request sounds overly complicated: connect to the database, issue a query, retrieve the results, generate an HTML page dynamically, send it back to the user. Remember that each component in an architecture is another architectural piece that will cost money, need maintenance, need upgrades, etc. MySQL is probably not a very good choice here.
+
+A different approach might be FTP. We could set up an FTP server with anonymous logins and allow users to freely browse the publicly available data. We could store everything in good old text files, et voila - our system is up and running. While conceptually simple, this may be suboptimal for many reasons: for one, FTP is not a safe protocol. Sure, we allow anonymous logins, and stock information is not really top secret stuff, but what if some day we decide to give private accounts to each user? Then usernames and passwords would be sent out in the clear - not ideal in the 21st century. We could use SFTP instead, but really, how familiar is the common internet user with FTP? The average user will be confused. What about mobile users? How many Android / iOS users have an FTP client installed on their mobile device? It's not really a usable system. Also, if we were to start giving out private user accounts in the future, our servers would start cluttering up zillions of user accounts. Is that really necessary to provide a stock price service?
+
+What about web services? A shiny simple SOAP-based web service where stock prices are all stored in XML files on disk and retrieved using the web service API. This has the advantage that we map our usecases directly into the implementation: the web services implement the 5 functions mentioned in step 1. Everything's XML based, so there's plenty of parsers available out there for pretty much *any* language that other developers might be using to implement a client. Oh yeah, that's another great point: as long as the API is documented, other developers can easily make Android or iOS apps that serve as a client. We can also implement a webpage on top of the API to provide service over HTTP. Corporate / enterprise clients can have their own software that communicates with the webservices API. What's not to love? This looks like a reasonable approach; what are the downsides? Well, XML does incur a little overhead - textual representation of data is more expensive - it takes up more disk space, uses more bandwidth, and takes longer to transmit. This could be a problem for users behind slow connections, but more often than not, most users today have access to highspeed connections. Perhaps a more serious issue is how to integrate this with our long time dataset for analytics. Data used for analytics is usually kept in OLAP database engines, so we might need to do some conversion work when transferring our stock prices to the analytics data warehouse. Is this acceptable? Maybe. If anything, we will always have to do some sort of conversion and transfer work to get data in the analytics system, so this looks like something we can't avoid.
+
+Overall, the web services approach looks promising and reasonable.
+
+This question doesn't seem so much about scalability and large scale issues, so we will omit steps 4 and 5. Either way, as usual, one of the key issues is growing. What if we get popular? 1000 clients is a very small userbase - should we really be assuming that we won't grow beyond that? What if we want to scale? We can leverage the fact that this specific system has an extremely high read-to-write ratio, so: cache, cache, cache. (Ab)use caching.
