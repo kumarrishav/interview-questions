@@ -21,6 +21,16 @@
 #include <stdlib.h>
 #include <assert.h>
 
+/* This is an interesting problem
+ *
+ * We solve this by keeping a set of nodes on each level. On each call, we can choose to place
+ * any node in this set into the current array position. If we choose a node, then we take that
+ * node out of the possible nodes set and insert its children, because they are now possible
+ * candidates for the set of the next call.
+ *
+ * This is better explained in a whiteboard though
+ */
+
 struct tree_node {
 	int value;
 	struct tree_node *left;
