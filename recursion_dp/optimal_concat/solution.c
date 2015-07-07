@@ -1,4 +1,16 @@
-
+/* There's a function that concatenates two strings and returns the length of the resulting string.
+ * We want to minimize the total concatenation cost of a series of strings.
+ *
+ * Say we have 3 strings: "abc", "def" and "gh". We would merge "abc" and "def" first, which
+ * costs 6, and then merge "abcdef" with "gh", costing 8, and the total cost would be 14.
+ *
+ * However, if we merge "abc" and "gh" first, which costs 5, and then merge "abcgh" with "def",
+ * which costs 8, the total cost would be 13.
+ *
+ * Write an algorithm to minimize the cost of concatenating a series of strings.
+ *
+ * Source: Careercup
+ */
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
