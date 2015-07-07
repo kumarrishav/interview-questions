@@ -40,6 +40,31 @@
  *
  * Note: I do believe that this solution is much more elegant and easier to implement than the
  * solution presented in the book.
+ *
+ * An example goes a long way towards understanding this approach
+ *
+ * Consider the tree
+ *
+ *              8
+ *           /     \
+ *          4      12
+ *        /   \   /  \
+ *       2     5 10   15
+ *      / \
+ *     1   3
+ *
+ * We know that the root must be the first element in the array. That's easy to see.
+ *
+ * Once we have 8 in the array, then we have two choices: 4 and 12. If we choose 4,
+ * the next position can be any of 2, 5, or 12. If we choose 12, then the next
+ * position can be any of 4, 10 or 15.
+ *
+ * If we choose 4 and 2, then the next position can be any of 1, 3, 5, 10, or 15.
+ *
+ * So, on each level, we have a set of possible choices. We just loop through every candidate,
+ * choosing one at a time for the current position, insert its children in the candidates list,
+ * and recurse.
+ *     
  */
 
 struct tree_node {
