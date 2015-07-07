@@ -23,12 +23,23 @@
 
 /* This is an interesting problem
  *
- * We solve this by keeping a set of nodes on each level. On each call, we can choose to place
- * any node in this set into the current array position. If we choose a node, then we take that
- * node out of the possible nodes set and insert its children, because they are now possible
- * candidates for the set of the next call.
+ * We solve this by keeping a set of nodes on each level. Think of it as a BFS on which each
+ * level of the BFS is handled by a single recursive call.
  *
- * This is better explained in a whiteboard though
+ * It's not a BFS by levels though, because it can skew itself into one of the sides of the tree.
+ *
+ * We do as follows:
+ *
+ * On each call, we can choose to place any node in the current BFS queue into the current array
+ * position. If we choose a node, then we take that node out of the possible nodes queue and insert
+ * its children, because they are now possible candidates for the set of the next call.
+ *
+ * Note, however, that each call only handles the nodes that were originally in the set.
+ *
+ * This is better explained in a whiteboard though.
+ *
+ * Note: I do believe that this solution is much more elegant and easier to implement than the
+ * solution presented in the book.
  */
 
 struct tree_node {
