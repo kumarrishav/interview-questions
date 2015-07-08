@@ -1,4 +1,8 @@
-
+/* Write a program to swap odd and even bits in an integer with as few instructions as
+ * possible (e.g. bit 0 and bit 1 are swapped, bit 2 and bit 3 are swapped, and so on).
+ *
+ * Source: Cracking the Coding Interview, 6th Edition, Chapter 5, Exercise 5.7 (page 116)
+ */
 #include <stdio.h>
 #include <limits.h>
 #include <stdint.h>
