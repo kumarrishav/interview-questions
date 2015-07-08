@@ -25,7 +25,7 @@ void NOTIFY_INIT(void) {
 	sigemptyset(&usrmask);
 	sigaddset(&usrmask, SIGUSR1);
 
-	// Aditionally block SIGUSR1
+	// Additionally block SIGUSR1
 	sigprocmask(SIG_BLOCK, &usrmask, &old_nousr);
 	sigdelset(&old_nousr, SIGUSR1);
 }
