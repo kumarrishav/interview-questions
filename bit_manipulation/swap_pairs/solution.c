@@ -17,7 +17,7 @@ unsigned swap_pairs(unsigned n) {
 #error "Unsupported size for unsigned integers"
 #endif
 
-	return (0U | ((n & odd_mask) >> 1U)) | ((n & (odd_mask >> 1U)) << 1U);
+	return ((n & odd_mask) >> 1U) | ((n & (odd_mask >> 1U)) << 1U);
 }
 
 static void print_binary(unsigned n) {
