@@ -1,4 +1,13 @@
-
+/* You have an integer and you can flip exactly one bit from a 0 to a 1. Write code to
+ * find the length of the longest sequence of 1s you could create
+ *
+ * EXAMPLE
+ *
+ * Input: 1775 (11011101111)
+ * Output: 8
+ *
+ * Source: Cracking the Coding Interview, 6th Edition, Chapter 5, Exercise 5.3
+ */
 #include <stdio.h>
 #include <limits.h>
 
