@@ -11,6 +11,22 @@
 #include <stdio.h>
 #include <limits.h>
 
+/*
+ * This works by trying to flip each 0 in turn and counting the size of the resulting group
+ * If our input is N, then ~N results in an integer that contains 1s only in the positions
+ * that we can flip. Call that integer M. At each step, we get the next bit to flip with
+ * M & -M (this gives us a number with only 1 bit set that corresponds to the LSB in M),
+ * and then we count the number of adjacent 1s in N to the left and right, and update the
+ * result if necessary. We always store the group count to the right, and use the left
+ * group count as the right group count of the next iteration. Also, we update M by doing
+ * M &= M-1 to pass to the next bit that we can flip.
+ *
+ * This runs in O(b) time and O(1) memory, where b is the number of bits in an integer, and,
+ * quite frankly, this is considerably more compact and elegant than the optimal solution that
+ * the book suggests.
+ *
+ */
+
 unsigned flip_to_win(unsigned n) {
 	unsigned m = ~n;
 
