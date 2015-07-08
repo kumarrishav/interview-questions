@@ -8,6 +8,11 @@ Some interesting resources to learn about system design, scalability, and large 
 * http://highscalability.com/ (a very interesting blog about large scale systems)
 * Cracking the Coding Interview, 6th Edition, Chapter 9 (the systems design section was significantly improved on the 6th Edition, but the 5th Edition also has some interesting ideas on Chapter 10, *Scalability and Memory Limits*)
 
+These talks discuss the specific issues of scalability that arised in building the systems that we all use today (Dropbox, Google, Facebook, etc.):
+
+* [Building Software Systems At Google and Lessons Learned](https://www.youtube.com/watch?v=modXC5IWTJI)
+* [How We've Scaled Dropbox](https://www.youtube.com/watch?v=PE4gwstWhmc)
+
 Note that there isn't a right way to answer these questions. Two different people may come up with completely divergent designs if they made different assumptions.
 
 Like any other problem, it is important to solve design questions using a mechanical, structured approach. It is very easy to get intimidaded by questions such as "Design Google Search", or "Design TinyURL". It's scary because many brain cells from many different engineers have been devoted to the task of designing and implementing such big systems, and it took *years* and quite a few millions of dollars to get to what we have today.
