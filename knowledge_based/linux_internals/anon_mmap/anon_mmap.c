@@ -1,4 +1,10 @@
-
+/* This program illustrates anonymous memory mapping as an IPC mechanism.
+ *
+ * mmap(2) with the MAP_ANONYMOUS flag is a good way to share memory between processes.
+ * Note that MAP_ANONYMOUS is not POSIX and as such implementations are not required to support it.
+ * For maximum portability, we could open /dev/zero instead.
+ *
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/mman.h>
