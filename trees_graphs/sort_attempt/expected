@@ -1,0 +1,11 @@
+Enter size of list, followed by each element. Then, enter the number of relations
+that are known, followed by each relation. A relation is a pair or whitespace separated
+IDs where the left ID is greater than the right ID.
+> No
+> Yes
+> Yes
+> No
+> No
+> No
+> Yes
+> 
