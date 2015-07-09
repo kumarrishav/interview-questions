@@ -1,4 +1,15 @@
-
+/* Find the longest common prefix in a list of sentences.
+ *
+ * EXAMPLE
+ *
+ * Input:
+ *    "I love all dogs"
+ *    "I love cats"
+ *
+ * Output: "I love "
+ *
+ * Source: Careercup (Google interview)
+ */
 #include <climits>
 #include <cstring>
 #include <cassert>
