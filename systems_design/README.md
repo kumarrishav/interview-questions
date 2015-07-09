@@ -59,3 +59,6 @@ Try to answer these questions:
 ## Step 5: Scale
 
 This is the final step, where we take into account the results of step 4, combine them with our estimates from step 2, and try to come up with a good solution that (hopefully) scales horizontally. There are quite a number of techniques that can be used to scale a system; this only comes with practice and reading. There's no perfect solution, it is very context- and problem-dependent.
+
+Useful resources:
+* [Building Scalable Databases: Pros and Cons of Various Database Sharding Schemes](http://www.25hoursaday.com/weblog/2009/01/16/BuildingScalableDatabasesProsAndConsOfVariousDatabaseShardingSchemes.aspx)
