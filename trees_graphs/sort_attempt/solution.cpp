@@ -1,4 +1,39 @@
-
+/* You have a list of N elements: a1, a2, a3, ..., aN
+ *
+ * Along with the elements, you are given some information about their relative order. To be
+ * more specific, you are given a set of predicates where each predicate is a pair (ai, aj).
+ * The pair (ai, aj) means that element ai is known to be greater than the element aj.
+ *
+ * You are to find whether it is possible to unequivocally sort this list. Your algorithm should
+ * output a Yes/No answer. If there isn't enough information to fully sort the list, the algorithm
+ * must return No as an answer. In other words, only return Yes if the given predicates lead to a
+ * unique sort order.
+ *
+ * EXAMPLES
+ *
+ * Consider the list [ 2, 1, 3 ] and the predicates:
+ *
+ * 3 > 1
+ * 2 > 1
+ * 3 > 2
+ *
+ * Output: Yes
+ *
+ * Consider the list [ 2, 1, 4, 3 ] and the predicates:
+ *
+ * 4 > 3
+ * 2 > 1
+ * 3 > 1
+ *
+ * Output: No
+ * Explanation: we know that 1 is the smallest element, so it would come first, but the relation
+ * between 2 and the elements 4 and 3 is ambiguous. This set of predicates implies that we could
+ * the elements in more than one way and still satisfy all the conditions, so the algorithm
+ * outputs No. On the other hand, if we knew that 3 > 2, then the algorithm would output Yes
+ * because there would be no more ambiguity and only one sort would be possible.
+ *
+ * Source: Careercup (Adobe interview)
+ */
 #include <cassert>
 #include <map>
 #include <iostream>
