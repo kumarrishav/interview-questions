@@ -1,4 +1,18 @@
-
+/* This code illustrates the usage of epoll(7) combined with TCP Keepalives.
+ *
+ * It serves multiple clients at the same time without the hassle and overhead of multithreading.
+ * Instead, it uses epoll(7) to multiplex I/O efficiently. epoll(7) has multiple advantages over
+ * select(2) / poll(2): epoll_wait(2) is O(1), the interface is cleaner to use, and user code is not
+ * forced to iterate through every file descriptor being watched: instead, epoll_wait(2) returns an
+ * array filled with the descriptors that need attention, and nothing else.
+ *
+ * Furthermore, descriptors are added and deleted using epoll_ctl(2), so the kernel maintains the
+ * information; user code is not required to do it, as opposed to select(2) and poll(2).
+ *
+ * The exact semantics of how to enable and configure TCP Keepalive are platform dependent. Thus,
+ * this code is not POSIX compliant. Also, epoll(7) is Linux specific.
+ *
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
