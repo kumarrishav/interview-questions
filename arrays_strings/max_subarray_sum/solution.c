@@ -1,3 +1,38 @@
+/* In computer science, the maximum subarray problem is the task of finding the contiguous subarray
+ * within a one-dimensional array of numbers (containing at least one positive number) which has the
+ * largest sum. For example, for the sequence of values -2, 1, -3, 4, -1, 2, 1, -5, 4; the
+ * contiguous subarray with the largest sum is 4, -1, 2, 1, with sum 6.
+ *
+ * Programming Pearls shows a simple linear solution:
+ *
+ * int max_sub_array_sum(int a[], int size) {
+ *     int max_so_far = a[0], i;
+ *     int curr_max = a[0];
+ *
+ *     for (i = 1; i < size; i++) {
+ *         curr_max = max(a[i], curr_max+a[i]);
+ *         max_so_far = max(max_so_far, curr_max);
+ *     }
+ *
+ *     return max_so_far;
+ * }
+ *
+ * Can you understand and explain how the algorithm works?
+ * Modify the algorithm to return the start index of the maximum subarray
+ * and its length.
+ *
+ * The prototype of the modified version should be:
+ *
+ * int max_sub_array_sum(int a[], int size, int *begin, int *len);
+ *
+ * EXAMPLE
+ *
+ * Using the earlier example, we know that the maximu subarray in [ -2, 1, -3, 4, -1, 2, 1, -5, 4 ]
+ * is [ 4, -1, 2, 1 ] with sum 6. The modified version returns 6, and stores 3 in *begin (the index
+ * of 4) and 4 in *len (the size of the maximum subarray).
+ *
+ * Source: Careercup (Adobe interview)
+ */
 
 #include <stdio.h>
 
