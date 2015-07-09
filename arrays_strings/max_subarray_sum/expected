@@ -1,0 +1,11 @@
+Enter size of array, followed by the elements.
+> max subarray sum = 123 (a[0..10])
+> max subarray sum = -2 (a[0..0])
+> max subarray sum = 4 (a[0..0])
+> max subarray sum = 5 (a[0..1])
+> max subarray sum = 0 (a[1..1])
+> max subarray sum = 7 (a[1..1])
+> max subarray sum = 7 (a[0..0])
+> max subarray sum = 1000095 (a[13..19])
+> max subarray sum = 1000094 (a[13..18])
+> 
