@@ -12,6 +12,7 @@ These talks discuss the specific issues of scalability that arised in building t
 
 * [Building Software Systems At Google and Lessons Learned](https://www.youtube.com/watch?v=modXC5IWTJI)
 * [How We've Scaled Dropbox](https://www.youtube.com/watch?v=PE4gwstWhmc)
+* [Seattle Conference on Scalability: YouTube Scalability](https://www.youtube.com/watch?v=ZW5_eEKEC28)
 
 Note that there isn't a right way to answer these questions. Two different people may come up with completely divergent designs if they made different assumptions.
 
