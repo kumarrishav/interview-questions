@@ -1,4 +1,7 @@
-
+/* Write code to determine how many numbers between 1 and 100000 contain an even number of digits
+ *
+ * Source: Careercup (Microsoft interview)
+ */
 
 #include <stdio.h>
 #define N 100000
