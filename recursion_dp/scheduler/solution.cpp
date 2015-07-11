@@ -1,3 +1,22 @@
+/* Given a single core processor and 2 processes executing programs with M and N atomic
+ * instructions, write a program to count how many different schedulings are possible.
+ *
+ * EXAMPLE
+ *
+ * Input:
+ * M = 2, N = 1 (Instructions M1, M2 for process 1 and N1 for process 2)
+ *
+ * Output:
+ * 3
+ *
+ * Explanation:
+ * The possibilities are:
+ * { M1, M2, N1 }
+ * { M1, N1, M2 }
+ * { N1, M2, M2 }
+ *
+ * Source: Careercup
+ */
 
 #include <iostream>
 #include <vector>
