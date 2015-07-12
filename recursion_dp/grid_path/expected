@@ -1,39 +1,23 @@
 Enter the values for X and Y
-Recursive: 2
-Maths: 2
-Recursive: 6
-Maths: 6
-Recursive: 3
-Maths: 3
-Recursive: 3
-Maths: 3
-Recursive: 6
-Maths: 6
-Recursive: 20
-Maths: 20
-Recursive: 10
-Maths: 10
-Recursive: 10
-Maths: 10
-Recursive: 70
-Maths: 70
-Recursive: 924
-Maths: 924
-Recursive: 35
-Maths: 35
-Recursive: 56
-Maths: 56
-Recursive: 56
-Maths: 56
-Recursive: 92378
-Maths: 92378
-Recursive: 92378
-Maths: 92378
-Recursive: 66
-Maths: 66
-Recursive: 66
-Maths: 66
-Recursive: 43758
-Maths: 43758
-Recursive: 43758
-Maths: 43758
+> DP: 2
+> DP: 6
+> DP: 3
+> DP: 3
+> DP: 6
+> DP: 20
+> DP: 10
+> DP: 10
+> DP: 70
+> DP: 924
+> DP: 35
+> DP: 56
+> DP: 56
+> DP: 92378
+> DP: 92378
+> DP: 66
+> DP: 66
+> DP: 43758
+> DP: 43758
+> DP: 17383860
+> DP: 2203961430
+> 
