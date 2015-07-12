@@ -1,4 +1,9 @@
-
+/* Write a recursive function to multiply two numbers without using the * operator.
+ * You can use addition, subtraction, and bit shifting, but you should minimize the number of those
+ * operations.
+ *
+ * Source: Cracking the Coding Interview, 6th Edition, Exercise 8.5, page 135
+ */
 #include <stdio.h>
 #define abs(x) ((x) > 0 ? (x) : -(x))
 
