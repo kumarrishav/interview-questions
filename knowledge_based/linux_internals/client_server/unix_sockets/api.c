@@ -25,6 +25,9 @@ int new_server(const char *name) {
 
 	static char buff[sizeof(addr.sun_path)+1];
 	sprintf(buff, "%s/%s", CLIENT_SOCK_DIR, name);
+
+	unlink(buff); /* In case it already exists */
+
 	memcpy(&addr.sun_path, buff, name_len);
 	size_t addr_sz = sizeof(addr)-sizeof(addr.sun_path)+name_len;
 
@@ -62,6 +65,8 @@ int accept_client(int servfd) {
 	struct stat statbuff;
 	if (stat(buff, &statbuff) < 0)
 		goto errout;
+
+	unlink(buff); /* This is no longer needed */
 
 	if (!S_ISSOCK(statbuff.st_mode)) {
 		errno = EINVAL;
