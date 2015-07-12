@@ -4,32 +4,41 @@
  *
  * Source: Cracking the Coding Interview, page 109, question 9.1
  */
+
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <assert.h>
 
-unsigned long long possibilities_aux(int left, unsigned long long cached[]) {
-	if (left < 0) {
-		return 0;
-	}
-	if (left == 0) {
+unsigned long long possibilities_naive(unsigned n) {
+	if (n == 0)
 		return 1;
-	}
-	if (cached[left-1] != 0) {
-		return cached[left-1];
-	} else {
-		cached[left-1] =
-			possibilities_aux(left-1, cached) +
-			possibilities_aux(left-2, cached) +
-			possibilities_aux(left-3, cached);
-	}
-
-	return cached[left-1];
+	unsigned long long res = possibilities_naive(n-1);
+	if (n > 1)
+		res += possibilities_naive(n-2);
+	if (n > 2)
+		res += possibilities_naive(n-3);
+	return res;
 }
 
-unsigned long long possibilities(int stairs) {
-	unsigned long long cached[stairs];
-	memset(cached, 0, sizeof(cached));
-	return possibilities_aux(stairs, cached);
+unsigned long long possibilities(unsigned n) {
+	unsigned long long *dp = malloc(sizeof(*dp)*(n+1));
+	assert(dp != NULL);
+
+	if (n >= 0)
+		dp[0] = 1;
+	if (n >= 1)
+		dp[1] = dp[0];
+	if (n >= 2)
+		dp[2] = dp[1]+dp[0];
+
+	unsigned i;
+	for (i = 3; i < n+1; i++)
+		dp[i] = dp[i-1]+dp[i-2]+dp[i-3];
+
+	unsigned long long ret = dp[n];
+	free(dp);
+	return ret;
 }
 
 int main(void) {
@@ -37,7 +46,11 @@ int main(void) {
 
 	int stairs;
 	while (scanf("%d", &stairs) == 1) {
-		printf("There are %llu ways to go up\n", possibilities(stairs));
+		/* This is super slow
+		 * printf("Naive: %llu\n", possibilities_naive(stairs));
+		 */
+		printf("DP: %llu\n", possibilities(stairs));
+		printf("> ");
 	}
 
 	return 0;
