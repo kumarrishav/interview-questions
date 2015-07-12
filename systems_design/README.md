@@ -9,6 +9,13 @@ Some interesting resources to learn about system design, scalability, and large 
 * Cracking the Coding Interview, 6th Edition, Chapter 9 (the systems design section was significantly improved on the 6th Edition, but the 5th Edition also has some interesting ideas on Chapter 10, *Scalability and Memory Limits*)
 * [Scalable Internet Architectures](https://www.youtube.com/watch?v=2WuT2rdLK5A)
 
+This series of lectures is a great introduction to very important concepts that underly Google's scale, such as MapReduce, GFS, BigTable, and other topics (note that GFS is old hat now, but it has historical importance. The successor of GFS is Colossus):
+* [Cluster Computing and MapReduce Lecture 1](https://www.youtube.com/watch?v=yjPBkvYh-ss)
+* [Cluster Computing and MapReduce Lecture 2](https://www.youtube.com/watch?v=-vD6PUdf3Js)
+* [Cluster Computing and MapReduce Lecture 3](https://www.youtube.com/watch?v=5Eib_H_zCEY)
+* [Cluster Computing and MapReduce Lecture 4](https://www.youtube.com/watch?v=1ZDybXl212Q)
+* [Cluster Computing and MapReduce Lecture 5](https://www.youtube.com/watch?v=BT-piFBP4fE)
+
 These talks discuss the specific issues of scalability that arised in building the systems that we all use today (Dropbox, Google, Facebook, etc.):
 
 * [Building Software Systems At Google and Lessons Learned](https://www.youtube.com/watch?v=modXC5IWTJI)
