@@ -1,4 +1,4 @@
-# interview-questions
+# Interview Questions
 
 Coding Interview practice with questions from various sources:
 
