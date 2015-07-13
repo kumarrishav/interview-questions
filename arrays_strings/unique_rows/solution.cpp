@@ -7,6 +7,17 @@
 #include <algorithm>
 #include <vector>
 
+/* We could simply sort the matrix using the library sorting routine
+ *
+ * However, this is expensive because traditional sorting compares elements
+ * atomically, and elements here are entire rows, which means that in an
+ * M x N matrix each comparison is O(N).
+ *
+ * Instead, we perform radix sort column by column, sorting each column
+ * using the library sort. This way, comparisons will still be O(1)
+ *
+ */
+
 using namespace std;
 
 void print_row(const vector<int> &row) {
