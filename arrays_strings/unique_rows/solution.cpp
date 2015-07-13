@@ -1,3 +1,7 @@
+/* Write a function to print the unique rows of a matrix
+ *
+ * Source: Careercup (Amazon interview)
+ */
 
 #include <iostream>
 #include <algorithm>
