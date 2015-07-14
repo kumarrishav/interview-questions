@@ -80,10 +80,7 @@ void reverse_words_nomem(string &str) {
 	string::size_type w2_start = next_word_backward(str, str.size()-1, w2_len);
 
 	while (w1_start+w1_len-1 < w2_start) {
-		//cout << "swapping word [" << w1_start << ", " << w1_len << "] with [" << w2_start << ", " << w2_len << "]" << endl;
 		swap_words(str, w1_start, w1_len, w2_start, w2_len);
-		//cout << "done: " << str << endl;
-
 		string::size_type w1_len_tmp = w1_len;
 		w1_start = next_word_forward(str, w1_start+w2_len, w1_len);
 		w2_start = next_word_backward(str, w2_start+w2_len-w1_len_tmp-1, w2_len);
