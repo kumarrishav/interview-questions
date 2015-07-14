@@ -1,3 +1,19 @@
+/* Given an array of integers and a number K, write a function to print every combination of exactly
+ * K elements of that array.
+ *
+ * EXAMPLE
+ * Input:  { 1, 2, 3 }
+ *         K = 2
+ *
+ * Output:
+ * { 1, 2 }
+ * { 1, 3 }
+ * { 2, 3 }
+ *
+ * Any order is valid, as long as every combination is generated
+ *
+ * Source: Stackoverflow
+ */
 
 #include <stdio.h>
 #include <assert.h>
