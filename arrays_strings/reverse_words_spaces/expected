@@ -1,0 +1,14 @@
+Enter a string to reverse the words order ignoring spaces
+> h g f e d c b a
+h g f e d c b a
+> asinglewordinansingleline
+asinglewordinansingleline
+> test a is this
+test a is this
+>                      World!      Hello  
+                     World!      Hello  
+> mmmmmmmmmmmmmmmm                     o    MN                                        jkl i                   cdefgh AB   
+mmmmmmmmmmmmmmmm                     o    MN                                        jkl i                   cdefgh AB   
+> rs opq mn jkl     ghi def    abc
+rs opq mn jkl     ghi def    abc
+> 
