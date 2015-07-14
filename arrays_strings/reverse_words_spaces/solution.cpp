@@ -1,7 +1,31 @@
+/* Reverse the words in a string, but maintain whitespace distribution. That is, you are to reverse
+ * the words in a string, but keep the number of whitespaces separating each word.
+ *
+ * EXAMPLE
+ * In the following example, consider that whitespaces are represented by S.
+ *
+ * Input: SShelloSSSSeveryoneSinSSSSStheSroomSSSSS
+ * Output: SSroomSSSStheSinSSSSSeveryoneShelloSSSSS
+ *
+ * Source: Invented
+ */
 
 #include <iostream>
 #include <sstream>
 #include <algorithm>
+
+/* We show two approaches below: one runs in O(N^2) time but uses O(1) memory.
+ * The other runs in O(N) time but uses O(N) memory.
+ *
+ * The former is based out of the swap_words() operation, which swaps the first word of a substring
+ * with the last word of that substring.
+ * As can be seen, this can be performed with a bunch of string rotations if we know the length of
+ * each word and its starting index
+ *
+ * The O(N) memory solution is pretty straightforward: we just copy spaces to a new string, and
+ * when a word is seen, instead of copying it, we grab the next word from the rear end.
+ *
+ */
 
 using namespace std;
 
