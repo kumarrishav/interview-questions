@@ -1,4 +1,5 @@
 
+#define _GNU_SOURCE
 #include "oserver.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,6 +25,12 @@ int serv_open(char *path, int mode) {
 	if (socketpair(AF_UNIX, SOCK_STREAM, 0, sockfds) < 0) {
 		return -1;
 	}
+
+	/* TODO Take care of SIGCHLD here
+	 * We should block SIGCHLD because the library user may not be aware that this function
+	 * forks a child process, and if a SIGCHLD handler was installed, the user code may
+	 * be confused when it is generated for this child process
+	 */
 
 	pid_t pid;
 	if ((pid = fork()) < 0) {
@@ -55,8 +62,33 @@ int serv_open(char *path, int mode) {
 
 	close(sockfds[0]);
 
+	struct ucred creds;
+	creds.pid = getpid();
+	creds.uid = geteuid();
+	creds.gid = getegid();
+
+	unsigned char cmsg_buff[CMSG_SPACE(sizeof(creds))];
+	struct cmsghdr *cmptr = (struct cmsghdr *) cmsg_buff;
+	cmptr->cmsg_len = CMSG_LEN(sizeof(creds));
+	cmptr->cmsg_level = SOL_SOCKET;
+	cmptr->cmsg_type = SCM_CREDENTIALS;
+	* (struct ucred *) CMSG_DATA(cmptr) = creds;
+
+	struct iovec iov;
+	iov.iov_base = buff;
+	iov.iov_len = req_len;
+
+	struct msghdr msg;
+	msg.msg_name = NULL;
+	msg.msg_namelen = 0;
+	msg.msg_iov = &iov;
+	msg.msg_iovlen = 1;
+	msg.msg_control = cmptr;
+	msg.msg_controllen = cmptr->cmsg_len;
+	msg.msg_flags = 0;
+
 	ssize_t sent;
-	if ((sent = write(sockfds[1], buff, req_len)) != req_len) {
+	if ((sent = sendmsg(sockfds[1], &msg, 0)) != req_len) {
 		ret = -1;
 		if (sent > 0)
 			errno = ECOMM;
