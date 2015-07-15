@@ -42,7 +42,7 @@ void handle_request(char *request, const struct ucred *src) {
 	}
 
 	if (!can_access(buff, src)) {
-		errno = EPERM;
+		errno = EACCES;
 		if (send_errno(STDOUT_FILENO) < 0) {
 			fprintf(stderr, "send_errno() failed attempting to notify client: %s\n",
 				strerror(errno));
