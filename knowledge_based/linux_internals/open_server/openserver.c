@@ -1,7 +1,4 @@
-/* An openserver exec()'d by the client
- *
- * TODO: Send credentials from server to client
- */
+/* An openserver exec()'d by the client */
 
 #define _GNU_SOURCE
 #include "oserver.h"
