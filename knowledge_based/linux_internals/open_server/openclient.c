@@ -13,6 +13,14 @@
 #include <unistd.h>
 #include <signal.h>
 
+/* Returns 0 if the server referred to by `creds` is not trusted, otherwise returns 1 */
+int auth_server(const struct ucred *creds) {
+	/* This is just a stub. We could now create custom authentication rules and authenticate the
+	 * server accordingly
+	 */
+	return 1;
+}
+
 int serv_open(char *path, int mode) {
 	static char buff[4096];
 	int req_len;
@@ -27,6 +35,13 @@ int serv_open(char *path, int mode) {
 		return -1;
 	}
 
+	int optval = 1;
+	if (setsockopt(sockfds[1], SOL_SOCKET, SO_PASSCRED, &optval, sizeof(optval)) < 0) {
+		close(sockfds[0]);
+		close(sockfds[1]);
+		return -1;
+	}
+
 	/* Block SIGCHLD */
 	sigset_t old, new;
 	sigemptyset(&new);
@@ -37,6 +52,7 @@ int serv_open(char *path, int mode) {
 	if ((pid = fork()) < 0) {
 		close(sockfds[0]);
 		close(sockfds[1]);
+		sigprocmask(SIG_SETMASK, &old, NULL);
 		return -1;
 	}
 
@@ -98,7 +114,14 @@ int serv_open(char *path, int mode) {
 		goto out;
 	}
 
-	ret = recv_fd(sockfds[1]);
+	struct ucred server_creds;
+	ret = recv_fd(sockfds[1], &server_creds);
+	if ((ret < 0 && errno == EBADMSG) || !auth_server(&server_creds)) {
+		/* Server didn't send credentials or it did but we don't trust */
+		errno = EBADE;
+		ret = -1;
+		goto out;
+	}
 
 out:
 	close(sockfds[1]);

@@ -52,6 +52,7 @@ int send_fd(int sockfd, int fd_to_send) {
 	return 0;
 }
 
+/* TODO Update errno to send credentials */
 int send_errno(int sockfd) {
 	ssize_t sent = send(sockfd, &errno, sizeof(errno), 0);
 	if (sent < 0)
@@ -63,10 +64,9 @@ int send_errno(int sockfd) {
 	return 0;
 }
 
-int recv_fd(int sockfd) {
+int recv_fd(int sockfd, struct ucred *server) {
 	int status;
-	unsigned char cmsg_buff[CMSG_SPACE(sizeof(status))];
-	struct cmsghdr *cmptr = (struct cmsghdr *) cmsg_buff;
+	unsigned char cmsg_buff[CMSG_SPACE(sizeof(status))+CMSG_SPACE(sizeof(*server))];
 
 	struct iovec iov;
 	iov.iov_base = &status;
@@ -77,8 +77,8 @@ int recv_fd(int sockfd) {
 	msg.msg_namelen = 0;
 	msg.msg_iov = &iov;
 	msg.msg_iovlen = 1;
-	msg.msg_control = cmptr;
-	msg.msg_controllen = CMSG_LEN(sizeof(status));
+	msg.msg_control = cmsg_buff;
+	msg.msg_controllen = sizeof(cmsg_buff);
 	msg.msg_flags = 0;
 
 	ssize_t received = recvmsg(sockfd, &msg, 0);
@@ -89,15 +89,43 @@ int recv_fd(int sockfd) {
 		errno = ECOMM;
 		return -1;
 	}
+
 	if (status != 0) {
-		errno = status;
+		if (msg.msg_controllen != CMSG_SPACE(sizeof(*server))) {
+			errno = EBADMSG;
+		} else {
+			errno = status;
+			if (server != NULL) {
+				*server = * (struct ucred *) CMSG_DATA(CMSG_FIRSTHDR(&msg));
+			}
+		}
 		return -1;
 	}
 
-	if (msg.msg_controllen != CMSG_SPACE(sizeof(status))) {
-		errno = EBADFD;
+	if (msg.msg_controllen != sizeof(cmsg_buff)) {
+		errno = EBADMSG;
 		return -1;
 	}
 
-	return * (int *) CMSG_DATA(cmptr);
+	struct ucred *creds_ptr = NULL;
+	int *fd_ptr = NULL;
+	struct cmsghdr *cmptr;
+
+	for (cmptr = CMSG_FIRSTHDR(&msg); cmptr != NULL; cmptr = CMSG_NXTHDR(&msg, cmptr)) {
+		if (cmptr->cmsg_type == SCM_CREDENTIALS) {
+			creds_ptr = (struct ucred *) CMSG_DATA(cmptr);
+		} else if (cmptr->cmsg_type == SCM_RIGHTS) {
+			fd_ptr = (int *) CMSG_DATA(cmptr);
+		}
+	}
+
+	if (fd_ptr == NULL || creds_ptr == NULL) {
+		errno = EBADMSG;
+		return -1;
+	}
+
+	if (server != NULL)
+		*server = *creds_ptr;
+
+	return *fd_ptr;
 }
