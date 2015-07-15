@@ -63,7 +63,6 @@ void handle_request(char *request, const struct ucred *src) {
 		}
 		goto outbuff;
 	}
-
 	if (send_fd(STDOUT_FILENO, fd) < 0) {
 		fprintf(stderr, "send_fd() failed attempting to send fd for %s: %s\n",
 			buff, strerror(errno));
