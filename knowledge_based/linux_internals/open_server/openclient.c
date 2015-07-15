@@ -11,6 +11,7 @@
 #include <sys/socket.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include <signal.h>
 
 int serv_open(char *path, int mode) {
 	static char buff[4096];
@@ -26,14 +27,16 @@ int serv_open(char *path, int mode) {
 		return -1;
 	}
 
-	/* TODO Take care of SIGCHLD here
-	 * We should block SIGCHLD because the library user may not be aware that this function
-	 * forks a child process, and if a SIGCHLD handler was installed, the user code may
-	 * be confused when it is generated for this child process
-	 */
+	/* Block SIGCHLD */
+	sigset_t old, new;
+	sigemptyset(&new);
+	sigaddset(&new, SIGCHLD);
+	sigprocmask(SIG_BLOCK, &new, &old);
 
 	pid_t pid;
 	if ((pid = fork()) < 0) {
+		close(sockfds[0]);
+		close(sockfds[1]);
 		return -1;
 	}
 
@@ -100,6 +103,7 @@ int serv_open(char *path, int mode) {
 out:
 	close(sockfds[1]);
 	waitpid(pid, NULL, 0);
+	sigprocmask(SIG_SETMASK, &old, NULL);
 	return ret;
 }
 
