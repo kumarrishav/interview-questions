@@ -209,6 +209,13 @@ void handle_event(const struct epoll_event *event) {
 			return;
 		}
 
+		int optval = 1;
+		if (setsockopt(clientfd, SOL_SOCKET, SO_PASSCRED, &optval, sizeof(optval)) < 0) {
+			syslog(LOG_ERR, "Error setting SO_PASSCRED on new client: %s\n", strerror(errno));
+			close(clientfd);
+			return;
+		}
+
 		struct epoll_event event;
 		event.events = EPOLLIN | EPOLLET;
 		event.data.fd = clientfd;
