@@ -1,0 +1,12 @@
+Enter the number of nodes in the BST, followed by the preorder traversal, followed by the inorder traversal
+> BST is now flattenned, traversing through right links only:
+5 10 15 
+> BST is now flattenned, traversing through right links only:
+5 10 15 
+> BST is now flattenned, traversing through right links only:
+1 
+> BST is now flattenned, traversing through right links only:
+7 8 9 10 
+> BST is now flattenned, traversing through right links only:
+-5 0 7 8 9 10 12 15 50 51 52 53 92 93 94 100 150 160 
+> 
