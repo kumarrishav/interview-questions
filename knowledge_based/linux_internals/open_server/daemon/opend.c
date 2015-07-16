@@ -18,11 +18,16 @@
 #define MAINSOCK_ADDR "/tmp/" DAEMON_NAME ".socket"
 #define LOCKFILE "/var/run/" DAEMON_NAME ".pid"
 #define LOCKFILEMODE (S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH)
+#define BACKLOG_SZ 10
 
 static int sockfd;
 static int epoll_fd;
 static int sig_fd;
 static int lockfile;
+
+void sighup_rehash(void) {
+	syslog(LOG_INFO, "Got SIGHUP, rehashing...\n");
+}
 
 int already_running(void) {
 	static char buff[32];
@@ -169,6 +174,56 @@ void prepare_loop(void) {
 	}
 }
 
+void handle_client_request(int clientfd) {
+	/* TODO */
+}
+
+void handle_event(const struct epoll_event *event) {
+	struct signalfd_siginfo signalinfo;
+
+	if (event->data.fd == sig_fd) {
+		ssize_t n;
+		if ((n = read(event->data.fd, &signalinfo, sizeof(signalinfo))) < 0) {
+			syslog(LOG_ERR, "Error reading from signal fd: %s\n", strerror(errno));
+			return;
+		}
+		if (n < sizeof(signalinfo)) {
+			syslog(LOG_ERR, "Partial read(2) on signal fd detected (%zu/%zu)\n", n, sizeof(signalinfo));
+			return;
+		}
+		if (signalinfo.ssi_signo == SIGHUP) {
+			sighup_rehash();
+		} else if (signalinfo.ssi_signo == SIGTERM) {
+			syslog(LOG_INFO, "Got SIGTERM, exiting...\n");
+			exit(EXIT_SUCCESS);
+		} else if (signalinfo.ssi_signo == SIGINT) {
+			syslog(LOG_INFO, "Got SIGINT, exiting...\n");
+			exit(EXIT_SUCCESS);
+		}
+	}
+
+	if (event->data.fd == sockfd) {
+		int clientfd;
+		if ((clientfd = accept(sockfd, NULL, NULL)) < 0) {
+			syslog(LOG_ERR, "Error accepting new client: %s\n", strerror(errno));
+			return;
+		}
+
+		struct epoll_event event;
+		event.events = EPOLLIN | EPOLLET;
+		event.data.fd = clientfd;
+
+		if (epoll_ctl(epoll_fd, EPOLL_CTL_ADD, clientfd, &event) < 0) {
+			syslog(LOG_ERR, "Error adding new client to epoll set: %s\n", strerror(errno));
+			close(clientfd);
+		}
+
+		return;
+	}
+
+	handle_client_request(event->data.fd);
+}
+
 void main_loop(void) {
 	static struct epoll_event ep_events[1024];
 
@@ -183,7 +238,34 @@ void main_loop(void) {
 
 		int i;
 		for (i = 0; i < ev_count; i++) {
-			/* TODO The core */
+			/* The core */
+			if (ep_events[i].events & (EPOLLRDHUP | EPOLLERR | EPOLLHUP)) {
+				if (ep_events[i].data.fd == sockfd) {
+					syslog(LOG_ERR, "Fatal: unknown error in main socket.\n");
+					exit(EXIT_FAILURE);
+				} else if (ep_events[i].data.fd == sig_fd) {
+					syslog(LOG_ERR, "Fatal: unknown error in signal fd.\n");
+					exit(EXIT_FAILURE);
+				}
+
+				int res;
+				res = epoll_ctl(epoll_fd, EPOLL_CTL_DEL, ep_events[i].data.fd, NULL);
+
+				if (res < 0) {
+					if (errno == ENOENT) {
+						/* Should never happen */
+						syslog(LOG_ERR, "Attempted to delete client that doesn't exist..?!");
+					} else {
+						syslog(LOG_ERR, "Fatal: error deleting client: %s\n", strerror(errno));
+						exit(EXIT_FAILURE);
+					}
+				}
+			} else if (ep_events[i].events & EPOLLIN) {
+				handle_event(&ep_events[i]);
+			} else {
+				syslog(LOG_ERR, "Fatal: unknown events reported by epoll_wait(2)\n");
+				exit(EXIT_FAILURE);
+			}
 		}
 	}
 }
@@ -221,6 +303,11 @@ int main(int argc, char *argv[]) {
 
 	if (bind(sockfd, (struct sockaddr *) &sockaddr, sockaddr_sz) < 0) {
 		syslog(LOG_ERR, "bind(2) error: %s\n", strerror(errno));
+		exit(EXIT_FAILURE);
+	}
+
+	if (listen(sockfd, BACKLOG_SZ) < 0) {
+		syslog(LOG_ERR, "listen(2) error: %s\n", strerror(errno));
 		exit(EXIT_FAILURE);
 	}
 
