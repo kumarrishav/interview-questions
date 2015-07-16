@@ -1,4 +1,9 @@
-
+/* Consider a set of child processes all with the same parent.
+ *
+ * How can the child processes share an in-memory linked list?
+ *
+ * Source: StackOverflow
+ */
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
