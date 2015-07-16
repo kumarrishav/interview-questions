@@ -1,0 +1,16 @@
+./././././
+./
+../
+/a/b/../a.out
+/a/b/./a.out
+././a/././b/../a.out
+/././a/./b/../a.out
+/././a/./b/../././.././a.out
+/home/example/google/is/awesome/../awesome/proof.out
+/home/example/google/is/awesome/../awesome/../awesome/../././../../proof.out
+/home/example/google/is/awesome/../awesome/../awesome/../././../../google/proof.out
+/home/example/google/is/awesome/../awesome/../../is/../../google/../../proof.out
+/home/example/google/is/awesome/../awesome/../../is/../../google/../../../proof.out
+home/example/google/is/awesome/../awesome/../../is/../../google/../../../proof.out
+./home/example/google/is/awesome/../awesome/../../is/../../google/../../../proof.out
+file.example

@@ -1,0 +1,33 @@
+Enter a path to normalize
+> Entered:	./././././
+Normalized:	
+> Entered:	./
+Normalized:	
+> Entered:	../
+> Entered:	/a/b/../a.out
+Normalized:	/a/a.out
+> Entered:	/a/b/./a.out
+Normalized:	/a/b/a.out
+> Entered:	././a/././b/../a.out
+Normalized:	a/a.out
+> Entered:	/././a/./b/../a.out
+Normalized:	/a/a.out
+> Entered:	/././a/./b/../././.././a.out
+Normalized:	/a.out
+> Entered:	/home/example/google/is/awesome/../awesome/proof.out
+Normalized:	/home/example/google/is/awesome/proof.out
+> Entered:	/home/example/google/is/awesome/../awesome/../awesome/../././../../proof.out
+Normalized:	/home/example/proof.out
+> Entered:	/home/example/google/is/awesome/../awesome/../awesome/../././../../google/proof.out
+Normalized:	/home/example/google/proof.out
+> Entered:	/home/example/google/is/awesome/../awesome/../../is/../../google/../../proof.out
+Normalized:	/home/proof.out
+> Entered:	/home/example/google/is/awesome/../awesome/../../is/../../google/../../../proof.out
+Normalized:	/proof.out
+> Entered:	home/example/google/is/awesome/../awesome/../../is/../../google/../../../proof.out
+Normalized:	proof.out
+> Entered:	./home/example/google/is/awesome/../awesome/../../is/../../google/../../../proof.out
+Normalized:	proof.out
+> Entered:	file.example
+Normalized:	file.example
+> 
