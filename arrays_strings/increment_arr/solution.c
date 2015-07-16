@@ -1,3 +1,12 @@
+/* You are given an array representing an integer. Write a function which increments this integer.
+ *
+ * EXAMPLE
+ *
+ * Input:  [ 1, 2, 3 ] (represents the number 123)
+ * Result: [ 1, 2, 4 ] (123+1 = 124)
+ *
+ * Source: Careercup (Google interview)
+ */
 
 #include <stdio.h>
 
