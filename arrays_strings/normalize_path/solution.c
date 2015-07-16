@@ -1,3 +1,28 @@
+/* In the UNIX world, pathnames can contain the special entries "." and "..", which stand for
+ * "current directory" and "parent directory".
+ *
+ * For example, the paths /home/google/example.txt and /home/google/./example.txt refer to the same
+ * file.
+ *
+ * Similarly, the paths /home/google/foo/../example.txt and /home/google/foo/example.txt also refer
+ * to the same file.
+ *
+ * Write a function that receives a path name and normalizes it by removing every "." and ".."
+ * entries in the path.
+ *
+ * Your function should identify error conditions and stop processing as soon as that happens,
+ * leaving the input string intact.
+ *
+ * EXAMPLES
+ *
+ * Input:  /a/b/../foo.txt
+ * Output: /a/foo.txt
+ *
+ * Input:  /a/b/././../foo.txt
+ * Output: /a/foo.txt
+ *
+ * Source: Careercup (Google interview)
+ */
 
 #include <stdio.h>
 #include <string.h>
