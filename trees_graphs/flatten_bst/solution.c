@@ -1,3 +1,28 @@
+/* Write a function that takes the root of a binary search tree and flattens it into a new binary
+ * search tree such that each node has at most one right child and no left child.
+ *
+ * EXAMPLE
+ *
+ * This tree:
+ *
+ *     10
+ *    /  \
+ *   5    15
+ *  /
+ * 1
+ *
+ * Gets converted into:
+ *
+ * 1
+ *  \
+ *   5
+ *    \
+ *    10
+ *      \
+ *      15
+ *
+ * Source: Careercup (Microsoft interview)
+ */
 
 #include <stdio.h>
 #include <assert.h>
