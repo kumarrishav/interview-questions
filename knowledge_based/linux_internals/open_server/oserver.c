@@ -15,6 +15,17 @@ int send_fd(int sockfd, int fd_to_send) {
 
 	unsigned char cmsg_buff[CMSG_SPACE(sizeof(fd_to_send))+CMSG_SPACE(sizeof(struct ucred))];
 
+	/* Needed because of a bug in glibc
+	 * (see https://sourceware.org/bugzilla/show_bug.cgi?id=13500)
+	 *
+	 * In particular, CMSG_NXTHDR assumes that cmsg_len has been initialized and it attempts
+	 * to read it for some additional validation. This may cause it to return NULL when it
+	 * shouldn't, which in turn caused segfaults in this function when it tried to
+	 * append the credentials.
+	 *
+	 */
+	memset(cmsg_buff, 0, sizeof(cmsg_buff));
+
 	struct msghdr msg;
 	msg.msg_name = NULL;
 	msg.msg_namelen = 0;
@@ -52,7 +63,6 @@ int send_fd(int sockfd, int fd_to_send) {
 	return 0;
 }
 
-/* TODO Update errno to send credentials */
 int send_errno(int sockfd) {
 
 	struct iovec iov;
@@ -60,6 +70,10 @@ int send_errno(int sockfd) {
 	iov.iov_len = sizeof(errno);
 
 	unsigned char cmsg_buff[CMSG_SPACE(sizeof(struct ucred))];
+	/* Just in case...
+	 * See the comment in send_fd()
+	 */
+	memset(cmsg_buff, 0, sizeof(cmsg_buff));
 
 	struct msghdr msg;
 	msg.msg_name = NULL;
@@ -96,6 +110,7 @@ int send_errno(int sockfd) {
 int recv_fd(int sockfd, struct ucred *server) {
 	int status;
 	unsigned char cmsg_buff[CMSG_SPACE(sizeof(status))+CMSG_SPACE(sizeof(*server))];
+	memset(cmsg_buff, 0, sizeof(cmsg_buff));
 
 	struct iovec iov;
 	iov.iov_base = &status;
