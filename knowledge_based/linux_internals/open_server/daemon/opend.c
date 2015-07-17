@@ -35,6 +35,12 @@ void sighup_rehash(void) {
 	 */
 }
 
+/* Terminates the server */
+void leave(void) {
+	unlink(MAINSOCK_ADDR);
+	exit(EXIT_SUCCESS);
+}
+
 /* Returns 0 if the process identified by the credentials in `who` *CANNOT* access the file
  * in `path`; otherwise returns non-zero
  */
@@ -98,7 +104,7 @@ void daemonize(void) {
 	umask(0);
 
 	if (chdir("/") < 0) {
-		perror("chdir(2) failed");
+		perror("Fatal: chdir(2) failed");
 		exit(EXIT_FAILURE);
 	}
 
@@ -106,7 +112,7 @@ void daemonize(void) {
 
 	pid_t pid;
 	if ((pid = fork()) < 0) {
-		perror("fork(2) failed");
+		perror("Fatal: fork(2) failed");
 		exit(EXIT_FAILURE);
 	}
 
@@ -117,7 +123,7 @@ void daemonize(void) {
 	setsid();
 
 	if ((pid = fork()) < 0) {
-		syslog(LOG_ERR, "Couldn't fork after creating session: %s\n", strerror(errno));
+		perror("Fatal: Couldn't fork after creating session");
 		exit(EXIT_FAILURE);
 	}
 
@@ -125,22 +131,43 @@ void daemonize(void) {
 		exit(EXIT_SUCCESS);
 	}
 
+	/* We can only do this here because already_running() atomically checks for other instances
+	 * and acquires a write lock on the PID file. This must be the last step after all forks are
+	 * done, because locks are lost when a process dies (and they are obviously not inherited by
+	 * the child processes)
+	 *
+	 * We also want to report any errors about duplicate instances to stderr to give the user a
+	 * chance to realize the mistake, instead of silently writing to syslog. Thus, we need to do
+	 * it before closing stderr.
+	 *
+	 */
+	int check;
+	if ((check = already_running()) == 1) {
+		fprintf(stderr, "Another instance of " DAEMON_NAME " was detected in the system.\n");
+		fprintf(stderr, "See " LOCKFILE " to get its PID.\n");
+		fprintf(stderr, "Terminating...\n");
+		exit(EXIT_SUCCESS);
+	} else if (check == -1) {
+		fprintf(stderr, "Fatal: Error checking for other instances: %s\n", strerror(errno));
+		exit(EXIT_FAILURE);
+	}
+
 	int sink = open("/dev/null", O_RDWR, 0);
 	if (sink < 0) {
-		syslog(LOG_ERR, "Couldn't open /dev/null: %s\n", strerror(errno));
+		fprintf(stderr, "Fatal: Couldn't open /dev/null: %s\n", strerror(errno));
 		exit(EXIT_FAILURE);
 	}
 
 	if (dup2(sink, STDIN_FILENO) < 0) {
-		syslog(LOG_ERR, "Couldn't dup() /dev/null into stdin: %s\n", strerror(errno));
+		fprintf(stderr, "Fatal: Couldn't dup() /dev/null into stdin: %s\n", strerror(errno));
 		exit(EXIT_FAILURE);
 	}
 	if (dup2(sink, STDOUT_FILENO) < 0) {
-		syslog(LOG_ERR, "Couldn't dup() /dev/null into stdout: %s\n", strerror(errno));
+		fprintf(stderr, "Fatal: Couldn't dup() /dev/null into stdout: %s\n", strerror(errno));
 		exit(EXIT_FAILURE);
 	}
 	if (dup2(sink, STDERR_FILENO) < 0) {
-		syslog(LOG_ERR, "Couldn't dup() /dev/null into stderr: %s\n", strerror(errno));
+		fprintf(stderr, "Couldn't dup() /dev/null into stderr: %s\n", strerror(errno));
 		exit(EXIT_FAILURE);
 	}
 
@@ -298,10 +325,12 @@ void handle_event(const struct epoll_event *event) {
 			return;
 		} else if (signalinfo.ssi_signo == SIGTERM) {
 			syslog(LOG_INFO, "Got SIGTERM, exiting...\n");
-			exit(EXIT_SUCCESS);
+			leave();
 		} else if (signalinfo.ssi_signo == SIGINT) {
 			syslog(LOG_INFO, "Got SIGINT, exiting...\n");
-			exit(EXIT_SUCCESS);
+			leave();
+		} else {
+			syslog(LOG_INFO, "Unexpected signal received: %s\n", strsignal(signalinfo.ssi_signo));
 		}
 	}
 
@@ -381,17 +410,8 @@ void main_loop(void) {
 }
 
 int main(int argc, char *argv[]) {
-
+	printf(DAEMON_NAME " booting, dropping to background...\n");
 	daemonize();
-
-	int check;
-	if ((check = already_running()) == 1) {
-		syslog(LOG_ERR, "There is already another instance running. See " LOCKFILE "\n");
-		return 0;
-	} else if (check == -1) {
-		syslog(LOG_ERR, "Error checking for other instances: %s\n", strerror(errno));
-		exit(EXIT_FAILURE);
-	}
 
 	struct sockaddr_un sockaddr;
 	sockaddr.sun_family = AF_UNIX;
