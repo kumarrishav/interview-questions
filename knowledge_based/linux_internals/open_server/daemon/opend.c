@@ -1,4 +1,5 @@
 
+#include "oserver.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -27,6 +28,21 @@ static int lockfile;
 
 void sighup_rehash(void) {
 	syslog(LOG_INFO, "Got SIGHUP, rehashing...\n");
+	/* This is just a stub. Rehashing logic could be implemented here.
+	 * Note that this function is not being executed as a signal handler because we use
+	 * signalfd(2) to process signals synchronously. Thus, it is safe for this function
+	 * to call other functions that are not async-signal safe.
+	 */
+}
+
+/* Returns 0 if the process identified by the credentials in `who` *CANNOT* access the file
+ * in `path`; otherwise returns non-zero
+ */
+int can_access(const char *path, const struct ucred *who) {
+	/* This is just a stub. We could now create custom permission rules and enforce them
+	 * using this function.
+	 */
+	return 1;
 }
 
 int already_running(void) {
@@ -174,8 +190,94 @@ void prepare_loop(void) {
 	}
 }
 
+void serve_client_request(int clientfd, char *request, const struct ucred *src) {
+	char *buff;
+	int omode;
+
+	if ((buff = strdup(request)) == NULL) {
+		syslog(LOG_ERR, "strdup(3) couldn't allocate memory");
+		return;
+	}
+
+	if (sscanf(request, "open %s %d", buff, &omode) != 2) {
+		syslog(LOG_ERR, "Invalid request: %s\n", request);
+		goto outbuff;
+	}
+
+	if (!can_access(buff, src)) {
+		errno = EACCES;
+		if (send_errno(clientfd) < 0) {
+			syslog(LOG_ERR, "send_errno() failed attempting to notify client: %s\n",
+			       strerror(errno));
+			syslog(LOG_ERR, "Note: Permission denied for pid %ld to open %s (euid = %ld, egid = %ld)\n",
+			       (long) src->pid, buff, (long) src->uid, (long) src->gid);
+		}
+		goto outbuff;
+	}
+
+	int fd = open(buff, omode);
+
+	if (fd < 0) {
+		int open_error = errno;
+		if (send_errno(clientfd) < 0) {
+			syslog(LOG_ERR, "send_errno() failed attempting to notify client: %s\n",
+			       strerror(errno));
+			syslog(LOG_ERR, "Note: couldn't open %s: %s\n", buff, strerror(open_error));
+		}
+		goto outbuff;
+	}
+	if (send_fd(clientfd, fd) < 0) {
+		syslog(LOG_ERR, "send_fd() failed attempting to send fd for %s: %s\n",
+		       buff, strerror(errno));
+		goto outclose;
+	}
+
+outclose:
+	close(fd);
+outbuff:
+	free(buff);
+}
+
 void handle_client_request(int clientfd) {
-	/* TODO */
+	static char req_buff[2048];
+
+	struct iovec iov;
+	iov.iov_base = req_buff;
+	iov.iov_len = sizeof(req_buff)-1;
+
+	unsigned char cmsg_buff[CMSG_SPACE(sizeof(struct ucred))];
+
+	struct msghdr msg;
+	msg.msg_name = NULL;
+	msg.msg_namelen = 0;
+	msg.msg_iov = &iov;
+	msg.msg_iovlen = 1;
+	msg.msg_control = cmsg_buff;
+	msg.msg_controllen = sizeof(cmsg_buff);
+	msg.msg_flags = 0;
+
+	ssize_t n;
+	n = recvmsg(clientfd, &msg, 0);
+
+	if (n == 0) {
+		syslog(LOG_INFO, "Ignoring empty message from client.\n");
+		return;
+	} else if (n < 0) {
+		syslog(LOG_ERR, "Error retrieving message from client: %s\n", strerror(errno));
+		return;
+	}
+
+	if (msg.msg_controllen != sizeof(cmsg_buff)) {
+		errno = EINVAL;
+		if (send_errno(clientfd) < 0) {
+			syslog(LOG_ERR, "send_errno() failed when attempting to notify client of invalid or non-existent cmsg: %s\n",
+			       strerror(errno));
+		}
+	} else {
+		struct ucred *ucredptr;
+		ucredptr = (struct ucred *) CMSG_DATA((struct cmsghdr *) cmsg_buff);
+		serve_client_request(clientfd, req_buff, ucredptr);
+	}
 }
 
 void handle_event(const struct epoll_event *event) {
@@ -193,6 +295,7 @@ void handle_event(const struct epoll_event *event) {
 		}
 		if (signalinfo.ssi_signo == SIGHUP) {
 			sighup_rehash();
+			return;
 		} else if (signalinfo.ssi_signo == SIGTERM) {
 			syslog(LOG_INFO, "Got SIGTERM, exiting...\n");
 			exit(EXIT_SUCCESS);
