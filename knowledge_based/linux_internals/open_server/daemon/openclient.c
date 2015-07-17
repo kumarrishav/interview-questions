@@ -26,10 +26,31 @@ int auth_server(const struct ucred *creds) {
 
 int serv_open(int servsock, char *path, int mode) {
 	static char buff[4096];
+	static char cwd_buff[4096];
 	int req_len;
 	int ret;
 
-	if ((req_len = snprintf(buff, sizeof(buff), "open %s %d\n", path, mode)) >= sizeof(buff)) {
+	if (path == NULL || *path == '\0') {
+		errno = EINVAL;
+		return -1;
+	}
+
+	cwd_buff[0] = '\0';
+
+	if (*path != '/') {
+		/* Convert to absolute pathname to send to daemon */
+		if (getcwd(cwd_buff, sizeof(cwd_buff)-1) == NULL) {
+			return -1;
+		}
+		size_t cwd_len = strlen(cwd_buff);
+		if (cwd_len == 0 || cwd_buff[cwd_len-1] != '/') {
+			cwd_buff[cwd_len] = '/';
+			cwd_buff[cwd_len+1] = '\0';
+		}
+	}
+
+	req_len = snprintf(buff, sizeof(buff), "open %s%s %d\n", cwd_buff, path, mode);
+	if (req_len >= sizeof(buff)) {
 		errno = ENAMETOOLONG;
 		return -1;
 	}
