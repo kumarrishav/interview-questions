@@ -26,16 +26,25 @@ ssize_t find_element(struct listy *ly, unsigned val) {
 
 	ssize_t l = 1;
 	ssize_t r;
+	long long v = element_at(ly, l);
 
-	while (element_at(ly, l) != -1)
+	while (v != -1 && v <= val) {
+
+		if (v == val) {
+			// We got lucky!
+			return l;
+		}
+
 		l *= 2;
+		v = element_at(ly, l);
+	}
 
 	r = l;
-	l = 0;
+	l /= 2;
 
 	while (l <= r) {
 		ssize_t m = l+(r-l)/2;
-		long long v = element_at(ly, m);
+		v = element_at(ly, m);
 
 		if (v == -1)
 			r = m-1;
