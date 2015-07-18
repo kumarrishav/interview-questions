@@ -1,0 +1,27 @@
+Enter the number of nodes in the BST, followed by the preorder traversal, followed by the inorder traversal
+Then, enter the value x to find the largest key in the BST that is smaller than x
+> 17
+> 35
+> 89
+> No such key.
+> 17
+> 35
+> 89
+> No such key.
+> 17
+> 35
+> 89
+> No such key.
+> 19
+> 21
+> 2
+> 4
+> 35
+> 19
+> 4
+> 35
+> 19
+> 4
+> 35
+> 19
+> 
