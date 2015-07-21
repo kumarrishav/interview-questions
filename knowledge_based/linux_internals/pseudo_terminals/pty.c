@@ -9,12 +9,14 @@
 #include <unistd.h>
 #include <sys/epoll.h>
 
-#define OPTSTR "+d:env"
+#define OPTSTR "+d:einv"
 
 static int set_noecho(int fd);
 static int tty_raw(int fd);
 static void tty_atexit(void);
-static int loop(int fd_master);
+static int loop(int fd_master, int ignoreeof);
+static ssize_t feed(int read_from_fd, int write_to_fd);
+static int remove_fd(int fd, int epoll_fd);
 
 static struct termios termios_original;
 static struct termios termios_raw;
@@ -25,6 +27,7 @@ int main(int argc, char *argv[]) {
 	int noecho = 0;
 	int interactive = isatty(STDIN_FILENO);
 	int verbose = 0;
+	int ignoreeof = 0;
 
 	int opt;
 	while ((opt = getopt(argc, argv, OPTSTR)) != EOF) {
@@ -34,6 +37,9 @@ int main(int argc, char *argv[]) {
 			break;
 		case 'e':
 			noecho = 1;
+			break;
+		case 'i':
+			ignoreeof = 1;
 			break;
 		case 'n':
 			interactive = 0;
@@ -109,7 +115,7 @@ int main(int argc, char *argv[]) {
 		do_driver(driver);
 */
 
-	int ret = loop(fd_master);
+	int ret = loop(fd_master, ignoreeof);
 
 	if (ret < 0)
 		perror("Error on main loop");
@@ -140,10 +146,8 @@ static void tty_atexit(void) {
 	tcsetattr(STDIN_FILENO, 0, &termios_original);
 }
 
-static ssize_t feed(int read_from_fd, int write_to_fd);
-
 /* Main loop, connects PTY to stdin and stdout */
-static int loop(int fd_master) {
+static int loop(int fd_master, int ignoreeof) {
 	int epoll_fd;
 
 	if ((epoll_fd = epoll_create(1)) < 0)
@@ -167,16 +171,29 @@ static int loop(int fd_master) {
 		int n;
 		if ((n = epoll_wait(epoll_fd, events, sizeof(events), -1)) < 0)
 			goto errout;
+
 		int i;
 		for (i = 0; i < n; i++) {
 			if (events[i].events & (EPOLLERR | EPOLLHUP | EPOLLRDHUP)) {
-				/* This should never fail */
-				if (epoll_ctl(epoll_fd, EPOLL_CTL_DEL, events[i].data.fd, NULL) < 0) {
-					fprintf(stderr,
-						"Internal error: failed to remove %d from epoll set: %s\n",
-						events[i].data.fd, strerror(errno));
-				}
+
+				int res = remove_fd(events[i].data.fd, epoll_fd);
 				monitoring--;
+
+				if (events[i].data.fd == STDIN_FILENO) {
+					if (!ignoreeof) {
+						res = remove_fd(fd_master, epoll_fd);
+						monitoring--;
+					}
+				} else {
+					res = remove_fd(STDIN_FILENO, epoll_fd);
+					monitoring--;
+				}
+
+				if (res < 0)
+					goto errout;
+
+				break;
+
 			} else if (events[i].events & EPOLLIN) {
 				int from = events[i].data.fd;
 				int to = (from == STDIN_FILENO ? fd_master : STDOUT_FILENO);
@@ -186,15 +203,23 @@ static int loop(int fd_master) {
 					goto errout;
 
 				if (fed == 0) {
-					if (epoll_ctl(epoll_fd, EPOLL_CTL_DEL, from, NULL) < 0) {
-						fprintf(stderr,
-							"Internal error: failed to remove %d after read(2) returned 0: %s\n",
-							from, strerror(errno));
+					int res = remove_fd(from, epoll_fd);
+					monitoring--;
+					if (from == STDIN_FILENO) {
+						if (!ignoreeof) {
+							res = remove_fd(fd_master, epoll_fd);
+							monitoring--;
+						}
+					} else {
+						res = remove_fd(STDIN_FILENO, epoll_fd);
+						monitoring--;
 					}
+
+					if (res < 0)
+						goto errout;
+
+					break;
 				}
-			} else {
-				fprintf(stderr, "Internal error: unexpected event caught on main loop; fd = %d, events = %" PRIu32 "\n",
-					events[i].data.fd, events[i].events);
 			}
 		}
 	}
@@ -209,6 +234,9 @@ errout:
 	return -1;
 }
 
+static int remove_fd(int fd, int epoll_fd) {
+	return epoll_ctl(epoll_fd, EPOLL_CTL_DEL, fd, NULL);
+}
 
 static ssize_t feed(int read_from_fd, int write_to_fd) {
 
