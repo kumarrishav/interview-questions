@@ -90,7 +90,7 @@ void *consumer(void *arg) {
 			exit(EXIT_FAILURE);
 		}
 
-		printf("Readded stdin to epoll fd\n");
+		printf("Rearmed stdin\n");
 	}
 }
 
