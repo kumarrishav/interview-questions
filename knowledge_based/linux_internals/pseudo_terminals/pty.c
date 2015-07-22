@@ -7,7 +7,7 @@
 #include <errno.h>
 #include <termios.h>
 #include <unistd.h>
-#include <sys/epoll.h>
+#include <signal.h>
 
 #define OPTSTR "+d:einv"
 
@@ -16,7 +16,6 @@ static int tty_raw(int fd);
 static void tty_atexit(void);
 static int loop(int fd_master, int ignoreeof);
 static ssize_t feed(int read_from_fd, int write_to_fd);
-static int remove_fd(int fd, int epoll_fd);
 
 static struct termios termios_original;
 static struct termios termios_raw;
@@ -146,96 +145,48 @@ static void tty_atexit(void) {
 	tcsetattr(STDIN_FILENO, 0, &termios_original);
 }
 
-/* Main loop, connects PTY to stdin and stdout */
 static int loop(int fd_master, int ignoreeof) {
-	int epoll_fd;
+	ssize_t n;
+	pid_t pid;
 
-	if ((epoll_fd = epoll_create(1)) < 0)
-		return -1;
-
-	struct epoll_event epevent;
-
-	epevent.events = EPOLLIN;
-	epevent.data.fd = STDIN_FILENO;
-	if (epoll_ctl(epoll_fd, EPOLL_CTL_ADD, STDIN_FILENO, &epevent) < 0)
-		goto errout;
-
-	epevent.data.fd = fd_master;
-	if (epoll_ctl(epoll_fd, EPOLL_CTL_ADD, fd_master, &epevent) < 0)
-		goto errout;
-
-	struct epoll_event events[2];
-	int monitoring = 2;
-
-	while (monitoring > 0) {
-		int n;
-		if ((n = epoll_wait(epoll_fd, events, sizeof(events), -1)) < 0)
-			goto errout;
-
-		int i;
-		for (i = 0; i < n; i++) {
-			if (events[i].events & (EPOLLERR | EPOLLHUP | EPOLLRDHUP)) {
-
-				int res = remove_fd(events[i].data.fd, epoll_fd);
-				monitoring--;
-
-				if (events[i].data.fd == STDIN_FILENO) {
-					if (!ignoreeof) {
-						res = remove_fd(fd_master, epoll_fd);
-						monitoring--;
-					}
-				} else {
-					res = remove_fd(STDIN_FILENO, epoll_fd);
-					monitoring--;
-				}
-
-				if (res < 0)
-					goto errout;
-
-				break;
-
-			} else if (events[i].events & EPOLLIN) {
-				int from = events[i].data.fd;
-				int to = (from == STDIN_FILENO ? fd_master : STDOUT_FILENO);
-				ssize_t fed;
-
-				if ((fed = feed(from, to)) < 0)
-					goto errout;
-
-				if (fed == 0) {
-					int res = remove_fd(from, epoll_fd);
-					monitoring--;
-					if (from == STDIN_FILENO) {
-						if (!ignoreeof) {
-							res = remove_fd(fd_master, epoll_fd);
-							monitoring--;
-						}
-					} else {
-						res = remove_fd(STDIN_FILENO, epoll_fd);
-						monitoring--;
-					}
-
-					if (res < 0)
-						goto errout;
-
-					break;
-				}
-			}
-		}
+	if ((pid = fork()) < 0) {
+		return 0;
 	}
 
-	return 0;
+	if (pid == 0) {
+		/* Child reads from stdin and writes into pty master */
+		while ((n = feed(STDIN_FILENO, fd_master)) > 0)
+			; /* Intentionally left blank */
 
-errout:
-	;
-	int saved_err = errno;
-	close(epoll_fd);
-	errno = saved_err;
-	return -1;
-}
+		if (n < 0)
+			perror("feed() error on pty child");
 
-static int remove_fd(int fd, int epoll_fd) {
-	return epoll_ctl(epoll_fd, EPOLL_CTL_DEL, fd, NULL);
+		/* We only notify the parent if ignoreeof is not set; but the
+		 * parent always notifies us upon termination.
+		 *
+		 * This is useful if stdin is redirected to something like
+		 * /dev/null but the program is a long-living application
+		 * that produces output over time.
+		 */
+		if (!ignoreeof)
+			kill(getppid(), SIGTERM);
+
+		/* Child terminates here */
+		exit(n < 0 ? EXIT_FAILURE : EXIT_SUCCESS);
+
+	} else {
+		/* Parent reads from pty master and writes to stdout */
+		while ((n = feed(fd_master, STDOUT_FILENO)) > 0)
+			; /* Intentionally left blank */
+
+		/* Child is always notified; ignoreeof only affects
+		 * child -> parent notifications
+		 */
+		kill(pid, SIGTERM);
+	}
+
+	/* Parent returns to caller */
+	return n >= 0 ? 0 : -1;
 }
 
 static ssize_t feed(int read_from_fd, int write_to_fd) {
