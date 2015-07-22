@@ -8,12 +8,14 @@
 #include <termios.h>
 #include <unistd.h>
 #include <signal.h>
+#include <sys/socket.h>
 
 #define OPTSTR "+d:einv"
 
 static int set_noecho(int fd);
 static int tty_raw(int fd);
 static void tty_atexit(void);
+static int do_driver(char *driver);
 static int loop(int fd_master, int ignoreeof);
 static ssize_t feed(int read_from_fd, int write_to_fd);
 
@@ -109,10 +111,14 @@ int main(int argc, char *argv[]) {
 		}
 		atexit(tty_atexit);
 	}
-/*
-	if (driver)
-		do_driver(driver);
-*/
+
+	if (driver != NULL) {
+		if (do_driver(driver) < 0) {
+			perror("do_driver() failed");
+			exit(EXIT_FAILURE);
+		}
+	}
+
 
 	int ret = loop(fd_master, ignoreeof);
 
@@ -143,6 +149,67 @@ static int tty_raw(int fd) {
 
 static void tty_atexit(void) {
 	tcsetattr(STDIN_FILENO, 0, &termios_original);
+}
+
+static int do_driver(char *driver) {
+	int fd_pipe[2];
+	pid_t pid;
+	int err_ret = 0;
+
+	if (socketpair(AF_UNIX, SOCK_STREAM, 0, fd_pipe) < 0)
+		return -1;
+
+	if ((pid = fork()) < 0) {
+		goto pipeout1;
+	}
+
+	if (pid == 0) {
+		if (close(fd_pipe[0]) < 0) {
+			perror("Error on driver child when attempting to close fd pipe");
+			exit(EXIT_FAILURE);
+		}
+		if (dup2(fd_pipe[1], STDIN_FILENO) < 0) {
+			perror("Error on driver child when attempting to dup2(2) to STDIN");
+			exit(EXIT_FAILURE);
+		}
+		if (dup2(fd_pipe[1], STDOUT_FILENO) < 0) {
+			perror("Error on driver child when attempting to dup2(2) to STDOUT");
+			exit(EXIT_FAILURE);
+		}
+		if (fd_pipe[1] != STDIN_FILENO && fd_pipe[1] != STDOUT_FILENO) {
+			if (close(fd_pipe[1]) < 0) {
+				perror("Error on driver child closing fd pipe after successfully duplicating it");
+				exit(EXIT_FAILURE);
+			}
+		}
+		if (execlp(driver, driver, NULL) < 0) {
+			perror("execl(2) error");
+			exit(EXIT_FAILURE);
+		}
+	} else {
+		if (close(fd_pipe[1]) < 0) {
+			err_ret = errno;
+			goto closedout;
+		}
+		if (dup2(fd_pipe[0], STDIN_FILENO) < 0) {
+			err_ret = errno;
+			goto pipeout0;
+		}
+		if (dup2(fd_pipe[0], STDOUT_FILENO) < 0) {
+			err_ret = errno;
+			goto pipeout0;
+		}
+	}
+
+	return 0;
+
+pipeout1:
+	close(fd_pipe[1]);
+pipeout0:
+	close(fd_pipe[0]);
+closedout:
+	errno = err_ret;
+	return -1;
 }
 
 static int loop(int fd_master, int ignoreeof) {
