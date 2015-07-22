@@ -189,7 +189,7 @@ static int do_driver(char *driver) {
 	} else {
 		if (close(fd_pipe[1]) < 0) {
 			err_ret = errno;
-			goto closedout;
+			goto pipeout0;
 		}
 		if (dup2(fd_pipe[0], STDIN_FILENO) < 0) {
 			err_ret = errno;
@@ -198,6 +198,12 @@ static int do_driver(char *driver) {
 		if (dup2(fd_pipe[0], STDOUT_FILENO) < 0) {
 			err_ret = errno;
 			goto pipeout0;
+		}
+		if (fd_pipe[0] != STDIN_FILENO && fd_pipe[0] != STDOUT_FILENO) {
+			if (close(fd_pipe[0]) < 0) {
+				err_ret = errno;
+				goto closedout;
+			}
 		}
 	}
 
