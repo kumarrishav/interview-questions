@@ -152,6 +152,18 @@ static void tty_atexit(void) {
 }
 
 static int do_driver(char *driver) {
+
+	/* TODO
+	 *
+	 * See why the driver program is getting hanged up
+	 * along with the pty child.
+	 * This is probably because we are using AF_UNIX sockets
+	 * as a full-duplex pipe and the pty child has no way to know that
+	 * input is over. Think about using separate uni-directional pipes
+	 * instead.
+	 *
+	 */
+
 	int fd_pipe[2];
 	pid_t pid;
 	int err_ret = 0;
