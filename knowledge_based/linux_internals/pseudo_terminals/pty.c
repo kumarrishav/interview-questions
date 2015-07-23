@@ -153,44 +153,50 @@ static void tty_atexit(void) {
 
 static int do_driver(char *driver) {
 
-	/* TODO
-	 *
-	 * See why the driver program is getting hanged up
-	 * along with the pty child.
-	 * This is probably because we are using AF_UNIX sockets
-	 * as a full-duplex pipe and the pty child has no way to know that
-	 * input is over. Think about using separate uni-directional pipes
-	 * instead.
-	 *
-	 */
+	int pty_to_driver[2];
+	int driver_to_pty[2];
+	int err_code;
 
-	int fd_pipe[2];
-	pid_t pid;
-	int err_ret = 0;
-
-	if (socketpair(AF_UNIX, SOCK_STREAM, 0, fd_pipe) < 0)
+	if (pipe(pty_to_driver) < 0)
 		return -1;
 
+	if (pipe(driver_to_pty) < 0) {
+		err_code = errno;
+		goto ptdout;
+	}
+
+	pid_t pid;
 	if ((pid = fork()) < 0) {
-		goto pipeout1;
+		err_code = errno;
+		goto dtpout;
 	}
 
 	if (pid == 0) {
-		if (close(fd_pipe[0]) < 0) {
-			perror("Error on driver child when attempting to close fd pipe");
+		if (close(pty_to_driver[1]) < 0) {
+			perror("Error closing pty_to_driver write channel on driver child");
 			exit(EXIT_FAILURE);
 		}
-		if (dup2(fd_pipe[1], STDIN_FILENO) < 0) {
-			perror("Error on driver child when attempting to dup2(2) to STDIN");
+		if (close(driver_to_pty[0]) < 0) {
+			perror("Error closing driver_to_pty read channel on driver child");
 			exit(EXIT_FAILURE);
 		}
-		if (dup2(fd_pipe[1], STDOUT_FILENO) < 0) {
-			perror("Error on driver child when attempting to dup2(2) to STDOUT");
+		if (dup2(pty_to_driver[0], STDIN_FILENO) < 0) {
+			perror("Error duplicating pty_to_driver read channel to stdin on driver child");
 			exit(EXIT_FAILURE);
 		}
-		if (fd_pipe[1] != STDIN_FILENO && fd_pipe[1] != STDOUT_FILENO) {
-			if (close(fd_pipe[1]) < 0) {
-				perror("Error on driver child closing fd pipe after successfully duplicating it");
+		if (pty_to_driver[0] != STDIN_FILENO) {
+			if (close(pty_to_driver[0]) < 0) {
+				perror("Error closing pty_to_driver read channel after successfully duplicating it to stdin");
+				exit(EXIT_FAILURE);
+			}
+		}
+		if (dup2(driver_to_pty[1], STDOUT_FILENO) < 0) {
+			perror("Error duplicating driver_to_pty write channel to stdout on driver child");
+			exit(EXIT_FAILURE);
+		}
+		if (driver_to_pty[1] != STDOUT_FILENO) {
+			if (close(driver_to_pty[1]) < 0) {
+				perror("Error closing driver_to_pty write channel after successfully duplicating it to stdout");
 				exit(EXIT_FAILURE);
 			}
 		}
@@ -198,35 +204,46 @@ static int do_driver(char *driver) {
 			perror("execl(2) error");
 			exit(EXIT_FAILURE);
 		}
-	} else {
-		if (close(fd_pipe[1]) < 0) {
-			err_ret = errno;
-			goto pipeout0;
+	}
+
+	if (close(driver_to_pty[1]) < 0) {
+		err_code = errno;
+		goto dtpout;
+	}
+	if (close(pty_to_driver[0]) < 0) {
+		err_code = errno;
+		goto dtpout;
+	}
+	if (dup2(pty_to_driver[1], STDOUT_FILENO) < 0) {
+		err_code = errno;
+		goto dtpout;
+	}
+	if (pty_to_driver[1] != STDOUT_FILENO) {
+		if (close(pty_to_driver[1]) < 0) {
+			err_code = errno;
+			goto dtpout;
 		}
-		if (dup2(fd_pipe[0], STDIN_FILENO) < 0) {
-			err_ret = errno;
-			goto pipeout0;
-		}
-		if (dup2(fd_pipe[0], STDOUT_FILENO) < 0) {
-			err_ret = errno;
-			goto pipeout0;
-		}
-		if (fd_pipe[0] != STDIN_FILENO && fd_pipe[0] != STDOUT_FILENO) {
-			if (close(fd_pipe[0]) < 0) {
-				err_ret = errno;
-				goto closedout;
-			}
+	}
+	if (dup2(driver_to_pty[0], STDIN_FILENO) < 0) {
+		err_code = errno;
+		goto dtpout;
+	}
+	if (driver_to_pty[0] != STDIN_FILENO) {
+		if (close(driver_to_pty[0]) < 0) {
+			err_code = errno;
+			goto dtpout;
 		}
 	}
 
 	return 0;
 
-pipeout1:
-	close(fd_pipe[1]);
-pipeout0:
-	close(fd_pipe[0]);
-closedout:
-	errno = err_ret;
+dtpout:
+	close(driver_to_pty[0]);
+	close(driver_to_pty[1]);
+ptdout:
+	close(pty_to_driver[0]);
+	close(pty_to_driver[1]);
+	errno = err_code;
 	return -1;
 }
 
