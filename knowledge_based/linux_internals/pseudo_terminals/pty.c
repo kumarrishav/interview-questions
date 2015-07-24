@@ -9,6 +9,8 @@
 #include <unistd.h>
 #include <signal.h>
 #include <sys/socket.h>
+#include <setjmp.h>
+#include <fcntl.h>
 
 #define OPTSTR "+d:einv"
 
@@ -18,9 +20,11 @@ static void tty_atexit(void);
 static int do_driver(char *driver);
 static int loop(int fd_master, int ignoreeof);
 static ssize_t feed(int read_from_fd, int write_to_fd);
+static void sigterm_hdr(int signo);
 
 static struct termios termios_original;
 static struct termios termios_raw;
+static jmp_buf jmp_env;
 
 int main(int argc, char *argv[]) {
 
@@ -248,6 +252,21 @@ ptdout:
 }
 
 static int loop(int fd_master, int ignoreeof) {
+
+	struct sigaction sigact;
+	sigact.sa_handler = sigterm_hdr;
+	sigact.sa_flags = 0;
+	sigemptyset(&sigact.sa_mask);
+
+	if (sigaction(SIGTERM, &sigact, NULL) < 0)
+		return -1;
+
+	sigset_t smask, orig;
+	sigemptyset(&smask);
+	sigaddset(&smask, SIGTERM);
+	if (sigprocmask(SIG_BLOCK, &smask, &orig) < 0)
+		return -1;
+
 	ssize_t n;
 	pid_t pid;
 
@@ -256,7 +275,20 @@ static int loop(int fd_master, int ignoreeof) {
 	}
 
 	if (pid == 0) {
+
 		/* Child reads from stdin and writes into pty master */
+
+		sigact.sa_handler = SIG_DFL;
+		if (sigaction(SIGTERM, &sigact, NULL) < 0) {
+			perror("sigaction(2) error");
+			exit(EXIT_FAILURE);
+		}
+
+		if (sigprocmask(SIG_SETMASK, &orig, NULL) < 0) {
+			perror("sigprocmask(2) error");
+			exit(EXIT_FAILURE);
+		}
+
 		while ((n = feed(STDIN_FILENO, fd_master)) > 0)
 			; /* Intentionally left blank */
 
@@ -277,15 +309,43 @@ static int loop(int fd_master, int ignoreeof) {
 		exit(n < 0 ? EXIT_FAILURE : EXIT_SUCCESS);
 
 	} else {
+
+		volatile int kill_child = 1;
+
 		/* Parent reads from pty master and writes to stdout */
+
+		if (setjmp(jmp_env) == 1) {
+			/* EOF on pty child */
+			int fd_flags;
+			if ((fd_flags = fcntl(fd_master, F_GETFL)) < 0) {
+				perror("fcntl(2) error retrieving fd_master flags");
+				exit(EXIT_FAILURE);
+			}
+
+			fd_flags |= O_NONBLOCK;
+
+			if (fcntl(fd_master, F_SETFL, fd_flags) < 0) {
+				perror("fcntl(2) error setting O_NONBLOCK on fd_master");
+				exit(EXIT_FAILURE);
+			}
+
+			kill_child = 0;
+		} else {
+			if (sigprocmask(SIG_SETMASK, &orig, NULL) < 0) {
+				perror("sigsetmask(2) error when attempting to restore it");
+				exit(EXIT_FAILURE);
+			}
+		}
+
 		while ((n = feed(fd_master, STDOUT_FILENO)) > 0)
 			; /* Intentionally left blank */
 
-		/* Child is always notified; ignoreeof only affects
-		 * child -> parent notifications
-		 */
-		kill(pid, SIGTERM);
+		if (kill_child)
+			kill(pid, SIGTERM);
 	}
+
+	if (n < 0 && (errno == EWOULDBLOCK || errno == EINTR))
+		n = 0;
 
 	/* Parent returns to caller */
 	return n >= 0 ? 0 : -1;
@@ -309,4 +369,8 @@ static ssize_t feed(int read_from_fd, int write_to_fd) {
 	}
 
 	return n;
+}
+
+static void sigterm_hdr(int signo) {
+	longjmp(jmp_env, 1);
 }
