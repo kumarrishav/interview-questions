@@ -8,7 +8,6 @@
 #include <termios.h>
 #include <unistd.h>
 #include <signal.h>
-#include <sys/socket.h>
 #include <setjmp.h>
 #include <fcntl.h>
 
