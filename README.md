@@ -3,6 +3,8 @@
 Coding Interview practice with questions from various sources:
 
 * Careercup
+* Pramp
+* InterviewBit
 * Glassdoor
 * StackOverflow
 * Cracking the Coding Interview (5th Edition)
