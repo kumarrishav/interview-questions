@@ -151,6 +151,7 @@ int main(int argc, char *argv[]) {
 	}
 
 	if (driver != NULL) {
+		/* do_driver() does the necessary stdin and stdout redirections */
 		if (do_driver(driver) < 0) {
 			perror("do_driver() failed");
 			exit(EXIT_FAILURE);
@@ -343,10 +344,55 @@ static int loop(int fd_master, int ignoreeof) {
 		exit(n < 0 ? EXIT_FAILURE : EXIT_SUCCESS);
 
 	} else {
+		/* Parent reads from pty master and writes to stdout */
 
 		volatile int kill_child = 1;
 
-		/* Parent reads from pty master and writes to stdout */
+		/* It is important to understand why we use setjmp(3) and longjmp(3) here. The
+		 * reason is race conditions. We could simply read from fd_master, knowing that
+		 * read(2) would be interrupted when the child terminates because the child
+		 * notifies us with SIGTERM.
+		 *
+		 * However, the child may terminate *before* the parent has the chance to call
+		 * read(2). The parent would block forever in the call to read(2), since we catch
+		 * SIGTERM and just set a flag that is tested after read(2). In fact, it's a little
+		 * worse than that: we can never be sure that SIGTERM was sent before calling
+		 * read(2).
+		 *
+		 * One could think that it would be enough to check if SIGTERM was caught before
+		 * calling read(2), as in while (!sigcaught && read(...) > 0) { ... }, but this
+		 * would only leave us on the same position: there is a window of time between
+		 * testing the flag and calling read(2) where the signal might arrive (this is also
+		 * known as a TOCTTOU error - Time Of Check To Time Of Use).
+		 *
+		 * Instead, we use setjmp(3) and longjmp(3) in combination with signal masks to
+		 * avoid race conditions as follows:
+		 *
+		 * - Before forking, we install a signal handler for SIGTERM and block SIGTERM by
+		 *   changing the process mask. This ensures that the parent does not receive
+		 *   the signal before it even calls setjmp(3). It also ensures that the child
+		 *   receives SIGTERM only after it has reset the signal disposition (since we don't
+		 *   want to catch the signal in the child), even if the parent terminates before
+		 *   the child has the chance to do so.
+		 *
+		 * - After forking, the child resets the signal disposition and only then it
+		 *   unblocks SIGTERM, for the reasons mentioned above. Meanwhile, the parent calls
+		 *   setjmp(3) to initialize the environment buffer. If setjmp(3) returns 0, meaning
+		 *   we didn't jump, then it is safe to unblock SIGTERM, since the environment
+		 *   buffer is now initialized. Note that the child may have terminated and sent
+		 *   SIGTERM long ago, but the parent will only receive it after setjmp(3) was
+		 *   called to initialize the buffer.
+		 *
+		 * - The signal handler installed for SIGTERM makes a non-local jump with longjmp(3)
+		 *   when the child terminates. That will cause setjmp(3) to return a value that is
+		 *   not 0. When that happens, the process sets O_NONBLOCK in the PTY master and
+		 *   reads whatever output was left there before the child terminated, until
+		 *   read(2) returns EWOULDBLOCK. We need to use non-blocking I/O because for all we
+		 *   know, the pty parent could still write (even though we know it won't) to the
+		 *   PTY master device, so read(2) would block forever once all of the child's
+		 *   output was over.
+		 *
+		 */
 
 		if (setjmp(jmp_env) == 1) {
 			/* EOF on pty child */
