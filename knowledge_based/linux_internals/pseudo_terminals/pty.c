@@ -11,6 +11,41 @@
 #include <setjmp.h>
 #include <fcntl.h>
 
+/* pty accepts the following arguments:
+ *
+ * -d /path/to/driver - Connect the PTY master's input to the driver's stdout and the PTY master's
+ *                      output to the driver's stdin. This essentially enables the driver program
+ *                      to control the terminal as if a user was typing input to the underlying
+ *                      process. Typing input is akin to writing to stdout and reading terminal
+ *                      output is equivalent to reading from stdin.
+ *
+ * -e                 - Disable ECHO on the pseudoterminal device.
+ *
+ * -i                 - Ignore EOF when writing to the PTY master. The effect of this is that the
+ *                      pty child (the pty child reads from stdin and writes to the PTY master) does
+ *                      not notify the pty parent when EOF is reached on stdin. As such, the pty
+ *                      master does not terminate and keeps writing the output from the PTY master.
+ *                      This option is useful when running a long-living program for which we want
+ *                      stdio to switch to line-buffered mode. We run the program with pty, redirect
+ *                      the program's stdin to /dev/null, and use this flag to prevent the pty child
+ *                      from killing the pty parent (since reading from /dev/null yields EOF). So
+ *                      the child dies and the parent just keeps copying the other process's output
+ *                      to stdout. This is an excellent way to get realtime, line-by-line output for
+ *                      programs for which we don't have the source code (so we can't change stdio
+ *                      buffering), since stdio will be running behind a terminal and enter
+ *                      line-buffered mode.
+ *
+ * -n                 - Disable interactive mode. In interactive mode, the current terminal is set
+ *                      to raw mode with the help of cfmakeraw(3) and it is restored before pty
+ *                      terminates. This option disables interactive mode, so the terminal settings
+ *                      are untouched. Note that this option can lead to surprising results: the PTY
+ *                      device has ECHO enabled by default, if we disable interactive mode on our
+ *                      own terminal, then we have 2 terminals echoing, so we will see everything
+ *                      twice.
+ *
+ * -v                 - Verbose. Prints the slave PTY pathname after allocation.
+ *
+ */
 #define OPTSTR "+d:einv"
 
 static int set_noecho(int fd);
