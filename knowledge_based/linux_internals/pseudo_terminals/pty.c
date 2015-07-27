@@ -425,8 +425,18 @@ static ssize_t feed(int read_from_fd, int write_to_fd) {
 	static char data_buff[2048];
 	ssize_t n, written;
 
-	if ((n = read(read_from_fd, data_buff, sizeof(data_buff))) < 0)
+	if ((n = read(read_from_fd, data_buff, sizeof(data_buff))) < 0) {
+
+#ifdef linux
+		/* Apparently in Linux read(2) returns -1 and sets errno to EIO when the slave pty
+		 * device is closed and we are blocked waiting for data.
+		 * If this is the case, we simply ignore the error
+		 */
+		return errno == EIO ? 0 : -1;
+#endif /* linux */
+
 		return -1;
+	}
 
 	if (n == 0)
 		return 0;
