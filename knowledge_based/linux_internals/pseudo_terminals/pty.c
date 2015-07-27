@@ -436,7 +436,7 @@ static int loop(int fd_master, int ignoreeof) {
 			kill(pid, SIGTERM);
 	}
 
-	if (n < 0 && (errno == EWOULDBLOCK || errno == EINTR))
+	if (n < 0 && (errno == EWOULDBLOCK || errno == EAGAIN || errno == EINTR))
 		n = 0;
 
 	/* Parent returns to caller */
@@ -455,7 +455,7 @@ static ssize_t feed(int read_from_fd, int write_to_fd) {
 		return 0;
 
 	if ((written = write(write_to_fd, data_buff, n)) != n) {
-		if (n >= 0)
+		if (written >= 0)
 			errno = EIO;
 		return -1;
 	}
