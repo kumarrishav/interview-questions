@@ -358,8 +358,6 @@ static int loop(int fd_master, int ignoreeof) {
 	} else {
 		/* Parent reads from pty master and writes to stdout */
 
-		volatile int kill_child = 1;
-
 		/* It is important to understand why we use setjmp(3) and longjmp(3) here. The
 		 * reason is race conditions. We could simply read from fd_master, knowing that
 		 * read(2) would be interrupted when the child terminates because the child
@@ -397,31 +395,14 @@ static int loop(int fd_master, int ignoreeof) {
 		 *
 		 * - The signal handler installed for SIGTERM makes a non-local jump with longjmp(3)
 		 *   when the child terminates. That will cause setjmp(3) to return a value that is
-		 *   not 0. When that happens, the process sets O_NONBLOCK in the PTY master and
-		 *   reads whatever output was left there before the child terminated, until
-		 *   read(2) returns EWOULDBLOCK. We need to use non-blocking I/O because for all we
-		 *   know, the pty parent could still write (even though we know it won't) to the
-		 *   PTY master device, so read(2) would block forever once all of the child's
-		 *   output was over.
+		 *   not 0. When that happens, we just return on the parent, to simulate a modem
+		 *   hangup.
 		 *
 		 */
 
 		if (setjmp(jmp_env) == 1) {
 			/* EOF on pty child */
-			int fd_flags;
-			if ((fd_flags = fcntl(fd_master, F_GETFL)) < 0) {
-				perror("fcntl(2) error retrieving fd_master flags");
-				exit(EXIT_FAILURE);
-			}
-
-			fd_flags |= O_NONBLOCK;
-
-			if (fcntl(fd_master, F_SETFL, fd_flags) < 0) {
-				perror("fcntl(2) error setting O_NONBLOCK on fd_master");
-				exit(EXIT_FAILURE);
-			}
-
-			kill_child = 0;
+			return 0;
 		} else {
 			if (sigprocmask(SIG_SETMASK, &orig, NULL) < 0) {
 				perror("sigsetmask(2) error when attempting to restore it");
@@ -432,12 +413,8 @@ static int loop(int fd_master, int ignoreeof) {
 		while ((n = feed(fd_master, STDOUT_FILENO)) > 0)
 			; /* Intentionally left blank */
 
-		if (kill_child)
-			kill(pid, SIGTERM);
+		kill(pid, SIGTERM);
 	}
-
-	if (n < 0 && (errno == EWOULDBLOCK || errno == EAGAIN || errno == EINTR))
-		n = 0;
 
 	/* Parent returns to caller */
 	return n >= 0 ? 0 : -1;
