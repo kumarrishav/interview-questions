@@ -1,3 +1,6 @@
+# Problem
+Imagine you are building some sort of service that will be called by up to 1000 client applications to get simple end-of-day stock price information (open, close, high, low). You may assume that you already have the data, and you can store it in any format you wish. How would you design the client-facing service that provides the information to client applications? You are responsible for the development, rollout, and ongoing monitoring and maintenance of the feed. Describe the different methods you considered and why you would recommend your approach. Your service can use any technologies you wish, and can distribute the information to the client applications in any mechanism you choose.
+
 ## Step 1: Scope the Problem
 
 We are specifically told that our system should support about 1000 users, which is good (most questions are not so specific), but this doesn't mean that we can be sloppy with the design: our service can get popular overnight; it should still be able to scale horizontally in a cost effective manner.
