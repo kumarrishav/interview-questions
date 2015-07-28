@@ -1,4 +1,10 @@
-
+/* You are given a function rand5() that uniformly generates a random number in the interval [1..5]
+ *
+ * Write a function rand7() that uses rand5() to generate a uniform random number in the range
+ * [1..7]
+ *
+ * Source: StackOverflow
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
