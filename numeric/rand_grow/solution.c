@@ -9,6 +9,34 @@
 #include <stdlib.h>
 #include <time.h>
 
+/* A good way to visualize the solution to this problem is to think of the values in [1..7] as the
+ * numbers in a dart board target.
+ *
+ * Since we want to grow the range of rand5() uniformly, we will have to call rand5() at least
+ * twice. Doing so enables us to get a uniform random number in the range [0..24] as follows:
+ *
+ * n = 5*(rand5()-1)+(rand5()-1)
+ *
+ * Essentially, we can think of it as selecting a random cell position in this matrix:
+ *
+ * [ 1, 2, 3, 4, 5 ]
+ * [ 6, 7, 1, 2, 3 ]
+ * [ 4, 5, 6, 7, 1 ]
+ * [ 2, 3, 4, 5, 6 ]
+ * [ 7, 1, 2, 3, 4 ]
+ *
+ * Note that the formula above gives the flattened offset of a random position in the matrix
+ * (it's as if we picked row i and column j, and computed the absolute offset with n = 5*i+j).
+ *
+ * However, the numbers 1, 2, 3 and 4 show up one more time than all of the others, so we can't
+ * naively return n%7. Instead, we keep shooting darts towards the target, ignoring any cell
+ * position greater than 20 (the last 4 positions).
+ *
+ * This ensures a uniform distribution in the range [0..20], which has 21 elements and thus is
+ * evenly divisible by 7, so we can take the value modulo 7 at that point.
+ *
+ */
+
 int rand5(void);
 
 int rand7(void) {
