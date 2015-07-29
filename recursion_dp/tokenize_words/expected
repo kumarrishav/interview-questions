@@ -1,0 +1,12 @@
+Enter a string to tokenize into words
+> apple pie
+> a cat
+> apple pie is the dinner
+> apple pie with pie
+> pie with pie and pie
+> apple
+> pie
+> cat
+> a
+> Unsolvable
+> 
