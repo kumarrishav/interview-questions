@@ -80,6 +80,8 @@ int dict_find(const char *str, size_t str_sz);
  * The bottom-up approach also has the added benefit of avoiding stack overflow altogether, which
  * is wonderful! We get O(n) space and O(n^2) time. Nice!
  *
+ * See solution_dp.cpp for the implementation of this bottom-up approach.
+ *
  */
 
 int tokenize_words_aux(const char *str, size_t str_len, char *buffer) {
