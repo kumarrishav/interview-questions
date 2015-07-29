@@ -1,3 +1,27 @@
+/* A fancy dynamic programming solution. This is the most elegant solution and it is O(n^2).
+ * Sidenote: it is not really O(n^2) because substr() and string concatenation is not constant.
+ *
+ * However, if it's really necessary, we could squeeze out a little bit more performance by
+ * using something similar to Java's StringBuffer to build the intermediate strings. Or instead
+ * each DP table entry could store a vector of pairs (i, j) with the start index of each word
+ * and its length. This would avoid string concatenation and substr() altogether. It would be nice
+ * to mention it in the interview, but it is probably not necessary to implement it.
+ *
+ * It is often easier to analyze the runtime of dynamic programming solutions by analyzing the
+ * equivalent bottom-up approach. Furthermore, developing a bottom-up solution allows us to avoid
+ * recursion, which eliminates the possibility of stack overflow. This is one advantage over
+ * memoization.
+ *
+ * Building the bottom-up rule may not be easy, but as everything else in life, practice makes
+ * perfect!
+ *
+ * This is a very elegant solution.
+ *
+ * Note: invalid entries in the dp table are marked as " " (a single space). This is because a
+ * solution is never a single space, so we choose to use that as a synonym of "no solution".
+ *
+ */
+
 #include <iostream>
 #include <vector>
 
