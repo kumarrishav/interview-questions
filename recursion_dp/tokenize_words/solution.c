@@ -1,3 +1,16 @@
+/* You have a dictionary API that exports a single method, dict_find(), which allows you to check if
+ * a word is stored in the dictionary.
+ *
+ * Given an input string with no spaces, segment the string into a space-separated sequence of
+ * dictionary words if possible.
+ *
+ * EXAMPLE
+ *
+ * Input:  "applepie" (assume the dictionary contains the words "apple" and "pie", among others)
+ * Output: "apple pie"
+ *
+ * Source: Careercup (Google interview)
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
