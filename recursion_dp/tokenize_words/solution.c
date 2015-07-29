@@ -58,12 +58,16 @@ int dict_find(const char *str, size_t str_sz);
  * Building dp[i-1] requires iterating through all of the suffixes of the i-th suffix, so in a
  * bottom-up solution, we would have a nested for loop, something like:
  *
+ * // dp[i] = " " means no solution found for this suffix
+ * for (i = 0; i < len; i++)
+ *     dp[i] = " ";
+ *
  * dp[len] = "";
+ * 
  * for (i = len-1; i >= 0; i--) {
- *     dp[i] = dp[i+1];
  *     // Add new solutions that appear with the new letter
  *     for (j = i+1; j < len+1; j++) {
- *         if (dict_find(str[i..j-1])) {
+ *         if (dict_find(str[i..j-1]) && dp[j] != " ") {
  *             // New solution found: the word str[i..j-1] with the solution in dp[j]
  *             dp[i] += str[i..j-1] + " " + dp[j];
  *         }
@@ -72,6 +76,9 @@ int dict_find(const char *str, size_t str_sz);
  *
  * This is pseudocode, but anyway, the point is, we can easily see that it will be O(n^2), a
  * significant (huge!) improvement over the O(2^N) naive solution.
+ *
+ * The bottom-up approach also has the added benefit of avoiding stack overflow altogether, which
+ * is wonderful! We get O(n) space and O(n^2) time. Nice!
  *
  */
 
