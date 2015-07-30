@@ -12,6 +12,8 @@
  * The deserialize method should receive the textual string representatio of the tree and return
  * a pointer to its root.
  *
+ * Note that each node may have a different, arbitrary number of children.
+ *
  * Source: Careercup (Google interview)
  */
 
@@ -27,6 +29,29 @@ struct tree_node {
 	vector<tree_node *> children;
 	tree_node(int v) : val(v) { }
 };
+
+/* This solution relies on the fact that an n-ary tree is just an acyclic directed graph.
+ * To serialize, we perform a BFS on the tree from the root, printing the number of children
+ * of a node before printing the children themselves.
+ *
+ * So, for this tree:
+ *
+ *                           1
+ *                 /    /    |    \    \
+ *               2     3     4     5    6
+ *             / | \   |    / \       / | \
+ *            7  8  9  10  11 12     13 14 15
+ *
+ * We serialize it as:
+ *
+ * 1 5 2 3 4 5 6 3 7 8 9 1 10 2 11 12 0 3 13 14 15 0 0 0 0 0 0 0 0 0
+ *
+ * Deserializing is very similar, but we do the opposite: we initialize the BFS queue with the first
+ * node in the input, read the children count, and read the same amount of subsequent nodes,
+ * enqueuing them and adding them to the unqueued node's children list at the same time.
+ *
+ * This solution is linear in the tree size.
+ */
 
 string serialize(tree_node *root) {
 	if (root == NULL)
