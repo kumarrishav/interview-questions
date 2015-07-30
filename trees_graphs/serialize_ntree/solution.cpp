@@ -1,3 +1,19 @@
+/* You have an n-ary tree of integers where each node is described by the following struct:
+ *
+ * struct tree_node {
+ *     int val;
+ *     vector<tree_node *> children;
+ * };
+ *
+ * How would you write a library to serialize and deserialize this tree? The serialize method
+ * should receive a pointer to the root of the tree and return a textual string representation of
+ * the tree.
+ *
+ * The deserialize method should receive the textual string representatio of the tree and return
+ * a pointer to its root.
+ *
+ * Source: Careercup (Google interview)
+ */
 
 #include <iostream>
 #include <vector>
