@@ -83,7 +83,9 @@ int main(void) {
 
 	string input;
 	while (getline(cin, input)) {
-		cout << serialize(deserialize(input)) << endl;
+		tree_node *root = deserialize(input);
+		cout << serialize(root) << endl;
+		destroy_tree(root);
 		cout << "> ";
 	}
 
