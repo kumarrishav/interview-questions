@@ -31,6 +31,13 @@ These talks discuss the specific issues of scalability that arised in building t
 * [Building Software at Google Scale Tech Talk](https://www.youtube.com/watch?v=2qv3fcXW1mg)
 * [The Architecture of StackOverflow](https://www.youtube.com/watch?v=t6kM2EM6so4)
 
+Some important metrics to keep in mind:
+
+* Active users on Facebook per month: 1.45 billion
+* Webpages indexed by Google: 30 trillion
+* Search queries in Google per second: 40,000
+* Tweets per second: 6,000
+
 Note that there isn't a right way to answer these questions. Two different people may come up with completely divergent designs if they made different assumptions.
 
 Like any other problem, it is important to solve design questions using a mechanical, structured approach. It is very easy to get intimidaded by questions such as "Design Google Search", or "Design TinyURL". It's scary because many brain cells from many different engineers have been devoted to the task of designing and implementing such big systems, and it took *years* and quite a few millions of dollars to get to what we have today.
