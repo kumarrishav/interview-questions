@@ -14,6 +14,7 @@ Some interesting resources to learn about system design, scalability, and large 
 * [How do I design an arbitrary system in an interview?](http://programmers.stackexchange.com/questions/75269/how-do-i-design-an-arbitrary-system-in-an-interview)
 * [How to ace a Systems Design interview](https://www.palantir.com/2011/10/how-to-rock-a-systems-design-interview/)
 * [Preparing System Design questions](http://www.quora.com/How-should-I-prepare-system-design-questions-for-Google-Facebook-Interview)
+* [The Google Architecture (original paper)](http://infolab.stanford.edu/~backrub/google.html)
 
 This series of lectures is a great introduction to very important concepts that underly Google's scale, such as MapReduce, GFS, BigTable, and other topics (note that GFS is old hat now, but it has historical importance. The successor of GFS is Colossus):
 * [Cluster Computing and MapReduce Lecture 1](https://www.youtube.com/watch?v=yjPBkvYh-ss)
