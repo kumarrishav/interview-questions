@@ -1,3 +1,21 @@
+/* There are two strings, A and B, such that A's length is greater than or equal to B's length.
+ * Write a function that finds all of the offsets in A where a permutation of B begins.
+ *
+ * EXAMPLE
+ *
+ * Input:
+ * A = mississippi
+ * B = sis
+ *
+ * Output: 1 2 3 4 5
+ *
+ * Explanation:
+ * A[1] is the beginning of a permutation of "sis" (the permutation is "iss")
+ * A[2] is the beginning of a permutation of "sis" (the permutation is "ssi")
+ * Etc...
+ *
+ * Source: Careercup (Microsoft interview)
+ */
 
 #include <stdio.h>
 #include <assert.h>
