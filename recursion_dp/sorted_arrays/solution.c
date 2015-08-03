@@ -1,4 +1,33 @@
-
+/* There are two sorted arrays, A and B, of the same size.
+ *
+ * Generate all possible sorted arrays that result from alternating between picking an element from
+ * A and B; and all sorted arrays that result from alternating between B and A.
+ *
+ * EXAMPLE
+ *
+ * Input:
+ *
+ * A = [ 0, 1, 5 ]
+ * B = [ 2, 7, 10 ]
+ *
+ * Output:
+ *
+ * [ 0, 2, 5, 7 ]
+ * [ 0, 2, 5, 10 ]
+ * [ 0, 7 ]
+ * [ 0, 10 ]
+ * [ 2, 5, 7 ]
+ * [ 2, 5, 10 ]
+ *
+ * Explanation:
+ *
+ * The first 4 arrays in the result set are all the possibilities if the first element we pick is
+ * from array A.
+ * The last 2 arrays in the result set are all the possibilities if the first element we pick is
+ * from array B.
+ *
+ * Source: Careercup (Microsoft interview)
+ */
 #include <stdio.h>
 
 static ssize_t bin_search(int arr[], int val, size_t len) {
