@@ -30,6 +30,16 @@
  */
 #include <stdio.h>
 
+/* Note:
+ * The following solution assumes we don't care about generating duplicate arrays.
+ *
+ * It also assumes that the question (as shown in the example) always aims to find
+ * the longest possible array and only stops when it is not possible to extend it.
+ * This can happen because we ran out of elements or because the other array does not
+ * have any element that has not been used and is greater than or equal to the last
+ * chosen element.
+ */
+
 static ssize_t bin_search(int arr[], int val, size_t len) {
 	ssize_t l, r;
 	l = -1;
