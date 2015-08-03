@@ -35,6 +35,9 @@ These talks discuss the specific issues of scalability that arised in building t
 Some important metrics to keep in mind:
 
 * Active users on Facebook per month: 1.45 billion
+* Facebook Messenger users: 800 million
+* Skype users: 350 million
+* Skype users online on average: 2.5 million
 * Webpages indexed by Google: 30 trillion
 * Search queries in Google per second: 40,000
 * Tweets per second: 6,000
