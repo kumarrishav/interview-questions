@@ -22,6 +22,32 @@
 #include <string.h>
 #include <limits.h>
 
+/* The following solution solves the problem in linear time, or, to be more precise, O(N+M), where
+ * N and M is the length of each string. Assume the largest string has size N, and the shortest has
+ * size M. A naive approach is to iterate through each index i in the large string, compute the
+ * character frequency table of large_str[i..i+M-1], and compare it to the short string's character
+ * frequency table - if they are the same, then we report i as an index.
+ *
+ * However, computing the character frequency table of each substring from scratch and comparing it
+ * against the short string's table is O(M), so this would be O(NM).
+ *
+ * We can improve on this and make it O(N+M). First, compute the character frequency table for the
+ * short string. Then, compute the character frequency table for large_str[0..M-1]. As we build it
+ * for the large string, we keep track of how many unique positions were filled, and how many of
+ * those matched with positions in the short string frequency table.
+ *
+ * Then it works as if there was a sliding window on the large string. When we move it right one
+ * place, we remove the character on the left, and add the new character on the right, updating the
+ * number of matched positions so far, along with the number of total positions.
+ *
+ * It takes some care to implement it correctly, but this added complexity allows us to know how
+ * many positions have been matched so far and how many unique positions are set in the character
+ * frequency table. So we can test if both tables match in O(1): they are the same if the number of
+ * matched positions on the large table is equal to the number of positions filled in the small
+ * table, and if the number of total filled positions in the large stable is equal to the number of
+ * positions filled in the small table.
+ */
+
 void match_permutations_aux(const char *big_str, const char *short_str, size_t short_len,
 			    const size_t short_freq[UCHAR_MAX+1], size_t nfreq) {
 
