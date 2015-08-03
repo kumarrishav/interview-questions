@@ -35,7 +35,9 @@ These talks discuss the specific issues of scalability that arised in building t
 Some important metrics to keep in mind:
 
 * Active users on Facebook per month: 1.45 billion
-* Facebook Messenger users: 800 million
+* Facebook Messenger messages/day: 800 million
+* Facebook Messenger active channels peak: 7 million
+* Facebook Messenger inbound traffic/sec.: 1 GB
 * Skype users: 350 million
 * Skype users online on average: 2.5 million
 * Webpages indexed by Google: 30 trillion
