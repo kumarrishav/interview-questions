@@ -1,3 +1,27 @@
+/* You are given the root node of a tree of integers where each node has an
+ * arbitrary, unknown number of children.
+ *
+ * Write a function that receives a pointer to the root and prints the number of
+ * nodes in the level that has the maximum number of nodes.
+ *
+ * EXAMPLE
+ *
+ * Input: the root of this tree:
+ *
+ *                  1                      Level 0
+ *         /    /   |    \      \
+ *        2    3    4     5      6         Level 1
+ *      /   \  |   / \   / \   / | \
+ *     7     8 9  0   7 9   1 2  3  4      Level 2
+ *           |         / \
+ *          -2        3   5                Level 3
+ *
+ * Output: 10
+ *
+ * Explanation: The level with most nodes is level 2, and it has 10 nodes.
+ *
+ * Source: Careercup (Microsoft interview)
+ */
 
 #include <iostream>
 #include <vector>
