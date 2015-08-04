@@ -8,6 +8,13 @@ Some interesting resources to learn about system design, scalability, and large 
 * http://highscalability.com/ (a very interesting blog about large scale systems)
 * Cracking the Coding Interview, 6th Edition, Chapter 9 (the systems design section was significantly improved on the 6th Edition, but the 5th Edition also has some interesting ideas on Chapter 10, *Scalability and Memory Limits*)
 * [Scalable Internet Architectures](https://www.youtube.com/watch?v=2WuT2rdLK5A)
+* [The System Design interview](https://github.com/checkcheckzz/system-design-interview)
+* [Thought process for System Design](http://programmers.stackexchange.com/questions/196185/general-thought-process-for-how-would-you-build-this-website-app-interview-que)
+* [How would you implement Google Search?](http://programmers.stackexchange.com/questions/38324/how-would-you-implement-google-search)
+* [How do I design an arbitrary system in an interview?](http://programmers.stackexchange.com/questions/75269/how-do-i-design-an-arbitrary-system-in-an-interview)
+* [How to ace a Systems Design interview](https://www.palantir.com/2011/10/how-to-rock-a-systems-design-interview/)
+* [Preparing System Design questions](http://www.quora.com/How-should-I-prepare-system-design-questions-for-Google-Facebook-Interview)
+* [The Google Architecture (original paper)](http://infolab.stanford.edu/~backrub/google.html)
 
 This series of lectures is a great introduction to very important concepts that underly Google's scale, such as MapReduce, GFS, BigTable, and other topics (note that GFS is old hat now, but it has historical importance. The successor of GFS is Colossus):
 * [Cluster Computing and MapReduce Lecture 1](https://www.youtube.com/watch?v=yjPBkvYh-ss)
@@ -24,6 +31,18 @@ These talks discuss the specific issues of scalability that arised in building t
 * [Seattle Conference on Scalability: Lessons In Building Scalable Systems](https://www.youtube.com/watch?v=mS48X9oEar0)
 * [Building Software at Google Scale Tech Talk](https://www.youtube.com/watch?v=2qv3fcXW1mg)
 * [The Architecture of StackOverflow](https://www.youtube.com/watch?v=t6kM2EM6so4)
+
+Some important metrics to keep in mind:
+
+* Active users on Facebook per month: 1.45 billion
+* Facebook Messenger messages/day: 800 million
+* Facebook Messenger active channels peak: 7 million
+* Facebook Messenger inbound traffic/sec.: 1 GB
+* Skype users: 350 million
+* Skype users online on average: 2.5 million
+* Webpages indexed by Google: 30 trillion
+* Search queries in Google per second: 40,000
+* Tweets per second: 6,000
 
 Note that there isn't a right way to answer these questions. Two different people may come up with completely divergent designs if they made different assumptions.
 
