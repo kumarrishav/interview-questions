@@ -16,6 +16,24 @@
 #include <stdio.h>
 #include <assert.h>
 
+/* This problem can be solved in linear time. We do so by reducing it to the maximum subarray
+ * problem as follows: for an input array A of size n, compute an auxiliary array, B, of size
+ * n-1 such that B[i] = A[i]-A[i+1].
+ *
+ * Thus the difference between any two elements A[i] and A[j]
+ * is given by B[i] + B[i+1] + B[i+2] + ... + B[j-1].
+ *
+ * So, we basically want to find the maximum subarray sum, which represents the maximum difference
+ * between a pair of elements.
+ *
+ * Since there is a known O(n) algorithm that solves the maximum subarray problem, we can solve this
+ * in O(n). Also, the maximum subarray sum solution traverses the array left-to-right, and reads
+ * each entry only once, so we don't need to explicitly build B. Instead, we generate the next
+ * value that would be in B on each iteration (it's just A[i]-A[i+1]).
+ *
+ * So we get O(n) time and O(1) memory. It can't get better than that.
+ */
+
 #define max(a, b) ((a) > (b) ? (a) : (b))
 
 int max_drop(int arr[], size_t len) {
