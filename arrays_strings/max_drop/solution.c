@@ -1,3 +1,17 @@
+/* Given an array with at least 2 integers, write a function that finds the maximum difference
+ * between a pair of elements A[m] and A[n], where m < n.
+ *
+ * EXAMPLE
+ *
+ * Input:  [ 10, 6, 7, 8, 1, 5, 20 ]
+ *
+ * Output: 9
+ *
+ * Explanation: the maximum difference is achieved with m = 0 and n = 4, because A[0]-A[4] = 9,
+ *              and there's no other pair (i, j) such that i < j and A[i]-A[j] > 9
+ *
+ * Source: Careercup (Facebook interview)
+ */
 
 #include <stdio.h>
 #include <assert.h>
