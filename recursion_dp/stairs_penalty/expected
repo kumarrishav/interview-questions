@@ -1,0 +1,15 @@
+Enter the number of stairs N.
+Then, enter an array J of size N where J[i] is the cost of jumping from step i in one stair to step i in the other stair.
+Then, enter an array L of size N-1 where L[i] is the cost of going from step i to step i+1 on the left stair.
+Then, enter an array R of size N-1 where R[i] is the cost of going from step i to step i+1 on the right stair.
+DP: 1
+> DP: 476
+> DP: 393
+> DP: 550
+> DP: 757
+> DP: 526
+> DP: 889
+> DP: 162
+> DP: 689348
+> DP: 17104
+> 
