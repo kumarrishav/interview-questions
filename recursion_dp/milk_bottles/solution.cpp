@@ -1,3 +1,22 @@
+/* A milkman serves milk in packaged bottles of varied sizes. The different bottle sizes are
+ * 1, 5, 7 and 10.
+ *
+ * He wants to supply the desired quantity of milk using as less bottles as possible.
+ *
+ * Write a function to help the milkman finding the minimum number of bottles required to supply the
+ * necessary milk. Your function receives the milk quantity, L, and returns the minimum number of
+ * bottles.
+ *
+ * EXAMPLE
+ *
+ * Input:  17 (L = 17)
+ *
+ * Output: 2
+ *
+ * Explanation: The optimal choice is to use a bottle of size 7 and a bottle of size 10.
+ *
+ * Source: StackOverflow
+ */
 
 #include <iostream>
 #include <algorithm>
