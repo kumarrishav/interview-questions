@@ -18,3 +18,4 @@ The knowledge based section includes some exercises adapted from:
 * Advanced Programming in the UNIX Environment (3rd Edition)
 * The C Programming Language (2nd edition)
 * Computer Networking: A Top-Down Approach (6th Edition)
+* UNIX and Linux System Administration Handbook (4th Edition)
