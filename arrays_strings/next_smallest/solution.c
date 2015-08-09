@@ -1,3 +1,19 @@
+/* Given a number represented in an array, write a function that changes the array to the next
+ * smallest number that has the exact same digits. If there is no next smallest number, return 0,
+ * otherwise, modify the array accordingly and return 1.
+ *
+ * EXAMPLE
+ *
+ * Input:  [ 3, 7, 1 ];
+ *
+ * Output: [ 3, 1, 7 ];
+ *
+ * Explanation: The input represents the number 371. The largest number with the digits 3, 7 and 1
+ * that is less than 371 is 317. Furthermore, if we repeatedly called next_smallest() until no more
+ * numbers exist, we would get the sequence 312, 173, 137.
+ *
+ * Source: Careercup
+ */
 
 #include <stdio.h>
 
