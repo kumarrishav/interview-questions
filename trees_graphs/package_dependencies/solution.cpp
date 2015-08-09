@@ -1,3 +1,35 @@
+/* Write a function that analyzes a list of package dependencies and prints a valid package
+ * installation order according to the dependencies.
+ *
+ * The function receives as input an array of strings with the following format:
+ *
+ * package_name: dependency1, dependency2, dependency3, ..., dependencyN
+ *
+ * If a package has no dependencies, the entry will be:
+ *
+ * package_name:
+ *
+ * If there are cyclic dependencies, print "Dependencies contain cycles"
+ *
+ * EXAMPLE
+ *
+ * Input:
+ *
+ * emacs: gcc, build-essential, g++
+ * g++: build-essential, vi
+ *
+ * Output:
+ *
+ * build-essential, vi, g++, gcc, emacs
+ *
+ * (Or any other valid order)
+ *
+ * Explanation: to install emacs, we must have gcc, build-essential and g++. To install g++, we must
+ *              have build-essential and vi. Thus, one possibility is to install build-essential,
+ *              then install vi, then g++, followed by gcc and finally emacs.
+ *
+ * Source: Careercup
+ */
 
 #include <iostream>
 #include <sstream>
