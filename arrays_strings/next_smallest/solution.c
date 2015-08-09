@@ -17,6 +17,41 @@
 
 #include <stdio.h>
 
+/* The algorithm used here is the reverse of the well known next permutation algorithm
+ * (see http://stackoverflow.com/questions/11483060/stdnext-permutation-implementation-explanation)
+ *
+ * The algorithm for the next permutation of an array A of size N is described as follows:
+ *
+ * - Find the largest k such that A[k] < A[k+1]. If there is no such k, then there is no next
+ *   permutation.
+ *
+ * - Find the largest l such that A[k] < A[l].
+ *
+ * - Swap A[k] with A[l]
+ *
+ * - Reverse A[k+1..N-1]
+ *
+ * The reverse of this algorithm, which we call next smallest, can be derived from the above.
+ * It is the opposite:
+ *
+ * - Find the largest k such that A[k] > A[k+1]. If there is no such k, then there is no next
+ *   smallest permutation.
+ *
+ * - Find the largest l such that A[k] > A[l].
+ *
+ * - Swap A[k] with A[l].
+ *
+ * - Reverse A[k+1..N].
+ *
+ *
+ * Note that while the value of k may be undefined (when there is no next permutation or no next
+ * smallest), the value of l is always well defined, because in the former case we're looking for
+ * an l such that A[k] < A[l], and A[k] < A[k+1], so there is at least a match. In the latter,
+ * we're looking for an l such that A[k] > A[l], and A[k] > A[k+1], so again there is at least
+ * one match.
+ *
+ */
+
 static void swap(int arr[], size_t i, size_t j) {
 	int tmp = arr[i];
 	arr[i] = arr[j];
