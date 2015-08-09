@@ -1,0 +1,12 @@
+Enter the number of entries, followed by each entry.
+An entry is of the form: package_name: dependency1, dependency2, ...
+Example: emacs: gcc, build-essential, g++
+> emacs
+> gcc, emacs
+> build-essential, gcc, emacs
+> build-essential, gcc, g++, emacs
+> build-essential, clang++, gcc, g++, linux-source, glibc, zlib, tar, linux-headers, emacs
+> linux-magic, glibc, linux-source, gdb, routef, pgrep, zdump, rgrep, mdir, linux-black-magic, vi, vim, linux-voodoo-magic, linux-headers, clang, clang++, g++, gcc, build-essential, emacs
+> linux-magic, glibc, linux-source, gdb, routef, pgrep, zdump, rgrep, mdir, linux-black-magic, vi, vim, linux-voodoo-magic, linux-headers, clang, clang++, g++, gcc, build-essential, emacs
+> Dependencies contain cycles
+> 

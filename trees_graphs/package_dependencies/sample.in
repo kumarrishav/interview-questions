@@ -1,0 +1,52 @@
+1
+emacs:
+
+1
+emacs: gcc
+
+1
+emacs: gcc, build-essential
+
+1
+emacs: gcc, build-essential, g++
+
+2
+emacs: gcc, build-essential, g++, linux-headers, clang++
+linux-headers: linux-source, glibc, zlib, tar
+
+10
+emacs: gcc, build-essential, g++
+g++: linux-headers, clang++
+build-essential: gcc, g++, clang++
+gcc: linux-headers, g++
+clang++: clang, vi, linux-headers
+clang: linux-headers, vi
+linux-headers: linux-source, linux-magic, linux-black-magic, linux-voodoo-magic
+linux-source: linux-magic, glibc
+linux-voodoo-magic: vi, vim, glibc
+linux-black-magic: gdb, routef, pgrep, zdump, rgrep, mdir
+
+10
+emacs: gcc, build-essential, g++
+g++: linux-headers, clang++
+build-essential: gcc, g++, clang++
+gcc: linux-headers, g++
+clang++: clang, vi, linux-headers
+clang: linux-headers, vi
+linux-headers: linux-source, linux-magic, linux-black-magic, linux-voodoo-magic, vi
+linux-source: linux-magic, glibc
+linux-voodoo-magic: vi, vim, glibc
+linux-black-magic: gdb, routef, pgrep, zdump, rgrep, mdir
+
+11
+emacs: gcc, build-essential, g++
+g++: linux-headers, clang++
+build-essential: gcc, g++, clang++
+gcc: linux-headers, g++
+clang++: clang, vi, linux-headers
+clang: linux-headers, vi
+linux-headers: linux-source, linux-magic, linux-black-magic, linux-voodoo-magic, vi
+linux-source: linux-magic, glibc
+linux-voodoo-magic: vi, vim, glibc
+linux-black-magic: gdb, routef, pgrep, zdump, rgrep, mdir
+mdir: g++
