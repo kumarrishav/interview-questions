@@ -13,9 +13,10 @@ Coding Interview practice with questions from various sources:
 * geeksforgeeks
 * Questions I invented
 
-The knowledge based section includes some exercises adapted from:
+The knowledge based section (and content) includes some exercises adapted from:
 
 * Advanced Programming in the UNIX Environment (3rd Edition)
+* UNIX and Linux System Administration Handbook (4th Edition)
 * The C Programming Language (2nd edition)
 * Computer Networking: A Top-Down Approach (6th Edition)
-* UNIX and Linux System Administration Handbook (4th Edition)
+* TCP/IP Illustrated, Volume 1 (2nd Edition)
