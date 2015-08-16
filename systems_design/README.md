@@ -7,6 +7,7 @@ Some interesting resources to learn about system design, scalability, and large 
 * http://www.hiredintech.com/system-design/ (be sure to check the premium content - it's free, and it thoroughly goes through how one might design a simplified Twitter)
 * http://highscalability.com/ (a very interesting blog about large scale systems)
 * Cracking the Coding Interview, 6th Edition, Chapter 9 (the systems design section was significantly improved on the 6th Edition, but the 5th Edition also has some interesting ideas on Chapter 10, *Scalability and Memory Limits*)
+* [Distributed Systems for Fun and Profit](http://book.mixu.net/distsys/)
 * [Scalable Internet Architectures](https://www.youtube.com/watch?v=2WuT2rdLK5A)
 * [The System Design interview](https://github.com/checkcheckzz/system-design-interview)
 * [Thought process for System Design](http://programmers.stackexchange.com/questions/196185/general-thought-process-for-how-would-you-build-this-website-app-interview-que)
