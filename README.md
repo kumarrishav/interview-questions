@@ -11,6 +11,7 @@ Coding Interview practice with questions from various sources:
 * Cracking the Coding Interview (6th Edition)
 * Programming Interviews Exposed (3rd Edition)
 * geeksforgeeks
+* HackerRank
 
 The knowledge based section (and content) includes some exercises adapted from:
 
