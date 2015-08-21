@@ -1,0 +1,11 @@
+Enter maze dimensions N and M for an NxM maze, followed by each entry separated by a blank,
+followed by the initial position
+> Impossible
+> ( 8, 2 ) -> ( 7, 2 ) -> ( 6, 2 ) -> ( 5, 2 ) -> ( 5, 1 ) -> ( 4, 1 ) -> ( 3, 1 ) -> ( 2, 1 ) -> ( 1, 1 ) -> ( 1, 2 ) -> ( 0, 2 )
+> Impossible
+> Impossible
+> Impossible
+> Impossible
+> ( 0, 0 )
+> Impossible
+> 
