@@ -1,3 +1,17 @@
+/* Consider a grid representing an NxM maze. Each position in the grid is either the character 'X'
+ * or the character '_'. 'X' means that there is a wall in that position, '_' means that there is
+ * nothing in there. We cannot go through walls when travelling inside the maze.
+ *
+ * You are given a starting position in the maze. To get out of the maze, it is enough to reach a
+ * position in the borders (i.e., any position with x = 0, x = N, y = 0 or y = M, assuming x is
+ * a zero-based index to select the row out of the N rows, and y is a zero-based index to select
+ * the column out of the M columns in each row.
+ *
+ * Write a function that finds a path to get out of the maze. Print the path. If it's impossible
+ * to get out of the maze, print "Impossible"
+ *
+ * Source: Careercup (EMC interview)
+ */
 
 #include <cassert>
 #include <iostream>
