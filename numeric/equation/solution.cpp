@@ -1,3 +1,8 @@
+/* Write a function that finds and prints all solutions for a^3 + b^3 = c^3 + d^3,
+ * where a, b, c, and d are different and lie in the range [0, 10^3].
+ *
+ * Source: Careercup (Google interview)
+ */
 
 #include <iostream>
 #include <cassert>
