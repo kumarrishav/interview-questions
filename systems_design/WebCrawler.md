@@ -1,6 +1,6 @@
 # Problem
 
-Design a web crawler that downloads the Web
+Design a web crawler that downloads the Web.
 
 ## Step 1: Scope the Problem
 
@@ -58,3 +58,9 @@ As mentioned before, the AOPIC algorithm may be a good choice here because it mi
 AOPIC solves this problem by using a credit system. Like any crawler, we start with a given set of N seed URLs (how these URLs are obtained in the first place is an entirely different matter). Each URL is originally assigned an equal amount of credits X. The system also keeps a lambda page in the frontier set; this page is not a real webpage, but rather, it's a placeholder for credit accumulation, as we will see soon. Crawling the lambda page has the side effect of redistributing all of the accumulated credits evenly among all of the other pages.
 
 The frontier logic is as follows: when a dequeue request comes in, we pick the URL with the highest credit. Ties are broken randomly. Let Y be the credits of the selected URL. We start by charging a 10% tax of credits that is transferred to the lambda page (so, the lambda page gets 0.1Y more credits). Then we count the number of URLs in the selected page, consider there are i such URLs. Each URL is added to the frontier if not already there, and then we distribute the remaining 0.9Y credits evenly among the different URLs. So, each URL would get 0.9Y/i credits. Finally, we clear the credits of the selected page (this ensures that we will crawl a different page next time). The benefit of this approach is that it elegantly avoids bot-traps and it is polite to webservers. We say it avoids bot-traps because dynamically generated URLs are almost always unique on the web, so other external pages will not refer them. This means that each of these "malicious" URLs will be "leaking" credits to the lambda page, which from time to time redistributes credits among the other, better pages. Furthermore, good webpages that are referred by a lot of different webpages tend to accumulate a lot of credits, and so they will be crawled more often.
+
+## Final Note
+
+One of the exercises that comes as part of the [Go Tour](http://tour.golang.org/) (in fact, the last exercise) shows a sample implementation of a Web Crawler in Go (using a canned URL fetcher that returns predefined answers, but it's a good illustration nevertheless).
+
+The exercise provides a very basic code showing a naive Web Crawler, and the challenge is to parallelize it and to make it smart enough so that it doesn't visit the same URL twice. I published my solution in [another repository](https://github.com/filipegoncalves/go-samples/blob/master/web_crawler/web_crawler.go).
