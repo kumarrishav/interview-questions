@@ -33,6 +33,10 @@ These talks discuss the specific issues of scalability that arised in building t
 * [Building Software at Google Scale Tech Talk](https://www.youtube.com/watch?v=2qv3fcXW1mg)
 * [The Architecture of StackOverflow](https://www.youtube.com/watch?v=t6kM2EM6so4)
 
+Google SREs have an interesting talk about App Engine and some lessons learned:
+
+* [Google I/O 2011: Life in App Engine Production](https://www.youtube.com/watch?v=rgQm1KEIIuc)
+
 Some important metrics to keep in mind:
 
 * Active users on Facebook per month: 1.45 billion
