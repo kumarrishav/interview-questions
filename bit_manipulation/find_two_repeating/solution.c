@@ -1,3 +1,18 @@
+/* Given an array of n+2 integers that contains every integer in the range [1 .. n] such that
+ * exactly two integers are repeated, write a function to find the two elements that appear
+ * twice.
+ *
+ * EXAMPLE:
+ *
+ * Input array: [4, 2, 4, 5, 2, 3, 1] (7 elements, n = 5, range = [1 .. 5])
+ *
+ * Output: 2, 4
+ *
+ * Explanation: n = 5, so the array contains every element in the range [1 .. 5]. The repeated
+ *              numbers are 2 and 4.
+ *
+ * Source: StackOverflow
+ */
 
 #include <stdio.h>
 #include <assert.h>
