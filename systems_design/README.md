@@ -32,6 +32,7 @@ These talks discuss the specific issues of scalability that arised in building t
 * [Seattle Conference on Scalability: Lessons In Building Scalable Systems](https://www.youtube.com/watch?v=mS48X9oEar0)
 * [Building Software at Google Scale Tech Talk](https://www.youtube.com/watch?v=2qv3fcXW1mg)
 * [The Architecture of StackOverflow](https://www.youtube.com/watch?v=t6kM2EM6so4)
+* [Facebook and memcached](https://www.youtube.com/watch?v=UH7wkvcf0ys)
 
 Google SREs have an interesting talk about App Engine and some lessons learned:
 
