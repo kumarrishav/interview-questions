@@ -5,12 +5,10 @@ BEGIN {
 
 function day_n(day, month)
 {
-/*	print "day =", day, "month =", month*/
 	res = day
 	for (k = 1; k < month; k++) {
 		res += m[k]
 	}
-/*	print "res =", res*/
 	return res
 }
 
@@ -23,8 +21,6 @@ function is_consecutive()
 	d1 = day_n(d[i], m[i])
 	d2 = day_n(d[(i+1)%3], m[(i+1)%3])
 	d3 = day_n(d[(i+2)%3], m[(i+2)%3])
-
-/*	print "d1 =", d1, "d2 =", d2, "d3 =", d3*/
 
 	return d1+1 == d2 && d2+1 == d3
 }
