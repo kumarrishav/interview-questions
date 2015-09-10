@@ -1,6 +1,6 @@
 # Interview Questions
 
-Coding Interview practice with questions from various sources:
+Coding Interview practice with questions from different sources:
 
 * Careercup
 * Pramp
@@ -20,3 +20,4 @@ The knowledge based section (and content) includes some exercises adapted from:
 * The C Programming Language (2nd edition)
 * Computer Networking: A Top-Down Approach (6th Edition)
 * TCP/IP Illustrated, Volume 1 (2nd Edition)
+* The awk programming language
